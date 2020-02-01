@@ -23,6 +23,10 @@ class UserController {
       admin,
     });
   }
+
+  async update(req, res) {
+    return res.json({ message: 'ok' });
+  }
 }
 
 export default new UserController();
