@@ -13,11 +13,9 @@ export default async (req, res, next) => {
   try {
     const decoded = await promisify(jwt.verify)(token, authConf.secret);
     const { id } = decoded;
-    req.userID = id;
+    req.userId = id;
   } catch (error) {
-    console.log(error);
-    return res.send(error);
-    //    return res.status(401).json({ error: 'Invalid token' });
+    return res.status(401).json({ error: 'Invalid token' });
   }
 
   return next();
