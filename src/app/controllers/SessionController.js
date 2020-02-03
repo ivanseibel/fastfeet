@@ -21,7 +21,7 @@ class SessionController {
 
     const user = await User.findOne({
       where: { email },
-      attributes: ['id', 'name', 'password_hash'],
+      attributes: ['id', 'name', 'password_hash', 'admin'],
     });
 
     if (!user) {
