@@ -6,31 +6,42 @@ class RecipientController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string()
+        .typeError('Name must be a string')
         .strict()
-        .required(),
+        .required('Name is required'),
       street: Yup.string()
+        .typeError('Street must be a string')
         .strict()
-        .required(),
+        .required('Street is required'),
       number: Yup.number()
-        .integer()
+        .typeError('Number must be a number')
+        .integer('Number must be an integer number')
         .strict()
-        .required(),
-      complement: Yup.string().strict(),
+        .required('Number is required'),
+      complement: Yup.string()
+        .typeError('Complement must be a string')
+        .strict(),
       state: Yup.string()
+        .typeError('State must be a string')
         .strict()
-        .length(2)
-        .required(),
+        .length(2, 'State must have 2 characters')
+        .required('State is required'),
       city: Yup.string()
+        .typeError('City must be a string')
         .strict()
-        .required(),
+        .required('City is required'),
       postal_code: Yup.string()
+        .typeError('Postal Code must be a string')
         .strict()
-        .length(8)
-        .required(),
+        .length(8, 'Postal Code must have 8 characters')
+        .required('Postal code is required'),
     });
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Data validation failed' });
+    try {
+      await schema.validate(req.body);
+    } catch (error) {
+      const { name, value, path: field, errors } = error;
+      return res.status(400).json({ error: { name, value, field, errors } });
     }
 
     const recipient = await Recipient.create(req.body);
@@ -41,31 +52,42 @@ class RecipientController {
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string()
+        .typeError('Name must be a string')
         .strict()
-        .required(),
+        .required('Name is required'),
       street: Yup.string()
+        .typeError('Street must be a string')
         .strict()
-        .required(),
+        .required('Street is required'),
       number: Yup.number()
-        .integer()
+        .typeError('Number must be a number')
+        .integer('Number must be an integer number')
         .strict()
-        .required(),
-      complement: Yup.string().strict(),
+        .required('Number is required'),
+      complement: Yup.string()
+        .typeError('Complement must be a string')
+        .strict(),
       state: Yup.string()
+        .typeError('State must be a string')
         .strict()
-        .length(2)
-        .required(),
+        .length(2, 'State must have 2 characters')
+        .required('State is required'),
       city: Yup.string()
+        .typeError('City must be a string')
         .strict()
-        .required(),
+        .required('City is required'),
       postal_code: Yup.string()
+        .typeError('Postal Code must be a string')
         .strict()
-        .length(8)
-        .required(),
+        .length(8, 'Postal Code must have 8 characters')
+        .required('Postal Code is required'),
     });
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Data validation failed' });
+    try {
+      await schema.validate(req.body);
+    } catch (error) {
+      const { name, value, path: field, errors } = error;
+      return res.status(400).json({ error: { name, value, field, errors } });
     }
 
     const { id } = req.params;

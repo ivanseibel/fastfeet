@@ -6,20 +6,26 @@ class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string()
+        .typeError('Name must be a string')
         .strict()
         .required(),
       email: Yup.string()
+        .typeError('Email must be a string')
         .strict()
         .required()
-        .email(),
+        .email('Email must be a valid email address'),
       password: Yup.string()
+        .typeError('Password must be a string')
         .strict()
         .required()
-        .min(6),
+        .min(6, 'Password must have 6 characters at least'),
     });
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Data validation fails' });
+    try {
+      await schema.validate(req.body);
+    } catch (error) {
+      const { name, value, path: field, errors } = error;
+      return res.status(400).json({ error: { name, value, field, errors } });
     }
 
     const { email } = req.body;
@@ -45,32 +51,41 @@ class UserController {
   }
 
   async update(req, res) {
+    // TODO Implement personalized validation messages
     const schema = Yup.object().shape({
-      name: Yup.string().strict(true),
-      email: Yup.string()
-        .email()
+      name: Yup.string()
+        .typeError('Name must be a string')
         .strict(true),
-      oldPassword: Yup.string()
-        .min(6)
+      email: Yup.string()
+        .typeError('Email must be a string')
+        .email('Email must be a valid email address')
         .strict(true),
       password: Yup.string()
+        .typeError('Password must be a string')
+        .min(6, 'Password must have 6 characters at least')
+        .strict(true),
+      oldPassword: Yup.string()
+        .typeError('Old Password must be a string')
         .strict(true)
-        .min(6)
-        .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
+        .when('password', (password, field) =>
+          password ? field.required() : field
         ),
       confirmPassword: Yup.string()
+        .typeError('Confirm Password must be a string')
         .strict(true)
         .when('password', (password, field) =>
           password ? field.required().oneOf([Yup.ref('password')]) : field
         ),
     });
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Data validation fails' });
+    try {
+      await schema.validate(req.body);
+    } catch (error) {
+      const { name, value, path: field, errors } = error;
+      return res.status(400).json({ error: { name, value, field, errors } });
     }
 
-    const { email, oldPassword } = req.body;
+    const { email, oldPassword, password } = req.body;
 
     const user = await User.findByPk(req.userId);
 
@@ -81,7 +96,7 @@ class UserController {
       }
     }
 
-    if (!(await user.checkPassword(oldPassword || ''))) {
+    if (password && !(await user.checkPassword(oldPassword))) {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
