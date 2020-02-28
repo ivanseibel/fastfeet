@@ -20,8 +20,8 @@ routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
 
-routes.post('/recipients', RecipientController.store);
-routes.put('/recipients/:id', RecipientController.update);
+routes.post('/recipients', OnlyAdmin, RecipientController.store);
+routes.put('/recipients/:id', OnlyAdmin, RecipientController.update);
 
 routes.post('/users', OnlyAdmin, UserController.store);
 routes.put('/users', OnlyAdmin, UserController.update);
