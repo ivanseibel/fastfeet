@@ -9,6 +9,13 @@ import UserController from './app/controllers/UserController';
 
 const routes = Router();
 
+function OnlyAdmin(req, res, next) {
+  if (!req.userIsAdmin) {
+    return res.status(401).json({ error: 'User must be administrator' });
+  }
+  return next();
+}
+
 routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
@@ -16,12 +23,12 @@ routes.use(authMiddleware);
 routes.post('/recipients', RecipientController.store);
 routes.put('/recipients/:id', RecipientController.update);
 
-routes.post('/users', UserController.store);
-routes.put('/users', UserController.update);
+routes.post('/users', OnlyAdmin, UserController.store);
+routes.put('/users', OnlyAdmin, UserController.update);
 
-routes.post('/deliverymans', DeliverymanController.store);
-routes.put('/deliverymans/:id', DeliverymanController.update);
-routes.get('/deliverymans', DeliverymanController.index);
-routes.delete('/deliverymans/:id', DeliverymanController.delete);
+routes.post('/deliverymans', OnlyAdmin, DeliverymanController.store);
+routes.put('/deliverymans/:id', OnlyAdmin, DeliverymanController.update);
+routes.get('/deliverymans', OnlyAdmin, DeliverymanController.index);
+routes.delete('/deliverymans/:id', OnlyAdmin, DeliverymanController.delete);
 
 export default routes;

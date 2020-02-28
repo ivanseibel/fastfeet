@@ -51,7 +51,6 @@ class UserController {
   }
 
   async update(req, res) {
-    // TODO Implement personalized validation messages
     const schema = Yup.object().shape({
       name: Yup.string()
         .typeError('Name must be a string')
