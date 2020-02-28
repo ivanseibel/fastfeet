@@ -4,7 +4,6 @@ import Deliveryman from '../models/Deliveryman';
 
 class DeliverymanController {
   async store(req, res) {
-    // TODO: Add admin user verification
     const schema = Yup.object().shape({
       name: Yup.string()
         .typeError('Name must be a string')
@@ -30,7 +29,6 @@ class DeliverymanController {
   }
 
   async update(req, res) {
-    // TODO: Add admin user verification
     const { id } = req.params;
 
     if (!id) {
@@ -68,7 +66,6 @@ class DeliverymanController {
   }
 
   async delete(req, res) {
-    // TODO: Add admin user verification
     const { id } = req.params;
 
     if (!id) {
