@@ -29,6 +29,7 @@ routes.put('/recipients/:id', OnlyAdmin, RecipientController.update);
 
 routes.post('/users', OnlyAdmin, UserController.store);
 routes.put('/users', OnlyAdmin, UserController.update);
+routes.get('/users', OnlyAdmin, UserController.index);
 
 routes.post('/deliverymans', OnlyAdmin, DeliverymanController.store);
 routes.put('/deliverymans/:id', OnlyAdmin, DeliverymanController.update);

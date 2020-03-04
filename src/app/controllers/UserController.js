@@ -102,6 +102,19 @@ class UserController {
     const { id, name, admin } = await user.update(req.body);
     return res.json({ id, name, admin });
   }
+
+  async index(req, res) {
+    const limitOfRecords = 20;
+    const { page = 1 } = req.query;
+    const users = await User.findAll({
+      order: [['name', 'ASC']],
+      limit: limitOfRecords,
+      offset: (page - 1) * limitOfRecords,
+      attributes: ['id', 'name', 'email', 'admin'],
+    });
+
+    return res.json(users);
+  }
 }
 
 export default new UserController();
