@@ -26,6 +26,7 @@ routes.use(authMiddleware);
 
 routes.post('/recipients', OnlyAdmin, RecipientController.store);
 routes.put('/recipients/:id', OnlyAdmin, RecipientController.update);
+routes.get('/recipients', OnlyAdmin, RecipientController.index);
 
 routes.post('/users', OnlyAdmin, UserController.store);
 routes.put('/users', OnlyAdmin, UserController.update);

@@ -104,6 +104,29 @@ class RecipientController {
 
     return res.json({ id, name });
   }
+
+  async index(req, res) {
+    const limitOfRecords = 20;
+    const { page = 1 } = req.query;
+
+    const recipients = await Recipient.findAll({
+      attributes: [
+        'id',
+        'name',
+        'street',
+        'number',
+        'complement',
+        'state',
+        'city',
+        'postal_code',
+      ],
+      order: [['name', 'ASC']],
+      limit: limitOfRecords,
+      offset: (page - 1) * limitOfRecords,
+    });
+
+    return res.json(recipients);
+  }
 }
 
 export default new RecipientController();
