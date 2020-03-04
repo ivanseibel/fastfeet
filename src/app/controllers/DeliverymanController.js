@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 import Deliveryman from '../models/Deliveryman';
+import Avatar from '../models/Avatar';
 
 class DeliverymanController {
   async store(req, res) {
@@ -38,13 +39,15 @@ class DeliverymanController {
     const schema = Yup.object().shape({
       name: Yup.string()
         .typeError('Name must be a string')
-        .strict()
-        .required('Name is required'),
+        .strict(),
       email: Yup.string()
         .typeError('Email must be a string')
         .email('Email must be a valid email address')
-        .strict()
-        .required('Email is required'),
+        .strict(),
+      avatar_id: Yup.number()
+        .typeError('Avatar Id must be a number')
+        .integer('Avatar Id must be an integer number')
+        .strict(true),
     });
 
     try {
@@ -54,7 +57,19 @@ class DeliverymanController {
       return res.status(400).json({ error: { name, value, field, errors } });
     }
 
-    const deliveryman = await Deliveryman.findByPk(req.params.id);
+    const { avatar_id } = req.body;
+
+    if (avatar_id) {
+      const avatarIsValid = await Avatar.findByPk(avatar_id);
+
+      if (!avatarIsValid) {
+        return res
+          .status(400)
+          .json({ error: 'There is no avatar with this id' });
+      }
+    }
+
+    const deliveryman = await Deliveryman.findByPk(id);
 
     if (!deliveryman) {
       return res.status(404).json({ error: 'Deliveryman not found' });
@@ -89,7 +104,8 @@ class DeliverymanController {
     const deliverymans = await Deliveryman.findAll({
       include: [
         {
-          model: 'avatar',
+          model: Avatar,
+          as: 'avatar',
           attributes: ['name', 'path', 'url'],
         },
       ],

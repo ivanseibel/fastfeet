@@ -8,9 +8,10 @@ import authMiddleware from './app/middlewares/auth';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import UserController from './app/controllers/UserController';
 import AvatarController from './app/controllers/AvatarController';
+import multerConfig from './config/multer';
 
 const routes = Router();
-// const upload = multer()
+const upload = multer(multerConfig);
 
 function OnlyAdmin(req, res, next) {
   if (!req.userIsAdmin) {
@@ -34,7 +35,17 @@ routes.put('/deliverymans/:id', OnlyAdmin, DeliverymanController.update);
 routes.get('/deliverymans', OnlyAdmin, DeliverymanController.index);
 routes.delete('/deliverymans/:id', OnlyAdmin, DeliverymanController.delete);
 
-routes.post('/avatars', OnlyAdmin, AvatarController.store);
-routes.put('/avatars', OnlyAdmin, AvatarController.update);
+routes.post(
+  '/avatars',
+  OnlyAdmin,
+  upload.single('file'),
+  AvatarController.store
+);
+routes.put(
+  '/avatars',
+  OnlyAdmin,
+  upload.single('file'),
+  AvatarController.update
+);
 
 export default routes;

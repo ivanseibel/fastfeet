@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 
 import User from '../models/User';
-import Avatar from '../models/Avatar';
 
 class UserController {
   async store(req, res) {
@@ -76,10 +75,6 @@ class UserController {
         .when('password', (password, field) =>
           password ? field.required().oneOf([Yup.ref('password')]) : field
         ),
-      avatar_id: Yup.number()
-        .typeError('Avatar Id must be a number')
-        .integer('Avatar Id must be an integer number')
-        .strict(true),
     });
 
     try {
@@ -89,15 +84,7 @@ class UserController {
       return res.status(400).json({ error: { name, value, field, errors } });
     }
 
-    const { email, oldPassword, password, avatar_id } = req.body;
-
-    if (avatar_id) {
-      const avatarIsValid = await Avatar.findByPk(avatar_id);
-
-      if (!avatarIsValid) {
-        return res.status(400).json({ error: 'Avatar not found' });
-      }
-    }
+    const { email, oldPassword, password } = req.body;
 
     const user = await User.findByPk(req.userId);
 

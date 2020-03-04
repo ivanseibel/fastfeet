@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 
 import databaseConfig from '../config/database';
+
 import User from '../app/models/User';
 import Recipient from '../app/models/Recipient';
 import Deliveryman from '../app/models/Deliveryman';
@@ -14,8 +15,10 @@ class Database {
   }
 
   init() {
-    this.connect = new Sequelize(databaseConfig);
-    models.map(model => model.init(this.connect));
+    this.connection = new Sequelize(databaseConfig);
+    models
+      .map(model => model.init(this.connection))
+      .map(model => model.associate && model.associate(this.connection.models));
   }
 }
 
