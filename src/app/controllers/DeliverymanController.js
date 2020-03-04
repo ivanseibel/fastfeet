@@ -87,6 +87,12 @@ class DeliverymanController {
     const limitOfRecords = 20;
     const { page = 1 } = req.query;
     const deliverymans = await Deliveryman.findAll({
+      include: [
+        {
+          model: 'avatar',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
       order: [['name', 'ASC']],
       limit: limitOfRecords,
       offset: (page - 1) * limitOfRecords,

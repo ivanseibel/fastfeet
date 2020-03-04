@@ -10,6 +10,13 @@ class Deliveryman extends Model {
       { sequelize }
     );
   }
+
+  static associate(models) {
+    this.belongsTo(models.Avatar, {
+      foreignKey: 'avatar_id',
+      as: 'avatar',
+    });
+  }
 }
 
 export default Deliveryman;
