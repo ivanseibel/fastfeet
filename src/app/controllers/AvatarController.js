@@ -12,10 +12,10 @@ class AvatarController {
   async update(req, res) {
     const { originalname: name, filename: path } = req.file;
 
-    const avatar = await Avatar.findByPk(req.id);
+    const avatar = await Avatar.findByPk(req.params.id);
 
     if (!avatar) {
-      return res.status(400).json({ error: 'Avatar not found on database' });
+      return res.status(400).json({ error: 'Avatar not found' });
     }
 
     await avatar.update({
