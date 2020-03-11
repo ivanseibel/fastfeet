@@ -9,6 +9,8 @@ import DeliverymanController from './app/controllers/DeliverymanController';
 import UserController from './app/controllers/UserController';
 import AvatarController from './app/controllers/AvatarController';
 import multerConfig from './config/multer';
+import DeliveryController from './app/controllers/DeliveryController';
+import SignatureController from './app/controllers/SignatureController';
 
 const routes = Router();
 const upload = multer(multerConfig);
@@ -37,6 +39,10 @@ routes.put('/deliverymans/:id', OnlyAdmin, DeliverymanController.update);
 routes.get('/deliverymans', OnlyAdmin, DeliverymanController.index);
 routes.delete('/deliverymans/:id', OnlyAdmin, DeliverymanController.delete);
 
+routes.post('/deliveries', OnlyAdmin, DeliveryController.store);
+routes.put('/deliveries/:id', OnlyAdmin, DeliveryController.update);
+routes.get('/deliveries', OnlyAdmin, DeliveryController.index);
+
 routes.post(
   '/avatars',
   OnlyAdmin,
@@ -44,10 +50,23 @@ routes.post(
   AvatarController.store
 );
 routes.put(
-  '/avatars',
+  '/avatars/:id',
   OnlyAdmin,
   upload.single('file'),
   AvatarController.update
+);
+
+routes.post(
+  '/signatures',
+  OnlyAdmin,
+  upload.single('file'),
+  SignatureController.store
+);
+routes.put(
+  '/signatures/:id',
+  OnlyAdmin,
+  upload.single('file'),
+  SignatureController.update
 );
 
 export default routes;
