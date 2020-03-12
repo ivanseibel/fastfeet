@@ -83,10 +83,6 @@ class DeliverymanController {
   async delete(req, res) {
     const { id } = req.params;
 
-    if (!id) {
-      return res.status('400').json({ error: 'Deliveryman id is required' });
-    }
-
     const deliveryman = await Deliveryman.findByPk(req.params.id);
 
     if (!deliveryman) {
