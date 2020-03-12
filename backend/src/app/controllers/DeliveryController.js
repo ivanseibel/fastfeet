@@ -137,6 +137,20 @@ class DeliveryController {
 
     return res.json(deliveries);
   }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const delivery = await Delivery.findByPk(id);
+
+    if (!delivery) {
+      return res.status(404).json({ error: 'Delivery not found' });
+    }
+
+    await delivery.destroy();
+
+    return res.json(delivery);
+  }
 }
 
 export default new DeliveryController();
