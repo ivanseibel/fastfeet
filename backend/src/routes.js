@@ -11,6 +11,7 @@ import AvatarController from './app/controllers/AvatarController';
 import multerConfig from './config/multer';
 import DeliveryController from './app/controllers/DeliveryController';
 import SignatureController from './app/controllers/SignatureController';
+import DeliveryStatusController from './app/controllers/DeliveryStatusController';
 
 const routes = Router();
 const upload = multer(multerConfig);
@@ -38,6 +39,7 @@ routes.post('/deliverymans', OnlyAdmin, DeliverymanController.store);
 routes.put('/deliverymans/:id', OnlyAdmin, DeliverymanController.update);
 routes.get('/deliverymans', OnlyAdmin, DeliverymanController.index);
 routes.delete('/deliverymans/:id', OnlyAdmin, DeliverymanController.delete);
+routes.get('/deliverymans/:id/deliveries', DeliveryStatusController.index);
 
 routes.post('/deliveries', OnlyAdmin, DeliveryController.store);
 routes.put('/deliveries/:id', OnlyAdmin, DeliveryController.update);
