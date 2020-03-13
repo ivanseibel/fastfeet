@@ -13,6 +13,7 @@ import DeliveryController from './app/controllers/DeliveryController';
 import SignatureController from './app/controllers/SignatureController';
 import DeliveryStatusController from './app/controllers/DeliveryStatusController';
 import DeliveryStartController from './app/controllers/DeliveryStartController';
+import DeliveryEndController from './app/controllers/DeliveryEndController';
 
 const routes = Router();
 const upload = multer(multerConfig);
@@ -46,7 +47,9 @@ routes.post('/deliveries', OnlyAdmin, DeliveryController.store);
 routes.put('/deliveries/:id', OnlyAdmin, DeliveryController.update);
 routes.get('/deliveries', OnlyAdmin, DeliveryController.index);
 routes.delete('/deliveries/:id', OnlyAdmin, DeliveryController.delete);
+
 routes.put('/deliveries/:id/start', DeliveryStartController.update);
+routes.put('/deliveries/:id/end', DeliveryEndController.update);
 
 routes.post(
   '/avatars',
