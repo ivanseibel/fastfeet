@@ -1,3 +1,4 @@
+import * as Yup from 'yup';
 import {
   parseISO,
   isAfter,
@@ -14,6 +15,19 @@ import Delivery from '../models/Delivery';
 
 class DeliveryStart {
   async update(req, res) {
+    const schema = Yup.object().shape({
+      start_date: Yup.date()
+        .typeError('Start Date must be a date')
+        .required('Start Date is required'),
+    });
+
+    try {
+      await schema.validate(req.body);
+    } catch (error) {
+      const { name, value, path: field, errors } = error;
+      return res.status(400).json({ error: { name, value, field, errors } });
+    }
+
     const { id } = req.params;
     const { start_date } = req.body;
 
@@ -31,7 +45,7 @@ class DeliveryStart {
       return res.status(401).json({ error: 'Your date is in the past' });
     }
 
-    // TODO: Put this parameter in an ENV file
+    // TODO: Move this parameter in an ENV file
     const limitOfDeliveries = 5;
     const totalDeliveries = await Delivery.count({
       where: {
