@@ -6,9 +6,9 @@ import Delivery from '../models/Delivery';
 class DeliveryEndController {
   async update(req, res) {
     const schema = Yup.object().shape({
-      end_date: Yup.date('End Date must be a date').required(
-        'End Date is required'
-      ),
+      end_date: Yup.date()
+        .typeError('End Date must be a date')
+        .required('End Date is required'),
       signature_id: Yup.number()
         .typeError('Signature Id must be a number')
         .integer('Signature Id must be an integer')
