@@ -1,0 +1,14 @@
+<strong>Hello, {{ deliveryman }}</strong>
+<p>One of your deliveries was canceled, see the details follow:</p>
+<p>
+  <strong>Recipient:</strong> {{ recipient }} <br />
+  <strong>Product:</strong> {{ product }} <br />
+
+  <ul style="list-style-type: none;">
+    <strong>Registered Problems:</strong>
+    {{#each problems}}
+    <li>- {{description}}</li>
+    {{/each}}
+  </ul>
+
+</p>
