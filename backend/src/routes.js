@@ -14,6 +14,7 @@ import SignatureController from './app/controllers/SignatureController';
 import DeliveryStatusController from './app/controllers/DeliveryStatusController';
 import DeliveryStartController from './app/controllers/DeliveryStartController';
 import DeliveryEndController from './app/controllers/DeliveryEndController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 const routes = Router();
 const upload = multer(multerConfig);
@@ -50,6 +51,16 @@ routes.delete('/deliveries/:id', OnlyAdmin, DeliveryController.delete);
 
 routes.put('/deliveries/:id/start', DeliveryStartController.update);
 routes.put('/deliveries/:id/end', DeliveryEndController.update);
+
+// Delivery Problems routes
+routes.post('/delivery/:id/problems', DeliveryProblemController.store);
+routes.get('/delivery/problems', DeliveryProblemController.index);
+routes.get('/delivery/:id/problems', DeliveryProblemController.index);
+routes.delete(
+  '/problem/:id/cancel-delivery',
+  OnlyAdmin,
+  DeliveryProblemController.delete
+);
 
 routes.post(
   '/avatars',
