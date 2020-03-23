@@ -15,7 +15,6 @@ import Delivery from '../models/Delivery';
 
 class DeliveryStart {
   async update(req, res) {
-    myProductionFunction();
     const schema = Yup.object().shape({
       start_date: Yup.date()
         .typeError('Start Date must be a date')
