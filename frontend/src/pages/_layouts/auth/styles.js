@@ -28,7 +28,7 @@ export const Content = styled.div`
     margin-top: 40px;
     padding: 0 30px;
 
-    label {
+    strong {
       align-self: flex-start;
       font-weight: bold;
       font-size: 14px;
@@ -39,6 +39,7 @@ export const Content = styled.div`
       border: 1px solid #DDDDDD;
       border-radius: 4px;
       height: 44px;
+      width: 100%;
       padding: 0 15px;
       color: #999;
       margin: 9px 0 15px;
