@@ -32,6 +32,8 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'react/state-in-constructor': 'off',
-    'react/static-property-placement': 'off'
+    'react/static-property-placement': 'off',
+    'no-console': ['error', {allow: ['tron']}],
+    'react/jsx-props-no-spreading': 'off',
   },
 };
