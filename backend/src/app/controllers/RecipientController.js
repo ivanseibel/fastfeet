@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 
 import Recipient from '../models/Recipient';
 
@@ -107,7 +108,9 @@ class RecipientController {
 
   async index(req, res) {
     const limitOfRecords = 20;
-    const { page = 1 } = req.query;
+    const { page = 1, q } = req.query;
+
+    const where = q ? { name: { [Op.iLike]: `%${q}%` } } : null;
 
     const recipients = await Recipient.findAll({
       attributes: [
@@ -120,6 +123,7 @@ class RecipientController {
         'city',
         'postal_code',
       ],
+      where,
       order: [['name', 'ASC']],
       limit: limitOfRecords,
       offset: (page - 1) * limitOfRecords,
