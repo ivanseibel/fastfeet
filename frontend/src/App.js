@@ -9,12 +9,14 @@ import './config/ReactotronConfig';
 import history from './services/history';
 import Routes from './routes';
 import { store, persistor } from './store';
+import HelmetHeader from './config/header';
 
 import GlobalStyle from './styles/global';
 
 function App() {
   return (
     <Provider store={store}>
+      <HelmetHeader />
       <PersistGate persistor={persistor}>
         <Router history={history}>
           <Routes />
