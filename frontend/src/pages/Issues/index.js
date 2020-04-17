@@ -1,7 +1,13 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { Container } from './styles';
+import RegisterHeader from '../../components/RegisterHeader';
 
 export default function Issues() {
-  return <div />;
+  const screenName = 'issues';
+  return (
+    <Container>
+      <RegisterHeader screenName={screenName} showControls={false} />
+    </Container>
+  );
 }
