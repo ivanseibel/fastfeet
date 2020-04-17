@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { Form, Input } from '@rocketseat/unform';
 
 import { signInRequest } from '../../store/modules/auth/actions';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 
 export default function SignIn() {
   const schema = Yup.object().shape({
