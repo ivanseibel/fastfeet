@@ -1,8 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 
+import { signInRequest } from '../../store/modules/auth/actions';
 import logo from '../../assets/logo.png';
 
 export default function SignIn() {
@@ -13,8 +14,10 @@ export default function SignIn() {
     password: Yup.string().required('Password is required'),
   });
 
-  function handleSubmit(data) {
-    console.tron.log(data);
+  const dispatch = useDispatch();
+
+  function handleSubmit({ email, password }) {
+    dispatch(signInRequest(email, password));
   }
 
   return (
