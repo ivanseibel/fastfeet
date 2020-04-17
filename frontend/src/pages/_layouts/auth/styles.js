@@ -34,6 +34,14 @@ export const Content = styled.div`
       font-size: 14px;
     }
 
+    /* Warnings from unform component + yup schema */
+    span {
+        color: #fb6f91;
+        align-self: flex-start;
+        margin: 0 0 15px;
+        font-weight: bold;
+      }
+
     input {
       background: #fff;
       border: 1px solid #DDDDDD;
