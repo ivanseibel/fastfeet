@@ -1,10 +1,18 @@
 import React from 'react';
+import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 
 import logo from '../../assets/logo.png';
 
 export default function SignIn() {
+  const schema = Yup.object().shape({
+    email: Yup.string('Email must be a string')
+      .email('Must be a valid email')
+      .required('Email is required'),
+    password: Yup.string().required('Password is required'),
+  });
+
   function handleSubmit(data) {
     console.tron.log(data);
   }
@@ -13,7 +21,7 @@ export default function SignIn() {
     <>
       <img src={logo} alt="FastFeet" />
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} schema={schema}>
         <strong>YOUR EMAIL</strong>
         <Input
           type="email"
