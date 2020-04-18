@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   token: null,
   signed: false,
   loading: false,
+  activeScreen: 'deliveries',
 };
 
 export default function auth(state = INITIAL_STATE, action) {
@@ -25,6 +26,13 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
       }
+
+      case '@auth/CHANGE_SCREEN': {
+        draft.activeScreen = action.payload.activeScreen;
+        console.tron.log(action);
+        break;
+      }
+
       default:
     }
   });

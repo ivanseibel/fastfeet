@@ -1,49 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { Container, Content, Profile, MenuItem } from './styles';
 import logo from '../../assets/logo.svg';
 
 export default function Header() {
-  const [screen, setScreen] = useState('deliveries');
+  const { activeScreen } = useSelector((state) => state.auth);
   return (
     <Container>
       <Content>
         <nav>
           <img src={logo} alt="FastFeet" />
-          <MenuItem
-            onClick={() => {
-              setScreen('deliveries');
-            }}
-            to="/deliveries"
-            selected={screen === 'deliveries'}
-          >
+          <MenuItem to="/deliveries" selected={activeScreen === 'deliveries'}>
             DELIVERIES
           </MenuItem>
           <MenuItem
-            onClick={() => {
-              setScreen('deliverymans');
-            }}
             to="/deliverymans"
-            selected={screen === 'deliverymans'}
+            selected={activeScreen === 'deliverymans'}
           >
             DELIVERYMANS
           </MenuItem>
-          <MenuItem
-            onClick={() => {
-              setScreen('recipients');
-            }}
-            to="/recipients"
-            selected={screen === 'recipients'}
-          >
+          <MenuItem to="/recipients" selected={activeScreen === 'recipients'}>
             RECIPIENTS
           </MenuItem>
-          <MenuItem
-            onClick={() => {
-              setScreen('issues');
-            }}
-            to="/issues"
-            selected={screen === 'issues'}
-          >
+          <MenuItem to="/issues" selected={activeScreen === 'issues'}>
             ISSUES
           </MenuItem>
         </nav>
