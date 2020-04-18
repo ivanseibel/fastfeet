@@ -1,13 +1,16 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
+import { changeScreen } from '../../store/modules/auth/actions';
 import { Container } from './styles';
 import HeaderRegister from '../../components/RegisterHeader';
 
 export default function Deliverymans() {
-  const screenName = 'deliverymans';
+  const dispatch = useDispatch();
+  dispatch(changeScreen('deliverymans'));
   return (
     <Container>
-      <HeaderRegister screenName={screenName} showControls />
+      <HeaderRegister screenName="deliverymans" showControls />
     </Container>
   );
 }

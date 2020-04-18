@@ -12,6 +12,13 @@ export function signInSuccess(token, user) {
   };
 }
 
+export function changeScreen(activeScreen) {
+  return {
+    type: '@auth/CHANGE_SCREEN',
+    payload: { activeScreen },
+  };
+}
+
 export function signFailure() {
   return {
     type: '@auth/SIGN_IN_FAILURE',
