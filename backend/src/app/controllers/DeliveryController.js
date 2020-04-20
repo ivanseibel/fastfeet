@@ -125,13 +125,20 @@ class DeliveryController {
       order: [['id', 'ASC']],
       limit: limitOfRecords,
       offset: (page - 1) * limitOfRecords,
-      attributes: ['id', 'product'],
+      attributes: [
+        'id',
+        'product',
+        'end_date',
+        'canceled_at',
+        'start_date',
+        'status',
+      ],
       where,
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'city', 'state'],
         },
         {
           model: Deliveryman,
