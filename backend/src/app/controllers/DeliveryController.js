@@ -4,6 +4,7 @@ import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
+import Avatar from '../models/Avatar';
 import Queue from '../../lib/Queue';
 import NewDeliveryMail from '../jobs/NewDeliveryMail';
 
@@ -136,6 +137,13 @@ class DeliveryController {
           model: Deliveryman,
           as: 'deliveryman',
           attributes: ['id', 'name'],
+          include: [
+            {
+              model: Avatar,
+              as: 'avatar',
+              attributes: ['url', 'path'],
+            },
+          ],
         },
       ],
     });
