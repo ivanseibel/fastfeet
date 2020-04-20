@@ -51,52 +51,6 @@ export const Grid = styled.div`
     }
 
     ul {
-      position: absolute;
-      z-index: 1;
-
-      left: calc(50% - 75px); /* to positionate at center of witdth */
-      top: calc(100% - 3px); /* header height + 30px */
-
-      width: 150px;
-      list-style: none;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-
-      li {
-        display: flex;
-        align-items: center;
-        grid-template-columns: 0.3fr 0.7fr;
-        border-bottom: 1px solid #ddd;
-        padding: 10px 10px;
-        cursor: pointer;
-
-        :hover {
-          background: ${darken(0.05, '#fff')};
-        }
-
-        &::before {
-          content: '';
-          z-index: 2;
-          position: absolute;
-          left: calc(50% - 8px);
-          top: -17px;
-          width: 0;
-          height: 0;
-          border-left: 8px solid transparent;
-          border-right: 8px solid transparent;
-          border-bottom: 8px solid #eee;
-          border-top: 8px solid transparent;
-        }
-
-        svg {
-          margin-right: 8px;
-        }
-
-        b {
-          font-weight: normal;
-        }
-      }
     }
   }
 
@@ -125,5 +79,55 @@ export const Status = styled.em`
     margin-right: 5px;
 
     background: ${(props) => statusColor[props.status]};
+  }
+`;
+
+export const Menu = styled.ul`
+  display: ${(props) => (props.showMenu ? 'block' : 'none')};
+  position: absolute;
+  z-index: 1;
+
+  left: calc(50% - 75px); /* to positionate at center of witdth */
+  top: calc(100% - 3px); /* header height + 30px */
+
+  width: 150px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+
+  li {
+    display: flex;
+    align-items: center;
+    grid-template-columns: 0.3fr 0.7fr;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 10px;
+    cursor: pointer;
+
+    :hover {
+      background: ${darken(0.05, '#fff')};
+    }
+
+    &::before {
+      content: '';
+      z-index: 2;
+      position: absolute;
+      left: calc(50% - 8px);
+      top: -17px;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #eee;
+      border-top: 8px solid transparent;
+    }
+
+    svg {
+      margin-right: 8px;
+    }
+
+    b {
+      font-weight: normal;
+    }
   }
 `;
