@@ -4,6 +4,7 @@ import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
+import Avatar from '../models/Avatar';
 import Queue from '../../lib/Queue';
 import NewDeliveryMail from '../jobs/NewDeliveryMail';
 
@@ -124,18 +125,32 @@ class DeliveryController {
       order: [['id', 'ASC']],
       limit: limitOfRecords,
       offset: (page - 1) * limitOfRecords,
-      attributes: ['id', 'product'],
+      attributes: [
+        'id',
+        'product',
+        'end_date',
+        'canceled_at',
+        'start_date',
+        'status',
+      ],
       where,
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'city', 'state'],
         },
         {
           model: Deliveryman,
           as: 'deliveryman',
           attributes: ['id', 'name'],
+          include: [
+            {
+              model: Avatar,
+              as: 'avatar',
+              attributes: ['url', 'path'],
+            },
+          ],
         },
       ],
     });
