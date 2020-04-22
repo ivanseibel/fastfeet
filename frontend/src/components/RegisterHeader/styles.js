@@ -19,6 +19,7 @@ export const Container = styled.div`
         position: absolute;
         top: 10px;
         left: 16px;
+        cursor: pointer;
       }
 
       input {
