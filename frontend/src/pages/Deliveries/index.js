@@ -1,18 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  MdMoreHoriz,
-  MdVisibility,
-  MdCreate,
-  MdDeleteForever,
-} from 'react-icons/md';
+import { MdMoreHoriz } from 'react-icons/md';
 
 import api from '../../services/api';
 import { changeScreen } from '../../store/modules/auth/actions';
-import { Container, Grid, Status, Menu } from './styles';
+
+import { Container, Grid, Status } from './styles';
 import HeaderRegister from '../../components/RegisterHeader';
+import PopupMenu from '../../components/PopupMenu';
 
 export default function Deliveries() {
+  const menuItems = [
+    {
+      type: 'Details',
+      method: () => {
+        console.log('Details');
+      },
+    },
+    {
+      type: 'Edit',
+      method: () => {
+        console.log('Edit');
+      },
+    },
+    {
+      type: 'Delete',
+      method: () => {
+        console.log('Delete');
+      },
+    },
+  ];
+
   const [deliveries, setDeliveries] = useState([]);
   const [filter, setFilter] = useState('');
 
@@ -63,7 +81,11 @@ export default function Deliveries() {
       deliveries.map((delivery) => {
         const updated = { ...delivery };
 
-        if (delivery.id === id) updated.showMenu = !delivery.showMenu;
+        if (delivery.id === id) {
+          updated.showMenu = !delivery.showMenu;
+        } else {
+          updated.showMenu = false;
+        }
 
         return updated;
       })
@@ -118,21 +140,12 @@ export default function Deliveries() {
                 }}
               >
                 <MdMoreHoriz size={20} />
+                <PopupMenu
+                  show={delivery.showMenu}
+                  menuItems={menuItems}
+                  toggleShowMenu={toggleShowMenu}
+                />
               </button>
-              <Menu showMenu={delivery.showMenu}>
-                <li>
-                  <MdVisibility size={20} color="#8e5be8" />
-                  <b>Details</b>
-                </li>
-                <li>
-                  <MdCreate size={20} color="#4d85ee" />
-                  <b>Edit</b>
-                </li>
-                <li>
-                  <MdDeleteForever size={20} color="#de3b3b" />
-                  <b>Delete</b>
-                </li>
-              </Menu>
             </span>
           </React.Fragment>
         ))}
