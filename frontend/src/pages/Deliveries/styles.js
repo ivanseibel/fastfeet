@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten, darken } from 'polished';
+import { lighten } from 'polished';
 
 const statusColor = {};
 statusColor.delivered = '#2ca42b';
@@ -29,7 +29,7 @@ export const Grid = styled.ul`
     justify-content: center;
   }
 
-  span {
+  > span {
     display: flex;
     position: relative;
     align-items: center;
@@ -48,9 +48,6 @@ export const Grid = styled.ul`
     button {
       background: transparent;
       border: 0;
-    }
-
-    ul {
     }
   }
 
@@ -82,52 +79,52 @@ export const Status = styled.em`
   }
 `;
 
-export const Menu = styled.ul`
-  display: ${(props) => (props.showMenu ? 'block' : 'none')};
-  position: absolute;
-  z-index: 1;
+// export const Menu = styled.ul`
+//   display: ${(props) => (props.showMenu ? 'block' : 'none')};
+//   position: absolute;
+//   z-index: 1;
 
-  left: calc(50% - 75px); /* to positionate at center of witdth */
-  top: calc(100% - 3px); /* header height + 30px */
+//   left: calc(50% - 75px); /* to positionate at center of witdth */
+//   top: calc(100% - 3px); /* header height + 30px */
 
-  width: 150px;
-  list-style: none;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+//   width: 150px;
+//   list-style: none;
+//   background: #fff;
+//   border: 1px solid #ddd;
+//   border-radius: 4px;
 
-  li {
-    display: flex;
-    align-items: center;
-    grid-template-columns: 0.3fr 0.7fr;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 10px;
-    cursor: pointer;
+//   li {
+//     display: flex;
+//     align-items: center;
+//     grid-template-columns: 0.3fr 0.7fr;
+//     border-bottom: 1px solid #ddd;
+//     padding: 10px 10px;
+//     cursor: pointer;
 
-    :hover {
-      background: ${darken(0.05, '#fff')};
-    }
+//     :hover {
+//       background: ${darken(0.05, '#fff')};
+//     }
 
-    &::before {
-      content: '';
-      z-index: 2;
-      position: absolute;
-      left: calc(50% - 8px);
-      top: -17px;
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-bottom: 8px solid #eee;
-      border-top: 8px solid transparent;
-    }
+//     &::before {
+//       content: '';
+//       z-index: 2;
+//       position: absolute;
+//       left: calc(50% - 8px);
+//       top: -17px;
+//       width: 0;
+//       height: 0;
+//       border-left: 8px solid transparent;
+//       border-right: 8px solid transparent;
+//       border-bottom: 8px solid #eee;
+//       border-top: 8px solid transparent;
+//     }
 
-    svg {
-      margin-right: 8px;
-    }
+//     svg {
+//       margin-right: 8px;
+//     }
 
-    b {
-      font-weight: normal;
-    }
-  }
-`;
+//     b {
+//       font-weight: normal;
+//     }
+//   }
+// `;
