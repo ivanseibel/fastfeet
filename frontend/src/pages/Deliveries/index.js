@@ -14,6 +14,7 @@ import HeaderRegister from '../../components/RegisterHeader';
 
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     async function loadDeliveries() {
@@ -25,12 +26,37 @@ export default function Deliveries() {
           showMenu: false,
         }));
         setDeliveries(data);
-        console.tron.log(data);
       }
     }
 
     loadDeliveries();
   }, []);
+
+  useEffect(() => {
+    async function loadDeliveries() {
+      let query = null;
+
+      if (filter.length > 0) {
+        query = {
+          params: {
+            q: filter,
+          },
+        };
+      }
+
+      const response = await api.get('deliveries', query || null);
+
+      if (response) {
+        const data = response.data.map((delivery) => ({
+          ...delivery,
+          showMenu: false,
+        }));
+        setDeliveries(data);
+      }
+    }
+
+    loadDeliveries();
+  }, [filter]);
 
   function toggleShowMenu(id) {
     setDeliveries(
@@ -50,10 +76,15 @@ export default function Deliveries() {
 
   return (
     <Container>
-      <HeaderRegister screenName="deliveries" showControls />
+      <HeaderRegister
+        screenName="deliveries"
+        showControls
+        setFilter={setFilter}
+      />
       <Grid status="delivered">
         <strong>ID</strong>
         <strong>Recipient</strong>
+        <strong>Product</strong>
         <strong>Deliveryman</strong>
         <strong>City</strong>
         <strong>State</strong>
@@ -61,9 +92,10 @@ export default function Deliveries() {
         <strong>Actions</strong>
 
         {deliveries.map((delivery) => (
-          <>
+          <React.Fragment key={delivery.id}>
             <span>{delivery.id}</span>
             <span>{delivery.recipient.name}</span>
+            <span>{delivery.product}</span>
             <span>
               <img
                 src={delivery.deliveryman.avatar.url}
@@ -102,7 +134,7 @@ export default function Deliveries() {
                 </li>
               </Menu>
             </span>
-          </>
+          </React.Fragment>
         ))}
       </Grid>
     </Container>

@@ -13,10 +13,10 @@ export const Container = styled.div`
   margin: 34px auto;
 `;
 
-export const Grid = styled.div`
+export const Grid = styled.ul`
   margin-top: 22px;
   display: grid;
-  grid-template-columns: 0.5fr 1.3fr 1.3fr 1fr 1fr 0.5fr 0.5fr;
+  grid-template-columns: 0.4fr 1.3fr 1.3fr 1.3fr 1.3fr 0.5fr 0.5fr 0.5fr;
   font-size: 16px;
 
   strong {
