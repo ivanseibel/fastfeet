@@ -8,14 +8,17 @@ import { changeScreen } from '../../store/modules/auth/actions';
 import { Container, Grid, Status } from './styles';
 import HeaderRegister from '../../components/RegisterHeader';
 import PopupMenu from '../../components/PopupMenu';
+import Modal from '../../components/Modal';
 
 export default function Deliveries() {
+  const [deliveries, setDeliveries] = useState([]);
+  const [filter, setFilter] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
   const menuItems = [
     {
       type: 'Details',
-      method: () => {
-        console.log('Details');
-      },
+      method: toggleShowModal,
     },
     {
       type: 'Edit',
@@ -30,9 +33,6 @@ export default function Deliveries() {
       },
     },
   ];
-
-  const [deliveries, setDeliveries] = useState([]);
-  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     async function loadDeliveries() {
@@ -92,64 +92,73 @@ export default function Deliveries() {
     );
   }
 
+  function toggleShowModal(id) {
+    setShowModal(!showModal);
+  }
+
   const dispatch = useDispatch();
 
   dispatch(changeScreen('deliveries'));
 
   return (
-    <Container>
-      <HeaderRegister
-        screenName="deliveries"
-        showControls
-        setFilter={setFilter}
-      />
-      <Grid status="delivered">
-        <strong>ID</strong>
-        <strong>Recipient</strong>
-        <strong>Product</strong>
-        <strong>Deliveryman</strong>
-        <strong>City</strong>
-        <strong>State</strong>
-        <strong>Status</strong>
-        <strong>Actions</strong>
+    <>
+      <Modal visible={showModal} toggleShowModal={toggleShowModal}>
+        <h4>Hello, I'm a modal</h4>
+      </Modal>
+      <Container>
+        <HeaderRegister
+          screenName="deliveries"
+          showControls
+          setFilter={setFilter}
+        />
+        <Grid status="delivered">
+          <strong>ID</strong>
+          <strong>Recipient</strong>
+          <strong>Product</strong>
+          <strong>Deliveryman</strong>
+          <strong>City</strong>
+          <strong>State</strong>
+          <strong>Status</strong>
+          <strong>Actions</strong>
 
-        {deliveries.map((delivery) => (
-          <React.Fragment key={delivery.id}>
-            <span>{delivery.id}</span>
-            <span>{delivery.recipient.name}</span>
-            <span>{delivery.product}</span>
-            <span>
-              <img
-                src={delivery.deliveryman.avatar.url}
-                alt={delivery.deliveryman.name}
-              />
-              {delivery.deliveryman.name}
-            </span>
-            <span>{delivery.recipient.city}</span>
-            <span>{delivery.recipient.state}</span>
-            <span>
-              <Status status={delivery.status}>
-                {delivery.status.toUpperCase()}
-              </Status>
-            </span>
-            <span className="actions">
-              <button
-                type="button"
-                onClick={() => {
-                  toggleShowMenu(delivery.id);
-                }}
-              >
-                <MdMoreHoriz size={20} />
-                <PopupMenu
-                  show={delivery.showMenu}
-                  menuItems={menuItems}
-                  toggleShowMenu={toggleShowMenu}
+          {deliveries.map((delivery) => (
+            <React.Fragment key={delivery.id}>
+              <span>{delivery.id}</span>
+              <span>{delivery.recipient.name}</span>
+              <span>{delivery.product}</span>
+              <span>
+                <img
+                  src={delivery.deliveryman.avatar.url}
+                  alt={delivery.deliveryman.name}
                 />
-              </button>
-            </span>
-          </React.Fragment>
-        ))}
-      </Grid>
-    </Container>
+                {delivery.deliveryman.name}
+              </span>
+              <span>{delivery.recipient.city}</span>
+              <span>{delivery.recipient.state}</span>
+              <span>
+                <Status status={delivery.status}>
+                  {delivery.status.toUpperCase()}
+                </Status>
+              </span>
+              <span className="actions">
+                <button
+                  type="button"
+                  onClick={() => {
+                    toggleShowMenu(delivery.id);
+                  }}
+                >
+                  <MdMoreHoriz size={20} />
+                  <PopupMenu
+                    show={delivery.showMenu}
+                    menuItems={menuItems}
+                    toggleShowMenu={toggleShowMenu}
+                  />
+                </button>
+              </span>
+            </React.Fragment>
+          ))}
+        </Grid>
+      </Container>
+    </>
   );
 }

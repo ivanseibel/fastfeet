@@ -16,8 +16,8 @@ export default function Routes() {
 
       <Route path="/deliveries" component={Deliveries} isPrivate />
       <Route path="/deliverymans" component={Deliverymans} isPrivate />
-      <Route path="/issues" component={Issues} isPrivate />
       <Route path="/recipients" component={Recipients} isPrivate />
+      <Route path="/issues" component={Issues} isPrivate />
     </Switch>
   );
 }
