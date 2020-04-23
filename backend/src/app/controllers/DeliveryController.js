@@ -5,6 +5,7 @@ import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 import Avatar from '../models/Avatar';
+import Signature from '../models/Signature';
 import Queue from '../../lib/Queue';
 import NewDeliveryMail from '../jobs/NewDeliveryMail';
 
@@ -168,6 +169,47 @@ class DeliveryController {
     }
 
     await delivery.destroy();
+
+    return res.json(delivery);
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const delivery = await Delivery.findByPk(id, {
+      attributes: [
+        'id',
+        'product',
+        'canceled_at',
+        'start_date',
+        'end_date',
+        'status',
+      ],
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          // include: [
+          //   'name',
+          //   'street',
+          //   'number',
+          //   'complement',
+          //   'state',
+          //   'city',
+          //   'postal_code',
+          // ],
+        },
+        {
+          model: Signature,
+          as: 'signature',
+          // include: ['path', 'url'],
+        },
+      ],
+    });
+
+    if (!delivery) {
+      return res.status(404).json({ error: 'Delivery not found' });
+    }
 
     return res.json(delivery);
   }

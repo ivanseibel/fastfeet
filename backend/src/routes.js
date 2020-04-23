@@ -47,6 +47,7 @@ routes.get('/deliverymans/:id/deliveries', DeliveryStatusController.index);
 routes.post('/deliveries', OnlyAdmin, DeliveryController.store);
 routes.put('/deliveries/:id', OnlyAdmin, DeliveryController.update);
 routes.get('/deliveries', OnlyAdmin, DeliveryController.index);
+routes.get('/deliveries/:id', OnlyAdmin, DeliveryController.show);
 routes.delete('/deliveries/:id', OnlyAdmin, DeliveryController.delete);
 
 routes.put('/deliveries/:id/start', DeliveryStartController.update);
