@@ -9,11 +9,13 @@ import { Container, Grid, Status } from './styles';
 import HeaderRegister from '../../components/RegisterHeader';
 import PopupMenu from '../../components/PopupMenu';
 import Modal from '../../components/Modal';
+import DeliveryDetails from './DeliveryDetails';
 
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const [filter, setFilter] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [deliveryId, setDeliveryId] = useState(null);
 
   const menuItems = [
     {
@@ -34,6 +36,8 @@ export default function Deliveries() {
     },
   ];
 
+  // TODO: Refactor loadDeliveries and filterDeliveries to unify.
+
   useEffect(() => {
     async function loadDeliveries() {
       const response = await api.get('deliveries');
@@ -51,7 +55,7 @@ export default function Deliveries() {
   }, []);
 
   useEffect(() => {
-    async function loadDeliveries() {
+    async function filterDeliveries() {
       let query = null;
 
       if (filter.length > 0) {
@@ -73,7 +77,7 @@ export default function Deliveries() {
       }
     }
 
-    loadDeliveries();
+    filterDeliveries();
   }, [filter]);
 
   function toggleShowMenu(id) {
@@ -83,6 +87,7 @@ export default function Deliveries() {
 
         if (delivery.id === id) {
           updated.showMenu = !delivery.showMenu;
+          setDeliveryId(id);
         } else {
           updated.showMenu = false;
         }
@@ -92,7 +97,7 @@ export default function Deliveries() {
     );
   }
 
-  function toggleShowModal(id) {
+  function toggleShowModal() {
     setShowModal(!showModal);
   }
 
@@ -102,9 +107,12 @@ export default function Deliveries() {
 
   return (
     <>
-      <Modal visible={showModal} toggleShowModal={toggleShowModal}>
-        <h4>Hello, I'm a modal</h4>
-      </Modal>
+      {showModal ? (
+        <Modal visible={showModal} toggleShowModal={toggleShowModal}>
+          <DeliveryDetails id={deliveryId} />
+        </Modal>
+      ) : null}
+
       <Container>
         <HeaderRegister
           screenName="deliveries"

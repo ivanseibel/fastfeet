@@ -17,21 +17,17 @@ export default function PopupMenu(props) {
 
         if (item) {
           item.method();
-        } else {
-          return;
         }
+      } else {
+        toggleShowMenu();
       }
-
-      toggleShowMenu();
     }
 
-    // add when mounted
-    document.addEventListener('mousedown', handleClick);
-
-    return () => {
+    if (show) {
       document.removeEventListener('mousedown', handleClick);
-    };
-  }, [menuItems, toggleShowMenu]);
+      document.addEventListener('mousedown', handleClick);
+    }
+  }, [show, menuItems, toggleShowMenu]);
 
   const ItemIcon = {
     Details: MdVisibility,

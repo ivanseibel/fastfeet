@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { ModalContainer, ModalContent } from './styles';
 
@@ -17,9 +18,12 @@ export default function Modal(props) {
       onClick={handleClickOut}
       id="modal-container"
     >
-      <ModalContent onClick={null}>
-        <h1>{children}</h1>
-      </ModalContent>
+      <ModalContent onClick={null}>{children}</ModalContent>
     </ModalContainer>
   );
 }
+
+Modal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  children: PropTypes.shape().isRequired,
+};

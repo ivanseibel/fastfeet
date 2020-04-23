@@ -29,7 +29,6 @@ export default function auth(state = INITIAL_STATE, action) {
 
       case '@auth/CHANGE_SCREEN': {
         draft.activeScreen = action.payload.activeScreen;
-        console.tron.log(action);
         break;
       }
 

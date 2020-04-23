@@ -17,7 +17,6 @@ export function* signIn({ payload }) {
     const { token, user } = response.data;
 
     if (!user.admin) {
-      console.tron.log('User is not an administrator');
       return;
     }
 
