@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { MdSearch, MdAdd } from 'react-icons/md';
+import { MdSearch, MdAdd, MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Container } from './styles';
+import { Container, SearchBox, Header, Buttons } from './styles';
 
 import { setDeliveriesFilter } from '../../store/modules/deliveries/actions';
 
-export default function RegisterHeader({ showControls }) {
+export default function RegisterHeader({ controls, title }) {
   const { activeScreen } = useSelector((state) => state.auth);
   const [newFilter, setNewFilter] = useState('');
 
@@ -37,28 +37,43 @@ export default function RegisterHeader({ showControls }) {
   }
 
   return (
-    <Container showControls={showControls ? 1 : 0}>
-      <h1>Managing {activeScreen}</h1>
-      <header>
-        <div>
-          <MdSearch size={16} color="#999" onClick={applyFilter} />
-          <input
-            onChange={handleNewFilter}
-            type="text"
-            placeholder={`Search by ${activeScreen}`}
-            value={newFilter}
-            onKeyDown={handleKeyDown}
-          />
-        </div>
-        <button type="button">
-          <MdAdd size={16} color="#fff" />
-          <strong>NEW</strong>
-        </button>
-      </header>
+    <Container>
+      <h1>{title}</h1>
+      <Header show={controls.length > 0}>
+        <SearchBox show={controls.includes('search')}>
+          <div>
+            <MdSearch size={16} color="#999" onClick={applyFilter} />
+            <input
+              onChange={handleNewFilter}
+              type="text"
+              placeholder={`Search by ${activeScreen}`}
+              value={newFilter}
+              onKeyDown={handleKeyDown}
+            />
+          </div>
+        </SearchBox>
+
+        <Buttons controls={controls}>
+          <button id="back" type="button">
+            <MdKeyboardArrowLeft size={18} color="#fff" />
+            <strong>BACK</strong>
+          </button>
+          <button id="save" type="button">
+            <MdDone size={18} color="#fff" />
+            <strong>SAVE</strong>
+          </button>
+
+          <button id="new" type="button">
+            <MdAdd size={18} color="#fff" />
+            <strong>NEW</strong>
+          </button>
+        </Buttons>
+      </Header>
     </Container>
   );
 }
 
 RegisterHeader.propTypes = {
-  showControls: PropTypes.bool.isRequired,
+  controls: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
 };

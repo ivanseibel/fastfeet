@@ -18,7 +18,6 @@ import DeliveryDetails from './DeliveryDetails';
 
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
-  // const [showModal, setShowModal] = useState(false);
 
   const filter = useSelector((state) => state.deliveries.filter);
   const deliveryDetails = useSelector(
@@ -27,6 +26,7 @@ export default function Deliveries() {
 
   const dispatch = useDispatch();
 
+  const headerControls = ['search', 'new'];
   const menuItems = [
     {
       type: 'Details',
@@ -101,16 +101,13 @@ export default function Deliveries() {
   return (
     <>
       {deliveryDetails.showModal ? (
-        <Modal
-        // visible={showDetails}
-        // toggleShowModal={() => setShowModal(!showModal)}
-        >
+        <Modal>
           <DeliveryDetails id={deliveryDetails.id} />
         </Modal>
       ) : null}
 
       <Container>
-        <HeaderRegister showControls />
+        <HeaderRegister controls={headerControls} title="Managing deliveries" />
         <Grid status="delivered">
           <strong>ID</strong>
           <strong>Recipient</strong>
@@ -157,7 +154,6 @@ export default function Deliveries() {
                       : false
                   }
                   menuItems={menuItems}
-                  // toggleShowMenu={toggleShowMenu}
                 />
               </span>
             </React.Fragment>
