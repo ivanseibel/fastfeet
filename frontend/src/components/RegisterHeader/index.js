@@ -3,11 +3,18 @@ import { MdSearch, MdAdd, MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Container, SearchBox, Header, Buttons } from './styles';
+import {
+  Container,
+  LeftBox,
+  Header,
+  RightBox,
+  Title,
+  Subtitle,
+} from './styles';
 
 import { setDeliveriesFilter } from '../../store/modules/deliveries/actions';
 
-export default function RegisterHeader({ controls, title }) {
+export default function RegisterHeader({ controls, title, subtitle }) {
   const { activeScreen } = useSelector((state) => state.auth);
   const [newFilter, setNewFilter] = useState('');
 
@@ -38,9 +45,10 @@ export default function RegisterHeader({ controls, title }) {
 
   return (
     <Container>
-      <h1>{title}</h1>
+      <Title show={title}>{title}</Title>
       <Header show={controls.length > 0}>
-        <SearchBox show={controls.includes('search')}>
+        <LeftBox show={controls.includes('search')}>
+          <Subtitle show={subtitle}>{subtitle}</Subtitle>
           <div>
             <MdSearch size={16} color="#999" onClick={applyFilter} />
             <input
@@ -51,9 +59,9 @@ export default function RegisterHeader({ controls, title }) {
               onKeyDown={handleKeyDown}
             />
           </div>
-        </SearchBox>
+        </LeftBox>
 
-        <Buttons controls={controls}>
+        <RightBox controls={controls}>
           <button id="back" type="button">
             <MdKeyboardArrowLeft size={18} color="#fff" />
             <strong>BACK</strong>
@@ -67,7 +75,7 @@ export default function RegisterHeader({ controls, title }) {
             <MdAdd size={18} color="#fff" />
             <strong>NEW</strong>
           </button>
-        </Buttons>
+        </RightBox>
       </Header>
     </Container>
   );
@@ -75,5 +83,11 @@ export default function RegisterHeader({ controls, title }) {
 
 RegisterHeader.propTypes = {
   controls: PropTypes.arrayOf(PropTypes.string).isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+};
+
+RegisterHeader.defaultProps = {
+  title: '',
+  subtitle: '',
 };

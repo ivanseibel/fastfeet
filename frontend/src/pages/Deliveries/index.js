@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdMoreHoriz } from 'react-icons/md';
 
 import api from '../../services/api';
+import history from '../../services/history';
 
 import { changeScreen } from '../../store/modules/auth/actions';
 import {
@@ -11,6 +12,7 @@ import {
 } from '../../store/modules/deliveries/actions';
 
 import { Container, Grid, Status } from './styles';
+
 import HeaderRegister from '../../components/RegisterHeader';
 import PopupMenu from '../../components/PopupMenu';
 import Modal from '../../components/Modal';
@@ -26,7 +28,7 @@ export default function Deliveries() {
 
   const dispatch = useDispatch();
 
-  const headerControls = ['search', 'new'];
+  const headerControls = ['title', 'search', 'new'];
   const menuItems = [
     {
       type: 'Details',
@@ -37,7 +39,7 @@ export default function Deliveries() {
     {
       type: 'Edit',
       method: () => {
-        console.log('Edit');
+        history.push('delivery');
       },
     },
     {

@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-export const Container = styled.div`
-  h1 {
-    margin-bottom: 34px;
-  }
+export const Container = styled.div``;
+
+export const Title = styled.h1`
+  display: ${(props) => (props.show ? 'block' : 'none')};
+  margin-bottom: 34px;
+`;
+
+export const Subtitle = styled.h1`
+  display: ${(props) => (props.show ? 'block' : 'none')};
 `;
 
 export const Header = styled.header`
@@ -14,7 +19,7 @@ export const Header = styled.header`
   align-items: center;
 `;
 
-export const SearchBox = styled.div`
+export const LeftBox = styled.div`
   position: relative;
 
   div {
@@ -42,7 +47,7 @@ export const SearchBox = styled.div`
   }
 `;
 
-export const Buttons = styled.div`
+export const RightBox = styled.div`
   display: flex;
   align-items: center;
 

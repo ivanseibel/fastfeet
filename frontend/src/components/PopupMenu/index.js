@@ -34,6 +34,10 @@ export default function PopupMenu(props) {
       document.removeEventListener('mousedown', handleClick);
       document.addEventListener('mousedown', handleClick);
     }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
   }, [show, menuItems, dispatch]);
 
   const ItemIcon = {
