@@ -1,14 +1,22 @@
 import React, { useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { MdVisibility, MdCreate, MdDeleteForever } from 'react-icons/md';
 
 import { MenuContainer, ItemContainer } from './styles';
 
+import { setShowPopup } from '../../store/modules/deliveries/actions';
+
 export default function PopupMenu(props) {
   const node = useRef();
-  const { show, menuItems, toggleShowMenu } = props;
+  const { show, menuItems } = props;
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    function toggleShowMenu() {
+      dispatch(setShowPopup(false));
+    }
     function handleClick(e) {
       if (node.current.contains(e.target)) {
         const [item] = menuItems.filter(
@@ -18,16 +26,15 @@ export default function PopupMenu(props) {
         if (item) {
           item.method();
         }
-      } else {
-        toggleShowMenu();
       }
+      toggleShowMenu();
     }
 
     if (show) {
       document.removeEventListener('mousedown', handleClick);
       document.addEventListener('mousedown', handleClick);
     }
-  }, [show, menuItems, toggleShowMenu]);
+  }, [show, menuItems, dispatch]);
 
   const ItemIcon = {
     Details: MdVisibility,
@@ -58,7 +65,6 @@ export default function PopupMenu(props) {
 PopupMenu.propTypes = {
   show: PropTypes.bool,
   menuItems: PropTypes.arrayOf(PropTypes.shape).isRequired,
-  toggleShowMenu: PropTypes.func.isRequired,
 };
 
 PopupMenu.defaultProps = {
