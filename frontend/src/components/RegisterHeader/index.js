@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { MdSearch, MdAdd } from 'react-icons/md';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Container } from './styles';
 
-export default function RegisterHeader({ showControls, setFilter }) {
+import { setDeliveriesFilter } from '../../store/modules/deliveries/actions';
+
+export default function RegisterHeader({ showControls }) {
   const { activeScreen } = useSelector((state) => state.auth);
   const [newFilter, setNewFilter] = useState('');
 
+  const dispatch = useDispatch();
+
   function applyFilter() {
-    setFilter(newFilter);
+    switch (activeScreen) {
+      case 'deliveries':
+        dispatch(setDeliveriesFilter(newFilter));
+        break;
+
+      default:
+        break;
+    }
+
     setNewFilter('');
   }
 
@@ -49,5 +61,4 @@ export default function RegisterHeader({ showControls, setFilter }) {
 
 RegisterHeader.propTypes = {
   showControls: PropTypes.bool.isRequired,
-  setFilter: PropTypes.func.isRequired,
 };

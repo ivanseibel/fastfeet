@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MdMoreHoriz } from 'react-icons/md';
 
 import api from '../../services/api';
+
 import { changeScreen } from '../../store/modules/auth/actions';
+import {
+  setDeliveryId,
+  setShowDetails,
+} from '../../store/modules/deliveries/actions';
 
 import { Container, Grid, Status } from './styles';
 import HeaderRegister from '../../components/RegisterHeader';
@@ -13,14 +18,21 @@ import DeliveryDetails from './DeliveryDetails';
 
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
-  const [filter, setFilter] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [deliveryId, setDeliveryId] = useState(null);
+  // const [showModal, setShowModal] = useState(false);
+
+  const filter = useSelector((state) => state.deliveries.filter);
+  const deliveryDetails = useSelector(
+    (state) => state.deliveries.deliveryDetails
+  );
+
+  const dispatch = useDispatch();
 
   const menuItems = [
     {
       type: 'Details',
-      method: toggleShowModal,
+      method: () => {
+        dispatch(setShowDetails(true));
+      },
     },
     {
       type: 'Edit',
@@ -36,7 +48,9 @@ export default function Deliveries() {
     },
   ];
 
-  // TODO: Refactor loadDeliveries and filterDeliveries to unify.
+  useEffect(() => {
+    dispatch(changeScreen('deliveries'));
+  }, [dispatch]);
 
   useEffect(() => {
     async function loadDeliveries() {
@@ -66,7 +80,7 @@ export default function Deliveries() {
         };
       }
 
-      const response = await api.get('deliveries', query || null);
+      const response = await api.get('deliveries', query);
 
       if (response) {
         const data = response.data.map((delivery) => ({
@@ -80,45 +94,23 @@ export default function Deliveries() {
     filterDeliveries();
   }, [filter]);
 
-  function toggleShowMenu(id) {
-    setDeliveries(
-      deliveries.map((delivery) => {
-        const updated = { ...delivery };
-
-        if (delivery.id === id) {
-          updated.showMenu = !delivery.showMenu;
-          setDeliveryId(id);
-        } else {
-          updated.showMenu = false;
-        }
-
-        return updated;
-      })
-    );
+  function handleSetDeliveryId(id) {
+    dispatch(setDeliveryId(id));
   }
-
-  function toggleShowModal() {
-    setShowModal(!showModal);
-  }
-
-  const dispatch = useDispatch();
-
-  dispatch(changeScreen('deliveries'));
 
   return (
     <>
-      {showModal ? (
-        <Modal visible={showModal} toggleShowModal={toggleShowModal}>
-          <DeliveryDetails id={deliveryId} />
+      {deliveryDetails.showModal ? (
+        <Modal
+        // visible={showDetails}
+        // toggleShowModal={() => setShowModal(!showModal)}
+        >
+          <DeliveryDetails id={deliveryDetails.id} />
         </Modal>
       ) : null}
 
       <Container>
-        <HeaderRegister
-          screenName="deliveries"
-          showControls
-          setFilter={setFilter}
-        />
+        <HeaderRegister showControls />
         <Grid status="delivered">
           <strong>ID</strong>
           <strong>Recipient</strong>
@@ -152,16 +144,21 @@ export default function Deliveries() {
                 <button
                   type="button"
                   onClick={() => {
-                    toggleShowMenu(delivery.id);
+                    handleSetDeliveryId(delivery.id);
                   }}
                 >
                   <MdMoreHoriz size={20} />
-                  <PopupMenu
-                    show={delivery.showMenu}
-                    menuItems={menuItems}
-                    toggleShowMenu={toggleShowMenu}
-                  />
                 </button>
+
+                <PopupMenu
+                  show={
+                    delivery.id === deliveryDetails.id
+                      ? deliveryDetails.showPopup
+                      : false
+                  }
+                  menuItems={menuItems}
+                  // toggleShowMenu={toggleShowMenu}
+                />
               </span>
             </React.Fragment>
           ))}

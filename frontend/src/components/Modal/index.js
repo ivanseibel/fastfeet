@@ -1,29 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import { ModalContainer, ModalContent } from './styles';
 
+import { setShowDetails as setShowDeliveryDetails } from '../../store/modules/deliveries/actions';
+
 export default function Modal(props) {
-  const { visible, children, toggleShowModal } = props;
+  const { children } = props;
+
+  const dispatch = useDispatch();
 
   function handleClickOut(e) {
     if (e.target.id === 'modal-container') {
-      toggleShowModal();
+      dispatch(setShowDeliveryDetails(false));
     }
   }
 
   return (
-    <ModalContainer
-      visible={visible}
-      onClick={handleClickOut}
-      id="modal-container"
-    >
+    <ModalContainer onClick={handleClickOut} id="modal-container">
       <ModalContent onClick={null}>{children}</ModalContent>
     </ModalContainer>
   );
 }
 
 Modal.propTypes = {
-  visible: PropTypes.bool.isRequired,
   children: PropTypes.shape().isRequired,
 };

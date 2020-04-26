@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const ModalContainer = styled.div`
-  display: ${(props) => (props.visible ? 'flex' : 'none')};
+  /* display: ${(props) => (props.visible ? 'flex' : 'none')}; */
+  display: flex;
 
   position: fixed;
   top: 0;
