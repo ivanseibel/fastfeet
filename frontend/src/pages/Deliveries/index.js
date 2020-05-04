@@ -28,7 +28,20 @@ export default function Deliveries() {
 
   const dispatch = useDispatch();
 
-  const headerControls = ['title', 'search', 'new'];
+  const headerControls = [
+    {
+      type: 'title',
+    },
+    {
+      type: 'search',
+    },
+    {
+      type: 'new',
+      method: () => {
+        alert('New');
+      },
+    },
+  ];
   const menuItems = [
     {
       type: 'Details',
@@ -39,7 +52,7 @@ export default function Deliveries() {
     {
       type: 'Edit',
       method: () => {
-        history.push('delivery');
+        history.push('delivery', { operation: 'edit' });
       },
     },
     {
@@ -109,7 +122,10 @@ export default function Deliveries() {
       ) : null}
 
       <Container>
-        <HeaderRegister controls={headerControls} title="Managing deliveries" />
+        <HeaderRegister
+          headerControls={headerControls}
+          title="Managing deliveries"
+        />
         <Grid status="delivered">
           <strong>ID</strong>
           <strong>Recipient</strong>

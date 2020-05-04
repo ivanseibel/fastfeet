@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { MdSearch, MdAdd, MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,12 +13,17 @@ import {
 } from './styles';
 
 import { setDeliveriesFilter } from '../../store/modules/deliveries/actions';
+// import history from '../../services/history';
 
-export default function RegisterHeader({ controls, title, subtitle }) {
+export default function RegisterHeader({ headerControls, title, subtitle }) {
   const { activeScreen } = useSelector((state) => state.auth);
   const [newFilter, setNewFilter] = useState('');
 
   const dispatch = useDispatch();
+
+  const controls = useMemo(() => {
+    return headerControls.map((control) => control.type);
+  }, [headerControls]);
 
   function applyFilter() {
     switch (activeScreen) {
@@ -43,6 +48,14 @@ export default function RegisterHeader({ controls, title, subtitle }) {
     setNewFilter(e.target.value);
   }
 
+  function buttonClick(type) {
+    const [button] = headerControls.filter((control) => control.type === type);
+
+    if (button) {
+      button.method();
+    }
+  }
+
   return (
     <Container>
       <Title show={title}>{title}</Title>
@@ -62,16 +75,34 @@ export default function RegisterHeader({ controls, title, subtitle }) {
         </LeftBox>
 
         <RightBox controls={controls}>
-          <button id="back" type="button">
+          <button
+            id="back"
+            type="button"
+            onClick={() => {
+              buttonClick('back');
+            }}
+          >
             <MdKeyboardArrowLeft size={18} color="#fff" />
             <strong>BACK</strong>
           </button>
-          <button id="save" type="button">
+          <button
+            id="save"
+            type="button"
+            onClick={() => {
+              buttonClick('save');
+            }}
+          >
             <MdDone size={18} color="#fff" />
             <strong>SAVE</strong>
           </button>
 
-          <button id="new" type="button">
+          <button
+            id="new"
+            type="button"
+            onClick={() => {
+              buttonClick('new');
+            }}
+          >
             <MdAdd size={18} color="#fff" />
             <strong>NEW</strong>
           </button>
@@ -82,7 +113,7 @@ export default function RegisterHeader({ controls, title, subtitle }) {
 }
 
 RegisterHeader.propTypes = {
-  controls: PropTypes.arrayOf(PropTypes.string).isRequired,
+  headerControls: PropTypes.arrayOf(PropTypes.shape).isRequired,
   title: PropTypes.string,
   subtitle: PropTypes.string,
 };
