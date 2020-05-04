@@ -58,6 +58,8 @@ export const RightBox = styled.div`
     margin-left: 16px;
 
     width: 142px;
+    max-height: 36px;
+    height: 100%;
 
     color: #fff;
     background: #7d40e7;
@@ -82,6 +84,7 @@ export const RightBox = styled.div`
   }
   #back {
     display: ${(props) => (props.controls.includes('back') ? 'flex' : 'none')};
+    background: #ccc;
   }
   #save {
     display: ${(props) => (props.controls.includes('save') ? 'flex' : 'none')};

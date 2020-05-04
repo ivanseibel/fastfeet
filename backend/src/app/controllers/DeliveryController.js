@@ -189,15 +189,20 @@ class DeliveryController {
         {
           model: Recipient,
           as: 'recipient',
-          // include: [
-          //   'name',
-          //   'street',
-          //   'number',
-          //   'complement',
-          //   'state',
-          //   'city',
-          //   'postal_code',
-          // ],
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'postal_code',
+          ],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
         },
         {
           model: Signature,
