@@ -16,9 +16,8 @@ export default function DeliveryForm({ location }) {
   const [deliverymans, setDeliverymans] = useState([]);
   const [delivery, setDelivery] = useState(null);
   const [newDelivery, setNewDelivery] = useState({
-    id: null,
-    recipientId: null,
-    deliverymanId: null,
+    recipient_id: null,
+    deliveryman_id: null,
     product: null,
   });
 
@@ -31,9 +30,9 @@ export default function DeliveryForm({ location }) {
   useEffect(() => {
     if (delivery) {
       setNewDelivery({
-        id: delivery.id,
-        recipientId: delivery.recipient.id,
-        deliverymanId: delivery.deliveryman.id,
+        // id: delivery.id,
+        recipient_id: delivery.recipient.id,
+        deliveryman_id: delivery.deliveryman ? delivery.deliveryman.id : null,
         product: delivery.product,
       });
     }
@@ -80,15 +79,17 @@ export default function DeliveryForm({ location }) {
 
     loadRecipients();
     loadDeliverymans();
-    loadDelivery();
+
+    if (deliveryId) loadDelivery();
   }, []);
 
   function handleRecipientChange(e) {
-    setNewDelivery({ ...newDelivery, recipientId: e.target.value });
+    setNewDelivery({ ...newDelivery, recipient_id: e.target.value });
   }
 
   function handleDeliverymanChange(e) {
-    setNewDelivery({ ...newDelivery, deliverymanId: e.target.value });
+    const deliverymanId = e.target.value === '' ? null : e.target.value;
+    setNewDelivery({ ...newDelivery, deliveryman_id: deliverymanId });
   }
 
   function handleProduct(e) {
@@ -97,7 +98,7 @@ export default function DeliveryForm({ location }) {
 
   async function handleSubmit() {
     const schema = Yup.object().shape({
-      recipientId: Yup.number()
+      recipient_id: Yup.number()
         .typeError('Recipient is required')
         .required('Recipient is required'),
       product: Yup.string('Product must be a string')
@@ -114,11 +115,29 @@ export default function DeliveryForm({ location }) {
       return;
     }
 
-    if (operation === 'edit') {
-      alert('Updating...');
-    }
-    if (operation === 'insert') {
-      alert('Inserting...');
+    const query = {};
+
+    Object.keys(newDelivery).forEach((key) => {
+      query[key] = newDelivery[key];
+    });
+
+    try {
+      if (operation === 'edit') {
+        await api.put(`deliveries/${deliveryId}`, query);
+        toast.success('Delivery updated with success!');
+      }
+      if (operation === 'insert') {
+        await api.post(`deliveries`, query);
+        setNewDelivery({
+          recipient_id: null,
+          deliveryman_id: null,
+          product: null,
+        });
+        toast.success('Delivery created with success!');
+      }
+      return;
+    } catch (error) {
+      toast.error(error.message);
     }
   }
 
@@ -150,7 +169,7 @@ export default function DeliveryForm({ location }) {
             <select
               id="recipient"
               className="field"
-              value={newDelivery.recipientId || ''}
+              value={newDelivery.recipient_id || ''}
               onChange={handleRecipientChange}
             >
               {recipients.map((recipient) => (
@@ -166,7 +185,7 @@ export default function DeliveryForm({ location }) {
             <select
               id="deliveryman"
               className="field"
-              value={newDelivery.deliverymanId || ''}
+              value={newDelivery.deliveryman_id || ''}
               onChange={handleDeliverymanChange}
             >
               {deliverymans.map((deliveryman) => (

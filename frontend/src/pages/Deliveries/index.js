@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MdMoreHoriz } from 'react-icons/md';
+import {
+  MdMoreHoriz,
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowRight,
+} from 'react-icons/md';
 
 import api from '../../services/api';
 import history from '../../services/history';
@@ -11,7 +15,7 @@ import {
   setShowDetails,
 } from '../../store/modules/deliveries/actions';
 
-import { Container, Grid, Status } from './styles';
+import { Container, Grid, Status, NavBar, NavButton } from './styles';
 
 import HeaderRegister from '../../components/RegisterHeader';
 import PopupMenu from '../../components/PopupMenu';
@@ -20,6 +24,8 @@ import DeliveryDetails from './DeliveryDetails';
 
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
+  const [totalRecords, setTotalRecords] = useState(0);
+  const [actualPage, setActualPage] = useState(1);
 
   const filter = useSelector((state) => state.deliveries.filter);
   const deliveryDetails = useSelector(
@@ -38,7 +44,8 @@ export default function Deliveries() {
     {
       type: 'new',
       method: () => {
-        alert('New');
+        dispatch(setDeliveryId(''));
+        history.push('delivery', { operation: 'insert' });
       },
     },
   ];
@@ -68,49 +75,51 @@ export default function Deliveries() {
   }, [dispatch]);
 
   useEffect(() => {
-    async function loadDeliveries() {
-      const response = await api.get('deliveries');
-
-      if (response) {
-        const data = response.data.map((delivery) => ({
-          ...delivery,
-          showMenu: false,
-        }));
-        setDeliveries(data);
-      }
-    }
-
-    loadDeliveries();
-  }, []);
-
-  useEffect(() => {
     async function filterDeliveries() {
-      let query = null;
+      const query = {
+        params: {
+          page: actualPage,
+        },
+      };
 
       if (filter.length > 0) {
-        query = {
-          params: {
-            q: filter,
-          },
-        };
+        query.params = { ...query.params, q: filter };
       }
 
       const response = await api.get('deliveries', query);
 
       if (response) {
-        const data = response.data.map((delivery) => ({
+        const rows = response.data.rows.map((delivery) => ({
           ...delivery,
           showMenu: false,
         }));
-        setDeliveries(data);
+        setDeliveries(rows);
+        setTotalRecords(response.data.count);
       }
     }
 
     filterDeliveries();
-  }, [filter]);
+  }, [filter, actualPage]);
+
+  const totalPages = useMemo(() => {
+    const pages = totalRecords / 10;
+    return pages < 1 ? 1 : Math.ceil(pages);
+  }, [totalRecords]);
 
   function handleSetDeliveryId(id) {
     dispatch(setDeliveryId(id));
+  }
+
+  function handleNextButtonClick() {
+    if (actualPage < totalPages) {
+      setActualPage(actualPage + 1);
+    }
+  }
+
+  function handlePrevButtonClick() {
+    if (actualPage > 1) {
+      setActualPage(actualPage - 1);
+    }
   }
 
   return (
@@ -142,11 +151,13 @@ export default function Deliveries() {
               <span>{delivery.recipient.name}</span>
               <span>{delivery.product}</span>
               <span>
-                <img
-                  src={delivery.deliveryman.avatar.url}
-                  alt={delivery.deliveryman.name}
-                />
-                {delivery.deliveryman.name}
+                {delivery.deliveryman ? (
+                  <img
+                    src={delivery.deliveryman.avatar.url}
+                    alt={delivery.deliveryman.name}
+                  />
+                ) : null}
+                {delivery.deliveryman ? delivery.deliveryman.name : null}
               </span>
               <span>{delivery.recipient.city}</span>
               <span>{delivery.recipient.state}</span>
@@ -177,6 +188,23 @@ export default function Deliveries() {
             </React.Fragment>
           ))}
         </Grid>
+
+        <NavBar>
+          <NavButton active={actualPage > 1} onClick={handlePrevButtonClick}>
+            <MdKeyboardArrowLeft size={20} color="#fff" />
+            <span>{'PREV '}</span>
+          </NavButton>
+          <strong>
+            Page: {actualPage} / {totalPages}
+          </strong>
+          <NavButton
+            active={actualPage < totalPages}
+            onClick={handleNextButtonClick}
+          >
+            <span>{' NEXT'}</span>
+            <MdKeyboardArrowRight size={20} color="#fff" />
+          </NavButton>
+        </NavBar>
       </Container>
     </>
   );
