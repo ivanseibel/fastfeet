@@ -20,11 +20,11 @@ export const Grid = styled.ul`
   font-size: 16px;
 
   strong {
-    padding: 0 0 18px 18px;
+    padding: 0 0 10px 18px;
   }
 
   strong:nth-of-type(7) {
-    padding: 0 0 18px 0;
+    padding: 0 0 10px 0;
     display: flex;
     justify-content: center;
   }
@@ -35,13 +35,13 @@ export const Grid = styled.ul`
     align-items: center;
     background: #fff;
     border-radius: 4px;
-    padding: 10px 0 10px 18px;
-    margin-bottom: 20px;
+    padding: 8px 0 8px 18px;
+    margin-bottom: 10px;
 
     img {
       margin-right: 5px;
-      width: 36px;
-      height: 36px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
     }
 
@@ -52,7 +52,7 @@ export const Grid = styled.ul`
   }
 
   span.actions {
-    padding: 18px 0;
+    padding: 8px 0;
     justify-content: center;
   }
 `;
@@ -79,52 +79,28 @@ export const Status = styled.em`
   }
 `;
 
-// export const Menu = styled.ul`
-//   display: ${(props) => (props.showMenu ? 'block' : 'none')};
-//   position: absolute;
-//   z-index: 1;
+export const NavBar = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 
-//   left: calc(50% - 75px); /* to positionate at center of witdth */
-//   top: calc(100% - 3px); /* header height + 30px */
+export const NavButton = styled.button`
+  display: flex;
+  align-items: center;
+  background: ${(props) => (props.active ? '#7159c1' : '#ccc')};
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 8px 15px;
+  cursor: ${(props) => (props.active ? 'pointer' : 'default')};
 
-//   width: 150px;
-//   list-style: none;
-//   background: #fff;
-//   border: 1px solid #ddd;
-//   border-radius: 4px;
+  span {
+    font-weight: bold;
+  }
 
-//   li {
-//     display: flex;
-//     align-items: center;
-//     grid-template-columns: 0.3fr 0.7fr;
-//     border-bottom: 1px solid #ddd;
-//     padding: 10px 10px;
-//     cursor: pointer;
-
-//     :hover {
-//       background: ${darken(0.05, '#fff')};
-//     }
-
-//     &::before {
-//       content: '';
-//       z-index: 2;
-//       position: absolute;
-//       left: calc(50% - 8px);
-//       top: -17px;
-//       width: 0;
-//       height: 0;
-//       border-left: 8px solid transparent;
-//       border-right: 8px solid transparent;
-//       border-bottom: 8px solid #eee;
-//       border-top: 8px solid transparent;
-//     }
-
-//     svg {
-//       margin-right: 8px;
-//     }
-
-//     b {
-//       font-weight: normal;
-//     }
-//   }
-// `;
+  svg {
+  }
+`;
