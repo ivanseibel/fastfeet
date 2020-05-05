@@ -17,9 +17,9 @@ class DeliveryController {
         .integer('Recipient Id must be an integer')
         .required('Recipient Id is required'),
       deliveryman_id: Yup.number()
+        .nullable()
         .typeError('Deliveryman Id must be a number')
-        .integer('Deliveryman Id must be a integer')
-        .required('Deliveryman Id is required'),
+        .integer('Deliveryman Id must be a integer'),
       product: Yup.string('Product must be a string')
         .min(3, 'Product must have 3 characters at least')
         .required('Product is required'),
@@ -40,10 +40,13 @@ class DeliveryController {
       return res.status(404).json({ error: 'Recipient not found' });
     }
 
-    const deliveryman = await Deliveryman.findByPk(deliveryman_id);
+    let deliveryman = {};
+    if (deliveryman_id) {
+      deliveryman = await Deliveryman.findByPk(deliveryman_id);
 
-    if (!deliveryman) {
-      return res.status(404).json({ error: 'Deliveryman not found' });
+      if (!deliveryman) {
+        return res.status(404).json({ error: 'Deliveryman not found' });
+      }
     }
 
     const delivery = await Delivery.create(req.body);
@@ -71,6 +74,7 @@ class DeliveryController {
         .typeError('Recipient Id must be a number')
         .integer('Recipient Id must be an integer'),
       deliveryman_id: Yup.number()
+        .nullable()
         .typeError('Deliveryman Id must be a number')
         .integer('Deliveryman Id must be an integer'),
       product: Yup.string('Product must be a string').min(
@@ -106,23 +110,18 @@ class DeliveryController {
       return res.status(404).json({ error: 'Delivery not found' });
     }
 
-    await delivery.update(req.body);
+    const updatedDelivery = await delivery.update(req.body);
 
-    return res.json({
-      id,
-      product: delivery.product,
-      recipient_id,
-      deliveryman_id,
-    });
+    return res.json(updatedDelivery);
   }
 
   async index(req, res) {
-    const limitOfRecords = 20;
+    const limitOfRecords = 10;
     const { page = 1, q } = req.query;
 
     const where = q ? { product: { [Op.iLike]: `%${q}%` } } : null;
 
-    const deliveries = await Delivery.findAll({
+    const deliveries = await Delivery.findAndCountAll({
       order: [['id', 'ASC']],
       limit: limitOfRecords,
       offset: (page - 1) * limitOfRecords,
