@@ -81,7 +81,7 @@ export default function DeliveryForm({ location }) {
     loadDeliverymans();
 
     if (deliveryId) loadDelivery();
-  }, []);
+  }, [deliveryId]);
 
   function handleRecipientChange(e) {
     setNewDelivery({ ...newDelivery, recipient_id: e.target.value });
