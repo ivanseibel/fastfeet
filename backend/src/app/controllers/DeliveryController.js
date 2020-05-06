@@ -51,11 +51,13 @@ class DeliveryController {
 
     const delivery = await Delivery.create(req.body);
 
-    await Queue.add(NewDeliveryMail.key, {
-      delivery,
-      recipient,
-      deliveryman,
-    });
+    if (deliveryman_id) {
+      await Queue.add(NewDeliveryMail.key, {
+        delivery,
+        recipient,
+        deliveryman,
+      });
+    }
 
     return res.json({
       id: delivery.id,
