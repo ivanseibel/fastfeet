@@ -5,6 +5,7 @@ import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
 } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 import history from '../../services/history';
@@ -28,11 +29,34 @@ export default function Deliveries() {
   const [actualPage, setActualPage] = useState(1);
 
   const filter = useSelector((state) => state.deliveries.filter);
+  const deliveryId = useSelector(
+    (state) => state.deliveries.deliveryDetails.id
+  );
   const deliveryDetails = useSelector(
     (state) => state.deliveries.deliveryDetails
   );
 
+  const totalPages = useMemo(() => {
+    const pages = totalRecords / 10;
+    return pages < 1 ? 1 : Math.ceil(pages);
+  }, [totalRecords]);
+
   const dispatch = useDispatch();
+
+  async function handleDeleteDelivery() {
+    try {
+      await api.delete(`deliveries/${deliveryId}`);
+      setDeliveries(
+        deliveries.filter((delivery) => delivery.id !== deliveryId)
+      );
+
+      setTotalRecords(totalRecords - 1);
+
+      toast.success('Delivery was deleted with success');
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   const headerControls = [
     {
@@ -65,10 +89,15 @@ export default function Deliveries() {
     {
       type: 'Delete',
       method: () => {
-        console.log('Delete');
+        window.confirm('Are you sure you wish to delete this delivery?') &&
+          handleDeleteDelivery();
       },
     },
   ];
+
+  useEffect(() => {
+    deliveries.length === 0 && actualPage > 1 && setActualPage(actualPage - 1);
+  }, [deliveries, actualPage]);
 
   useEffect(() => {
     dispatch(changeScreen('deliveries'));
@@ -100,11 +129,6 @@ export default function Deliveries() {
 
     filterDeliveries();
   }, [filter, actualPage]);
-
-  const totalPages = useMemo(() => {
-    const pages = totalRecords / 10;
-    return pages < 1 ? 1 : Math.ceil(pages);
-  }, [totalRecords]);
 
   function handleSetDeliveryId(id) {
     dispatch(setDeliveryId(id));

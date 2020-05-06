@@ -36,5 +36,7 @@ module.exports = {
     'no-console': ['error', {allow: ['tron']}],
     'react/jsx-props-no-spreading': 'off',
     'no-param-reassign': 'off',
+    'no-alert': 'off',
+    'no-unused-expressions': 'off'
   },
 };
