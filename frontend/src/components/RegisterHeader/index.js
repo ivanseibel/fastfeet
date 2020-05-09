@@ -26,11 +26,11 @@ export default function RegisterHeader({ headerControls, title, subtitle }) {
   }, [headerControls]);
 
   const searchBy = useMemo(() => {
-    if (controls.includes('search')) {
-      const search = headerControls.find((hc) => hc.type === 'search');
-      return search.searchBy;
-    }
-  });
+    const defaultObject = { type: '', searchBy: '' };
+    const result =
+      headerControls.find((hc) => hc.type === 'search') || defaultObject;
+    return result.searchBy;
+  }, [headerControls]);
 
   function applyFilter() {
     switch (activeScreen) {

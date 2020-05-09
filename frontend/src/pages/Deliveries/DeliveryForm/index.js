@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -6,7 +7,6 @@ import AsyncSelect from 'react-select/async';
 
 import api from '../../../services/api';
 import history from '../../../services/history';
-import { getSafe } from '../../../utils/utils';
 
 import { Container, Row1, Row2, SelectContainer } from './styles';
 
@@ -260,3 +260,7 @@ export default function DeliveryForm({ location }) {
     </Container>
   );
 }
+
+DeliveryForm.propTypes = {
+  location: PropTypes.shape().isRequired,
+};
