@@ -25,6 +25,13 @@ export default function RegisterHeader({ headerControls, title, subtitle }) {
     return headerControls.map((control) => control.type);
   }, [headerControls]);
 
+  const searchBy = useMemo(() => {
+    if (controls.includes('search')) {
+      const search = headerControls.find((hc) => hc.type === 'search');
+      return search.searchBy;
+    }
+  });
+
   function applyFilter() {
     switch (activeScreen) {
       case 'deliveries':
@@ -67,7 +74,7 @@ export default function RegisterHeader({ headerControls, title, subtitle }) {
             <input
               onChange={handleNewFilter}
               type="text"
-              placeholder={`Search by ${activeScreen}`}
+              placeholder={`Search ${activeScreen} by ${searchBy}`}
               value={newFilter}
               onKeyDown={handleKeyDown}
             />
