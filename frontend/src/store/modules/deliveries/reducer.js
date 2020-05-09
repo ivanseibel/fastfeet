@@ -4,6 +4,12 @@ const INITIAL_STATE = {
   filter: '',
   deliveryDetails: {
     id: '',
+    recipient_id: '',
+    recipient_name: '',
+    deliveryman_id: '',
+    deliveryman_name: '',
+    product: '',
+
     showPopup: false,
     showModal: false,
   },
@@ -17,8 +23,15 @@ export default function deliveries(state = INITIAL_STATE, action) {
         break;
       }
 
-      case '@deliveries/SET_DELIVERY_ID': {
-        draft.deliveryDetails.id = action.payload.deliveryId;
+      case '@deliveries/SET_DELIVERY_DATA': {
+        draft.deliveryDetails.id = action.payload.id;
+        draft.deliveryDetails.recipient_id = action.payload.recipient_id;
+        draft.deliveryDetails.recipient_name = action.payload.recipient_name;
+        draft.deliveryDetails.deliveryman_id = action.payload.deliveryman_id;
+        draft.deliveryDetails.deliveryman_name =
+          action.payload.deliveryman_name;
+        draft.deliveryDetails.product = action.payload.product;
+
         draft.deliveryDetails.showPopup = true;
         break;
       }

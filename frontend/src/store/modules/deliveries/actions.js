@@ -5,10 +5,10 @@ export function setDeliveriesFilter(filter) {
   };
 }
 
-export function setDeliveryId(deliveryId) {
+export function setDeliveryData(deliveryData) {
   return {
-    type: '@deliveries/SET_DELIVERY_ID',
-    payload: { deliveryId },
+    type: '@deliveries/SET_DELIVERY_DATA',
+    payload: deliveryData,
   };
 }
 

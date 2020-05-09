@@ -5,72 +5,52 @@ export const Container = styled.div`
 
   max-width: 900px;
   width: 100%;
+
+  form {
+    background-color: #fff;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 30px;
+  }
 `;
 
-export const Form = styled.form`
+export const Row1 = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 30px;
+`;
+
+export const Row2 = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  margin-top: 16px;
 
-  background: #fff;
+  input {
+    margin-top: 9px;
+    height: 45px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    color: #999;
+    font-size: 16px;
+    padding: 0 15px;
 
-  border: 0;
-  border-radius: 4px;
-
-  margin-top: 20px;
-  padding: 30px;
-
-  #row-1 {
-    margin-bottom: 16px;
-
-    label + label {
-      margin-left: 30px;
+    ::placeholder {
+      color: #999;
+      font-size: 16px;
     }
-  }
-  #row-2 {
   }
 `;
 
-export const FormRow = styled.div`
-  display: flex;
-  flex: 1;
+export const SelectContainer = styled.pre`
+  margin-top: 9px;
 
-  label {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    position: relative;
+  [class^='react-select__'] {
+    font: 16px 'Roboto', sans-serif;
+    color: #999;
+  }
 
-    font-weight: bold;
-
-    .field {
-      height: 45px;
-
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background: #fff;
-
-      color: #999;
-      font-size: 16px;
-
-      padding: 12px 15px;
-      margin-top: 9px;
-
-      ::placeholder {
-        color: #999;
-      }
-    }
-
-    select {
-      appearance: none;
-      background: transparent;
-    }
-
-    svg {
-      position: absolute;
-      top: 35px;
-      right: 10px;
-      pointer-events: none;
-    }
+  .react-select__control {
+    padding: 0 5px;
+    height: 45px;
   }
 `;

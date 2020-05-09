@@ -9,10 +9,11 @@ import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 import history from '../../services/history';
+import { getSafe } from '../../utils/utils';
 
 import { changeScreen } from '../../store/modules/auth/actions';
 import {
-  setDeliveryId,
+  setDeliveryData,
   setShowDetails,
 } from '../../store/modules/deliveries/actions';
 
@@ -68,7 +69,15 @@ export default function Deliveries() {
     {
       type: 'new',
       method: () => {
-        dispatch(setDeliveryId(''));
+        dispatch(
+          setDeliveryData({
+            deliveryId: '',
+            recipientId: '',
+            recipientName: '',
+            deliverymanId: '',
+            deliverymanName: '',
+          })
+        );
         history.push('delivery', { operation: 'insert' });
       },
     },
@@ -130,8 +139,8 @@ export default function Deliveries() {
     filterDeliveries();
   }, [filter, actualPage]);
 
-  function handleSetDeliveryId(id) {
-    dispatch(setDeliveryId(id));
+  function handleSetDeliveryData(data) {
+    dispatch(setDeliveryData(data));
   }
 
   function handleNextButtonClick() {
@@ -172,19 +181,19 @@ export default function Deliveries() {
           {deliveries.map((delivery) => (
             <React.Fragment key={delivery.id}>
               <span>{delivery.id}</span>
-              <span>{delivery.recipient.name}</span>
-              <span>{delivery.product}</span>
+              <span>{getSafe(() => delivery.recipient.name)}</span>
+              <span>{getSafe(() => delivery.product)}</span>
               <span>
                 {delivery.deliveryman ? (
                   <img
-                    src={delivery.deliveryman.avatar.url}
-                    alt={delivery.deliveryman.name}
+                    src={getSafe(() => delivery.deliveryman.avatar.url)}
+                    alt={getSafe(() => delivery.deliveryman.name)}
                   />
                 ) : null}
-                {delivery.deliveryman ? delivery.deliveryman.name : null}
+                {getSafe(() => delivery.deliveryman.name)}
               </span>
-              <span>{delivery.recipient.city}</span>
-              <span>{delivery.recipient.state}</span>
+              <span>{getSafe(() => delivery.recipient.city)}</span>
+              <span>{getSafe(() => delivery.recipient.state)}</span>
               <span>
                 <Status status={delivery.status}>
                   {delivery.status.toUpperCase()}
@@ -194,7 +203,16 @@ export default function Deliveries() {
                 <button
                   type="button"
                   onClick={() => {
-                    handleSetDeliveryId(delivery.id);
+                    handleSetDeliveryData({
+                      id: delivery.id,
+                      recipient_id: getSafe(() => delivery.recipient.id),
+                      recipient_name: getSafe(() => delivery.recipient.name),
+                      deliveryman_id: getSafe(() => delivery.deliveryman.id),
+                      deliveryman_name: getSafe(
+                        () => delivery.deliveryman.name
+                      ),
+                      product: getSafe(() => delivery.product),
+                    });
                   }}
                 >
                   <MdMoreHoriz size={20} />
