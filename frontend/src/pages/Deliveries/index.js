@@ -65,6 +65,7 @@ export default function Deliveries() {
     },
     {
       type: 'search',
+      searchBy: 'product',
     },
     {
       type: 'new',
