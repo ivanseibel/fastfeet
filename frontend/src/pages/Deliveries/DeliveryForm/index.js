@@ -1,42 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { MdKeyboardArrowDown } from 'react-icons/md';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import AsyncSelect from 'react-select/async';
 
 import api from '../../../services/api';
 import history from '../../../services/history';
+import { getSafe } from '../../../utils/utils';
 
-import { Container, Form, FormRow } from './styles';
+import { Container, Row1, Row2, SelectContainer } from './styles';
 
 import HeaderRegister from '../../../components/RegisterHeader';
 
 export default function DeliveryForm({ location }) {
   const [recipients, setRecipients] = useState([]);
   const [deliverymans, setDeliverymans] = useState([]);
-  const [delivery, setDelivery] = useState(null);
+  // const [delivery, setDelivery] = useState(null);
   const [newDelivery, setNewDelivery] = useState({
     recipient_id: null,
+    recipient_name: null,
     deliveryman_id: null,
+    deliveryman_name: null,
     product: null,
   });
 
   const { operation } = location.state;
 
-  const { id: deliveryId } = useSelector(
+  const selectedDelivery = useSelector(
     (state) => state.deliveries.deliveryDetails
   );
 
   useEffect(() => {
-    if (delivery) {
+    if (selectedDelivery.id !== '') {
       setNewDelivery({
-        // id: delivery.id,
-        recipient_id: delivery.recipient.id,
-        deliveryman_id: delivery.deliveryman ? delivery.deliveryman.id : null,
-        product: delivery.product,
+        recipient_id: selectedDelivery.recipient_id,
+        recipient_name: selectedDelivery.recipient_name,
+        deliveryman_id: selectedDelivery.deliveryman_id,
+        deliveryman_name: selectedDelivery.deliveryman_name,
+        product: selectedDelivery.product,
       });
     }
-  }, [delivery]);
+  }, [selectedDelivery]);
 
   useEffect(() => {
     async function loadRecipients() {
@@ -44,12 +48,17 @@ export default function DeliveryForm({ location }) {
       const { data } = response;
 
       if (data) {
-        data.unshift({
-          id: '',
-          name: '',
+        const loaded = data.map((recipient) => ({
+          value: recipient.id,
+          label: recipient.name,
+        }));
+
+        loaded.unshift({
+          value: null,
+          label: 'Select...',
         });
 
-        setRecipients(data);
+        setRecipients(loaded);
       }
     }
 
@@ -58,38 +67,72 @@ export default function DeliveryForm({ location }) {
       const { data } = response;
 
       if (data) {
-        data.unshift({
-          id: '',
-          name: '',
+        const loaded = data.map((deliveryman) => ({
+          value: deliveryman.id,
+          label: deliveryman.name,
+        }));
+
+        loaded.unshift({
+          value: null,
+          label: 'Select...',
         });
 
-        setDeliverymans(data);
-      }
-    }
-
-    async function loadDelivery() {
-      const response = await api.get(`deliveries/${deliveryId}`);
-
-      const { data } = response;
-
-      if (data) {
-        setDelivery(data);
+        setDeliverymans(loaded);
       }
     }
 
     loadRecipients();
     loadDeliverymans();
 
-    if (deliveryId) loadDelivery();
-  }, [deliveryId]);
+    // if (deliveryId) loadDelivery();
+  }, [selectedDelivery]);
 
-  function handleRecipientChange(e) {
-    setNewDelivery({ ...newDelivery, recipient_id: e.target.value });
+  function filterRecipients(inputValue) {
+    return recipients.filter((recipient) =>
+      recipient.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
   }
 
-  function handleDeliverymanChange(e) {
-    const deliverymanId = e.target.value === '' ? null : e.target.value;
-    setNewDelivery({ ...newDelivery, deliveryman_id: deliverymanId });
+  function loadRecipientsToSelect(inputValue, callback) {
+    setTimeout(() => {
+      callback(filterRecipients(inputValue));
+    }, 1000);
+  }
+
+  function handleRecipientInputChange(newValue) {
+    return newValue.replace(/\W/g, '');
+  }
+
+  function handleRecipientChange(newValue) {
+    setNewDelivery({
+      ...newDelivery,
+      recipient_id: newValue.value,
+      recipient_name: newValue.label,
+    });
+  }
+
+  function filterDeliverymans(inputValue) {
+    return deliverymans.filter((deliveryman) =>
+      deliveryman.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
+
+  function loadDeliverymansToSelect(inputValue, callback) {
+    setTimeout(() => {
+      callback(filterDeliverymans(inputValue));
+    }, 1000);
+  }
+
+  function handleDeliverymanInputChange(newValue) {
+    return newValue.replace(/\W/g, '');
+  }
+
+  function handleDeliverymanChange(newValue) {
+    setNewDelivery({
+      ...newDelivery,
+      deliveryman_id: newValue.value,
+      deliveryman_name: newValue.label,
+    });
   }
 
   function handleProduct(e) {
@@ -115,15 +158,15 @@ export default function DeliveryForm({ location }) {
       return;
     }
 
-    const query = {};
-
-    Object.keys(newDelivery).forEach((key) => {
-      query[key] = newDelivery[key];
-    });
+    const query = {
+      recipient_id: newDelivery.recipient_id,
+      deliveryman_id: newDelivery.deliveryman_id,
+      product: newDelivery.product,
+    };
 
     try {
       if (operation === 'edit') {
-        await api.put(`deliveries/${deliveryId}`, query);
+        await api.put(`deliveries/${selectedDelivery.id}`, query);
         toast.success('Delivery updated with success!');
       }
       if (operation === 'insert') {
@@ -162,55 +205,58 @@ export default function DeliveryForm({ location }) {
         headerControls={headerControls}
         subtitle="Delivery edit"
       />
-      <Form>
-        <FormRow id="row-1">
-          <label htmlFor="recipient">
-            Recipient
-            <select
-              id="recipient"
-              className="field"
-              value={newDelivery.recipient_id || ''}
-              onChange={handleRecipientChange}
-            >
-              {recipients.map((recipient) => (
-                <option key={String(recipient.id)} value={String(recipient.id)}>
-                  {recipient.name}
-                </option>
-              ))}
-            </select>
-            <MdKeyboardArrowDown color="#ddd" size={25} />
-          </label>
-          <label htmlFor="deliveryman">
-            Deliveryman
-            <select
-              id="deliveryman"
-              className="field"
-              value={newDelivery.deliveryman_id || ''}
-              onChange={handleDeliverymanChange}
-            >
-              {deliverymans.map((deliveryman) => (
-                <option key={deliveryman.id} value={deliveryman.id}>
-                  {deliveryman.name}
-                </option>
-              ))}
-            </select>
-            <MdKeyboardArrowDown color="#ddd" size={25} />
-          </label>
-        </FormRow>
-        <FormRow id="row-2">
-          <label htmlFor="product">
-            Product name
-            <input
-              type="text"
-              id="product"
-              className="field"
-              placeholder=""
-              value={newDelivery.product || ''}
-              onChange={handleProduct}
-            />
-          </label>
-        </FormRow>
-      </Form>
+
+      <form>
+        <Row1>
+          <div>
+            <strong>Recipient</strong>
+            <SelectContainer>
+              <AsyncSelect
+                cacheOptions
+                loadOptions={loadRecipientsToSelect}
+                defaultOptions={recipients}
+                value={{
+                  value: newDelivery.recipient_id,
+                  label: newDelivery.recipient_name || 'Select...',
+                }}
+                onInputChange={handleRecipientInputChange}
+                className="react-select-container"
+                classNamePrefix="react-select"
+                onChange={handleRecipientChange}
+              />
+            </SelectContainer>
+          </div>
+          <div>
+            <strong>Deliveryman</strong>
+            <SelectContainer>
+              <AsyncSelect
+                cacheOptions
+                loadOptions={loadDeliverymansToSelect}
+                defaultOptions={deliverymans}
+                value={{
+                  value: newDelivery.deliveryman_id,
+                  label: newDelivery.deliveryman_name || 'Select...',
+                }}
+                onInputChange={handleDeliverymanInputChange}
+                onChange={handleDeliverymanChange}
+                className="react-select-container"
+                classNamePrefix="react-select"
+              />
+            </SelectContainer>
+          </div>
+        </Row1>
+        <Row2>
+          <strong>Product name</strong>
+          <input
+            type="text"
+            id="product"
+            className="field"
+            placeholder=""
+            value={newDelivery.product || ''}
+            onChange={handleProduct}
+          />
+        </Row2>
+      </form>
     </Container>
   );
 }
