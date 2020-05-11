@@ -12,7 +12,11 @@ import {
   Subtitle,
 } from './styles';
 
-import { setDeliveriesFilter } from '../../store/modules/deliveries/actions';
+import {
+  setDeliveriesFilter,
+  setShowWithProblems,
+} from '../../store/modules/deliveries/actions';
+
 // import history from '../../services/history';
 
 export default function RegisterHeader({ headerControls, title, subtitle }) {
@@ -20,6 +24,10 @@ export default function RegisterHeader({ headerControls, title, subtitle }) {
   const [newFilter, setNewFilter] = useState('');
 
   const dispatch = useDispatch();
+
+  const { onlyWithProblems } = useSelector(
+    (state) => state.deliveries.deliveryDetails
+  );
 
   const controls = useMemo(() => {
     return headerControls.map((control) => control.type);
@@ -63,13 +71,17 @@ export default function RegisterHeader({ headerControls, title, subtitle }) {
     }
   }
 
+  function handleChangeOnlyWithProblems(e) {
+    dispatch(setShowWithProblems(!onlyWithProblems));
+  }
+
   return (
     <Container>
       <Title show={title}>{title}</Title>
       <Header show={controls.length > 0}>
-        <LeftBox show={controls.includes('search')}>
-          <Subtitle show={subtitle}>{subtitle}</Subtitle>
-          <div>
+        <Subtitle show={subtitle}>{subtitle}</Subtitle>
+        <LeftBox show={controls}>
+          <div className="search">
             <MdSearch size={16} color="#999" onClick={applyFilter} />
             <input
               onChange={handleNewFilter}
@@ -78,6 +90,18 @@ export default function RegisterHeader({ headerControls, title, subtitle }) {
               value={newFilter}
               onKeyDown={handleKeyDown}
             />
+            <div className="check">
+              <label htmlFor="onlyWithProblems">
+                <input
+                  className="check"
+                  type="checkbox"
+                  checked={onlyWithProblems}
+                  id="onlyWithProblems"
+                  onChange={handleChangeOnlyWithProblems}
+                />
+                Only with problems
+              </label>
+            </div>
           </div>
         </LeftBox>
 

@@ -120,12 +120,19 @@ class DeliveryController {
 
   async index(req, res) {
     const limitOfRecords = 10;
-    const { page = 1, q, with_problems = false } = req.query;
+    const { page = 1, q } = req.query;
+    let { with_problems } = req.query;
+
+    // converting string to boolean true/false
+    if (with_problems) {
+      with_problems = JSON.parse(with_problems);
+    } else {
+      with_problems = false;
+    }
 
     let where = q ? { product: { [Op.iLike]: `%${q}%` } } : null;
 
-    if (with_problems) {
-      // console.log(sequelize.connection.literal('topics - 1'));
+    if (with_problems === true) {
       const tempSQL = sequelize.connection.dialect.QueryGenerator.selectQuery(
         'delivery_problems',
         {

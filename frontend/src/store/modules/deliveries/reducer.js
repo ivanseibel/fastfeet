@@ -10,6 +10,7 @@ const INITIAL_STATE = {
     deliveryman_name: '',
     product: '',
 
+    onlyWithProblems: false,
     showPopup: false,
     showModal: false,
   },
@@ -43,6 +44,12 @@ export default function deliveries(state = INITIAL_STATE, action) {
 
       case '@deliveries/SET_SHOW_MODAL': {
         draft.deliveryDetails.showModal = action.payload.showModal;
+        break;
+      }
+
+      case '@deliveries/SET_SHOW_WITH_PROBLEMS': {
+        draft.deliveryDetails.onlyWithProblems =
+          action.payload.onlyWithProblems;
         break;
       }
 
