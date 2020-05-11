@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
 
+import sequelize from '../../database/index';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
@@ -8,6 +9,7 @@ import Avatar from '../models/Avatar';
 import Signature from '../models/Signature';
 import Queue from '../../lib/Queue';
 import NewDeliveryMail from '../jobs/NewDeliveryMail';
+import DeliveryProblem from '../models/DeliveryProblem';
 
 class DeliveryController {
   async store(req, res) {
@@ -119,10 +121,26 @@ class DeliveryController {
 
   async index(req, res) {
     const limitOfRecords = 10;
-    const { page = 1, q } = req.query;
+    const { page = 1, q, with_problems = false } = req.query;
 
-    const where = q ? { product: { [Op.iLike]: `%${q}%` } } : null;
+    let where = q ? { product: { [Op.iLike]: `%${q}%` } } : null;
 
+    if (with_problems) {
+      // console.log(sequelize.connection.literal('topics - 1'));
+      const tempSQL = sequelize.connection.dialect.QueryGenerator.selectQuery(
+        'delivery_problems',
+        {
+          attributes: ['delivery_id'],
+        }
+      ).slice(0, -1); // to remove the ';' from the end of the SQL
+      // where = { $notIn: sequelize.connection.literal(`(${tempSQL})`) };
+      where = {
+        ...where,
+        id: { [Op.in]: sequelize.connection.literal(`(${tempSQL})`) },
+      };
+    }
+
+    // const deliveries = await Delivery.findAndCountAll({
     const deliveries = await Delivery.findAndCountAll({
       order: [['id', 'ASC']],
       limit: limitOfRecords,
@@ -137,6 +155,13 @@ class DeliveryController {
       ],
       where,
       include: [
+        // {
+        // model: DeliveryProblem,
+        // as: 'problem',
+        // attributes: [],
+        // required: with_problems,
+        // limit: 1,
+        // },
         {
           model: Recipient,
           as: 'recipient',
