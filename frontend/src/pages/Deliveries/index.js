@@ -30,10 +30,16 @@ export default function Deliveries() {
   const [actualPage, setActualPage] = useState(1);
 
   const filter = useSelector((state) => state.deliveries.filter);
+
   const deliveryId = useSelector(
     (state) => state.deliveries.deliveryDetails.id
   );
+
   const deliveryDetails = useSelector(
+    (state) => state.deliveries.deliveryDetails
+  );
+
+  const { onlyWithProblems } = useSelector(
     (state) => state.deliveries.deliveryDetails
   );
 
@@ -66,6 +72,9 @@ export default function Deliveries() {
     {
       type: 'search',
       searchBy: 'product',
+    },
+    {
+      type: 'onlyWithProblems',
     },
     {
       type: 'new',
@@ -118,11 +127,12 @@ export default function Deliveries() {
       const query = {
         params: {
           page: actualPage,
+          with_problems: onlyWithProblems,
         },
       };
 
       if (filter.length > 0) {
-        query.params = { ...query.params, q: filter };
+        query.params.q = filter;
       }
 
       const response = await api.get('deliveries', query);
@@ -138,7 +148,7 @@ export default function Deliveries() {
     }
 
     filterDeliveries();
-  }, [filter, actualPage]);
+  }, [filter, actualPage, onlyWithProblems]);
 
   function handleSetDeliveryData(data) {
     dispatch(setDeliveryData(data));

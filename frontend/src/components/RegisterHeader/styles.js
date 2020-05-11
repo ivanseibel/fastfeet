@@ -21,9 +21,10 @@ export const Header = styled.header`
 
 export const LeftBox = styled.div`
   position: relative;
+  display: flex;
 
-  div {
-    display: ${(props) => (props.show ? 'block' : 'none')};
+  div.search {
+    display: ${(props) => (props.show.includes('search') ? 'flex' : 'none')};
 
     svg {
       position: absolute;
@@ -32,7 +33,7 @@ export const LeftBox = styled.div`
       cursor: pointer;
     }
 
-    input {
+    > input {
       width: 300px;
       height: 36px;
       padding: 8px 40px;
@@ -42,6 +43,22 @@ export const LeftBox = styled.div`
 
       &::placeholder {
         color: #999;
+      }
+    }
+  }
+
+  div.check {
+    display: ${(props) =>
+      props.show.includes('onlyWithProblems') ? 'flex' : 'none'};
+    align-items: center;
+
+    label {
+      color: #999;
+      margin-left: 25px;
+
+      input {
+        margin-right: 5px;
+        align-self: vertical;
       }
     }
   }

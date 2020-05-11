@@ -25,3 +25,10 @@ export function setShowDetails(showModal) {
     payload: { showModal },
   };
 }
+
+export function setShowWithProblems(onlyWithProblems) {
+  return {
+    type: '@deliveries/SET_SHOW_WITH_PROBLEMS',
+    payload: { onlyWithProblems },
+  };
+}
