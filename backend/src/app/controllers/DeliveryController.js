@@ -9,7 +9,6 @@ import Avatar from '../models/Avatar';
 import Signature from '../models/Signature';
 import Queue from '../../lib/Queue';
 import NewDeliveryMail from '../jobs/NewDeliveryMail';
-import DeliveryProblem from '../models/DeliveryProblem';
 
 class DeliveryController {
   async store(req, res) {
