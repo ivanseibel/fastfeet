@@ -203,7 +203,7 @@ export default function DeliveryForm({ location }) {
     <Container>
       <HeaderRegister
         headerControls={headerControls}
-        subtitle="Delivery edit"
+        subtitle={operation === 'edit' ? 'Delivery edit' : 'Delivery insert'}
       />
 
       <form>
