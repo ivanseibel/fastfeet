@@ -16,6 +16,7 @@ import {
   setDeliveriesFilter,
   setShowWithProblems,
 } from '../../store/modules/deliveries/actions';
+import { setDeliverymansFilter } from '../../store/modules/deliverymans/actions';
 
 // import history from '../../services/history';
 
@@ -44,6 +45,10 @@ export default function RegisterHeader({ headerControls, title, subtitle }) {
     switch (activeScreen) {
       case 'deliveries':
         dispatch(setDeliveriesFilter(newFilter));
+        break;
+
+      case 'deliverymans':
+        dispatch(setDeliverymansFilter(newFilter));
         break;
 
       default:
