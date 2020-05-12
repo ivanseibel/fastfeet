@@ -96,12 +96,12 @@ class DeliverymanController {
   }
 
   async index(req, res) {
-    const limitOfRecords = 20;
+    const limitOfRecords = 10;
     const { page = 1, q } = req.query;
 
     const where = q ? { name: { [Op.iLike]: `%${q}%` } } : null;
 
-    const deliverymans = await Deliveryman.findAll({
+    const deliverymans = await Deliveryman.findAndCountAll({
       where,
       include: [
         {
