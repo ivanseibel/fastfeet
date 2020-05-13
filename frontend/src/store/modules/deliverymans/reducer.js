@@ -2,13 +2,14 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
   filter: '',
-  showPopup: false,
 
   deliverymanDetails: {
     id: '',
     name: '',
     email: '',
     avatar: {},
+
+    showPopup: false,
   },
 };
 
@@ -30,7 +31,7 @@ export default function deliveries(state = INITIAL_STATE, action) {
       }
 
       case '@deliverymans/SET_SHOW_POPUP': {
-        draft.showPopup = action.payload.showPopup;
+        draft.deliverymanDetails.showPopup = action.payload.showPopup;
         break;
       }
 
