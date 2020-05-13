@@ -7,7 +7,8 @@ export const MenuContainer = styled.ul`
   position: absolute;
   width: 150px;
   top: calc(100% - 5px);
-  left: calc(75px - 100%);
+  margin-left: auto;
+  margin-right: auto;
 
   background: #fff;
 
