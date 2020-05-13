@@ -5,8 +5,6 @@ import { MdVisibility, MdCreate, MdDeleteForever } from 'react-icons/md';
 
 import { MenuContainer, ItemContainer } from './styles';
 
-import { setShowPopup } from '../../store/modules/deliveries/actions';
-
 export default function PopupMenu(props) {
   const node = useRef();
   const { show, menuItems, toggle } = props;
@@ -38,7 +36,7 @@ export default function PopupMenu(props) {
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
-  }, [show, menuItems, dispatch]);
+  }, [show, menuItems, dispatch, toggle]);
 
   const ItemIcon = {
     Details: MdVisibility,
@@ -69,6 +67,7 @@ export default function PopupMenu(props) {
 PopupMenu.propTypes = {
   show: PropTypes.bool,
   menuItems: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  toggle: PropTypes.func.isRequired,
 };
 
 PopupMenu.defaultProps = {

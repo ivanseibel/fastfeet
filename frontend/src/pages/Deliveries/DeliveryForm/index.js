@@ -15,7 +15,6 @@ import HeaderRegister from '../../../components/RegisterHeader';
 export default function DeliveryForm({ location }) {
   const [recipients, setRecipients] = useState([]);
   const [deliverymans, setDeliverymans] = useState([]);
-  // const [delivery, setDelivery] = useState(null);
   const [newDelivery, setNewDelivery] = useState({
     recipient_id: null,
     recipient_name: null,
@@ -67,7 +66,7 @@ export default function DeliveryForm({ location }) {
       const { data } = response;
 
       if (data) {
-        const loaded = data.map((deliveryman) => ({
+        const loaded = data.rows.map((deliveryman) => ({
           value: deliveryman.id,
           label: deliveryman.name,
         }));
@@ -83,8 +82,6 @@ export default function DeliveryForm({ location }) {
 
     loadRecipients();
     loadDeliverymans();
-
-    // if (deliveryId) loadDelivery();
   }, [selectedDelivery]);
 
   function filterRecipients(inputValue) {
