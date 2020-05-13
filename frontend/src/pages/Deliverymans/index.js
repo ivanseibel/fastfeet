@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+
 import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
   MdMoreHoriz,
 } from 'react-icons/md';
-import { useSelector, useDispatch } from 'react-redux';
-
 import api from '../../services/api';
 import { getSafe } from '../../utils/utils';
+import history from '../../services/history';
 
 import { changeScreen } from '../../store/modules/auth/actions';
 import {
@@ -47,22 +49,49 @@ export default function Deliverymans() {
     {
       type: 'new',
       method: () => {
-        alert('New deliveryman');
+        dispatch(
+          setDeliverymanData({
+            deliveryId: '',
+            recipientId: '',
+            recipientName: '',
+            deliverymanId: '',
+            deliverymanName: '',
+          })
+        );
+        history.push('deliveryman', { operation: 'insert' });
       },
     },
   ];
+
+  async function handleDeleteDeliveryman() {
+    try {
+      await api.delete(`deliverymans/${deliverymanDetails.id}`);
+      setDeliverymans(
+        deliverymans.filter(
+          (deliveryman) => deliveryman.id !== deliverymanDetails.id
+        )
+      );
+
+      setTotalRecords(totalRecords - 1);
+
+      toast.success('Deliveryman was deleted with success');
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   const menuItems = [
     {
       type: 'Edit',
       method: () => {
-        alert('Edit');
+        history.push('deliveryman', { operation: 'edit' });
       },
     },
     {
       type: 'Delete',
       method: () => {
-        alert('Delete');
+        window.confirm('Are you sure you wish to delete this deliveryman?') &&
+          handleDeleteDeliveryman();
       },
     },
   ];
@@ -141,7 +170,8 @@ export default function Deliverymans() {
               {' '}
               <img
                 src={getSafe(() => deliveryman.avatar.url)}
-                alt={getSafe(() => deliveryman.name)}
+                // alt={getSafe(() => deliveryman.name)}
+                alt=""
               />
             </span>
 

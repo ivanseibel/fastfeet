@@ -32,9 +32,9 @@ export default function Deliveries() {
 
   const filter = useSelector((state) => state.deliveries.filter);
 
-  const deliveryId = useSelector(
-    (state) => state.deliveries.deliveryDetails.id
-  );
+  // const deliveryId = useSelector(
+  //   (state) => state.deliveries.deliveryDetails.id
+  // );
 
   const deliveryDetails = useSelector(
     (state) => state.deliveries.deliveryDetails
@@ -53,9 +53,9 @@ export default function Deliveries() {
 
   async function handleDeleteDelivery() {
     try {
-      await api.delete(`deliveries/${deliveryId}`);
+      await api.delete(`deliveries/${deliveryDetails.id}`);
       setDeliveries(
-        deliveries.filter((delivery) => delivery.id !== deliveryId)
+        deliveries.filter((delivery) => delivery.id !== deliveryDetails.id)
       );
 
       setTotalRecords(totalRecords - 1);
