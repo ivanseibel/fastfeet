@@ -15,6 +15,7 @@ import { changeScreen } from '../../store/modules/auth/actions';
 import {
   setDeliveryData,
   setShowDetails,
+  setShowPopup,
 } from '../../store/modules/deliveries/actions';
 
 import { Container, Grid, Status, NavBar, NavButton } from './styles';
@@ -236,6 +237,9 @@ export default function Deliveries() {
                       : false
                   }
                   menuItems={menuItems}
+                  toggle={(value) => {
+                    dispatch(setShowPopup(value));
+                  }}
                 />
               </span>
             </React.Fragment>

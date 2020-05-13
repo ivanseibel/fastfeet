@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
   MdMoreHoriz,
 } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import api from '../../services/api';
 import { getSafe } from '../../utils/utils';
+
+import { changeScreen } from '../../store/modules/auth/actions';
+import {
+  setDeliverymanData,
+  setShowPopup,
+} from '../../store/modules/deliverymans/actions';
 
 import * as S from './styles';
 import HeaderRegister from '../../components/RegisterHeader';
@@ -16,13 +22,19 @@ import PopupMenu from '../../components/PopupMenu';
 export default function Deliverymans() {
   const [deliverymans, setDeliverymans] = useState([]);
   const [actualPage, setActualPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [totalRecords, setTotalRecords] = useState(0);
 
   const filter = useSelector((state) => state.deliverymans.filter);
   const deliverymanDetails = useSelector(
     (state) => state.deliverymans.deliverymanDetails
   );
+
+  const totalPages = useMemo(() => {
+    const pages = totalRecords / 10;
+    return pages < 1 ? 1 : Math.ceil(pages);
+  }, [totalRecords]);
+
+  const dispatch = useDispatch();
 
   const headerControls = [
     {
@@ -56,6 +68,16 @@ export default function Deliverymans() {
   ];
 
   useEffect(() => {
+    dispatch(changeScreen('deliverymans'));
+  }, [dispatch]);
+
+  useEffect(() => {
+    deliverymans.length === 0 &&
+      actualPage > 1 &&
+      setActualPage(actualPage - 1);
+  }, [deliverymans, actualPage]);
+
+  useEffect(() => {
     async function filterDeliverymans() {
       const query = {
         params: {
@@ -83,15 +105,20 @@ export default function Deliverymans() {
   }, [filter, actualPage]);
 
   function handlePrevButtonClick() {
-    alert('Prev button');
+    if (actualPage > 1) {
+      setActualPage(actualPage - 1);
+    }
   }
 
   function handleNextButtonClick() {
-    alert('Next button');
+    if (actualPage < totalPages) {
+      setActualPage(actualPage + 1);
+    }
   }
 
   function handleSetDeliverymanData(data) {
-    alert('HandleSetDeliveryData');
+    dispatch(setDeliverymanData(data));
+    dispatch(setShowPopup(true));
   }
 
   return (
@@ -110,10 +137,13 @@ export default function Deliverymans() {
         {deliverymans.map((deliveryman) => (
           <React.Fragment key={deliveryman.id}>
             <span>{deliveryman.id}</span>
-            <img
-              src={getSafe(() => deliveryman.avatar.url)}
-              alt={getSafe(() => deliveryman.name)}
-            />
+            <span>
+              {' '}
+              <img
+                src={getSafe(() => deliveryman.avatar.url)}
+                alt={getSafe(() => deliveryman.name)}
+              />
+            </span>
 
             <span>{getSafe(() => deliveryman.name)}</span>
             <span>{getSafe(() => deliveryman.email)}</span>
@@ -139,6 +169,9 @@ export default function Deliverymans() {
                     : false
                 }
                 menuItems={menuItems}
+                toggle={(value) => {
+                  dispatch(setShowPopup(value));
+                }}
               />
             </span>
           </React.Fragment>

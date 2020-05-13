@@ -9,13 +9,13 @@ import { setShowPopup } from '../../store/modules/deliveries/actions';
 
 export default function PopupMenu(props) {
   const node = useRef();
-  const { show, menuItems } = props;
+  const { show, menuItems, toggle } = props;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     function toggleShowMenu() {
-      dispatch(setShowPopup(false));
+      toggle(false);
     }
     function handleClick(e) {
       if (node.current.contains(e.target)) {
