@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin: 34px auto;
+  margin: 20px auto;
 
   max-width: 900px;
   width: 100%;
@@ -19,23 +19,35 @@ export const AvatarRow = styled.div`
   flex: 1;
   justify-content: center;
 
-  span {
+  label {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 150px;
     height: 150px;
+    cursor: pointer;
+    overflow: hidden;
 
     border: 1px dashed #ddd;
     border-radius: 50%;
 
-    strong {
+    > strong {
       color: #ddd;
     }
 
     svg {
       color: #ddd;
+    }
+
+    > input {
+      display: none;
+    }
+
+    img {
+      width: 150px;
+      /* height: 150px; */
+      /* border-radius: 50%; */
     }
   }
 `;

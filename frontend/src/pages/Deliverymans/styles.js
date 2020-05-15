@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   max-width: 1200px;
   height: 80%;
-  margin: 34px auto;
+  margin: 20px auto;
 `;
 
 export const Grid = styled.ul`
@@ -31,11 +31,21 @@ export const Grid = styled.ul`
     padding: 8px 0 8px 18px;
     margin-bottom: 10px;
 
-    img {
-      margin-right: 5px;
+    span.avatarSpan {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 30px;
       height: 30px;
+      overflow: hidden;
       border-radius: 50%;
+
+      img {
+        /* margin-right: 5px; */
+        width: 30px;
+        /* height: 30px; */
+        /* border-radius: 50%; */
+      }
     }
 
     button {
