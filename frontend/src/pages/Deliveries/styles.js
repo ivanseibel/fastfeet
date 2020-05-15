@@ -10,7 +10,7 @@ statusColor.canceled = '#de3b3b';
 export const Container = styled.div`
   max-width: 1440px;
   height: 80%;
-  margin: 34px auto;
+  margin: 20px auto;
 `;
 
 export const Grid = styled.ul`

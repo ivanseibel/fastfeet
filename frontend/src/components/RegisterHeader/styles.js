@@ -5,7 +5,7 @@ export const Container = styled.div``;
 
 export const Title = styled.h1`
   display: ${(props) => (props.show ? 'block' : 'none')};
-  margin-bottom: 34px;
+  margin-bottom: 20px;
 `;
 
 export const Subtitle = styled.h1`

@@ -131,7 +131,7 @@ export default function Deliverymans() {
     }
 
     filterDeliverymans();
-  }, [filter, actualPage]);
+  }, [filter, actualPage, totalRecords]);
 
   function handlePrevButtonClick() {
     if (actualPage > 1) {
@@ -167,12 +167,13 @@ export default function Deliverymans() {
           <React.Fragment key={deliveryman.id}>
             <span>{deliveryman.id}</span>
             <span>
-              {' '}
-              <img
-                src={getSafe(() => deliveryman.avatar.url)}
-                // alt={getSafe(() => deliveryman.name)}
-                alt=""
-              />
+              <span className="avatarSpan">
+                <img
+                  src={getSafe(() => deliveryman.avatar.url)}
+                  // alt={getSafe(() => deliveryman.name)}
+                  alt=""
+                />
+              </span>
             </span>
 
             <span>{getSafe(() => deliveryman.name)}</span>
