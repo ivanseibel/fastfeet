@@ -32,10 +32,6 @@ export default function Deliveries() {
 
   const filter = useSelector((state) => state.deliveries.filter);
 
-  // const deliveryId = useSelector(
-  //   (state) => state.deliveries.deliveryDetails.id
-  // );
-
   const deliveryDetails = useSelector(
     (state) => state.deliveries.deliveryDetails
   );
@@ -117,7 +113,7 @@ export default function Deliveries() {
 
   useEffect(() => {
     deliveries.length === 0 && actualPage > 1 && setActualPage(actualPage - 1);
-  }, [deliveries, actualPage]);
+  }, [deliveries, actualPage, totalRecords]);
 
   useEffect(() => {
     dispatch(changeScreen('deliveries'));

@@ -101,7 +101,7 @@ class DeliverymanController {
 
     const where = q ? { name: { [Op.iLike]: `%${q}%` } } : null;
 
-    const deliverymans = await Deliveryman.findAndCountAll({
+    const deliverymen = await Deliveryman.findAndCountAll({
       where,
       include: [
         {
@@ -115,7 +115,7 @@ class DeliverymanController {
       offset: (page - 1) * limitOfRecords,
     });
 
-    return res.json(deliverymans);
+    return res.json(deliverymen);
   }
 }
 

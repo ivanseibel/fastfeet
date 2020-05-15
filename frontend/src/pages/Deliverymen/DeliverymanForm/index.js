@@ -21,7 +21,7 @@ export default function DeliverymanForm({ location }) {
   });
 
   const selectedDeliveryman = useSelector(
-    (state) => state.deliverymans.deliverymanDetails
+    (state) => state.deliverymen.deliverymanDetails
   );
 
   const { operation } = location.state;
@@ -94,11 +94,11 @@ export default function DeliverymanForm({ location }) {
       }
 
       if (operation === 'edit') {
-        await api.put(`deliverymans/${selectedDeliveryman.id}`, query);
+        await api.put(`deliverymen/${selectedDeliveryman.id}`, query);
         toast.success('Deliveryman updated with success!');
       }
       if (operation === 'insert') {
-        await api.post(`deliverymans`, query);
+        await api.post(`deliverymen`, query);
         setNewDeliveryman({
           name: null,
           email: null,
@@ -118,7 +118,7 @@ export default function DeliverymanForm({ location }) {
     {
       type: 'back',
       method: () => {
-        history.push('/deliverymans');
+        history.push('/deliverymen');
       },
     },
     {

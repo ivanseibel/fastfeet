@@ -38,11 +38,11 @@ routes.post('/users', OnlyAdmin, UserController.store);
 routes.put('/users', OnlyAdmin, UserController.update);
 routes.get('/users', OnlyAdmin, UserController.index);
 
-routes.post('/deliverymans', OnlyAdmin, DeliverymanController.store);
-routes.put('/deliverymans/:id', OnlyAdmin, DeliverymanController.update);
-routes.get('/deliverymans', OnlyAdmin, DeliverymanController.index);
-routes.delete('/deliverymans/:id', OnlyAdmin, DeliverymanController.delete);
-routes.get('/deliverymans/:id/deliveries', DeliveryStatusController.index);
+routes.post('/deliverymen', OnlyAdmin, DeliverymanController.store);
+routes.put('/deliverymen/:id', OnlyAdmin, DeliverymanController.update);
+routes.get('/deliverymen', OnlyAdmin, DeliverymanController.index);
+routes.delete('/deliverymen/:id', OnlyAdmin, DeliverymanController.delete);
+routes.get('/deliverymen/:id/deliveries', DeliveryStatusController.index);
 
 routes.post('/deliveries', OnlyAdmin, DeliveryController.store);
 routes.put('/deliveries/:id', OnlyAdmin, DeliveryController.update);

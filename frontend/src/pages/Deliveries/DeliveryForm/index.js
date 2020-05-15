@@ -14,7 +14,7 @@ import HeaderRegister from '../../../components/RegisterHeader';
 
 export default function DeliveryForm({ location }) {
   const [recipients, setRecipients] = useState([]);
-  const [deliverymans, setDeliverymans] = useState([]);
+  const [deliverymen, setDeliverymen] = useState([]);
   const [newDelivery, setNewDelivery] = useState({
     recipient_id: null,
     recipient_name: null,
@@ -61,8 +61,8 @@ export default function DeliveryForm({ location }) {
       }
     }
 
-    async function loadDeliverymans() {
-      const response = await api.get('deliverymans');
+    async function loadDeliverymen() {
+      const response = await api.get('deliverymen');
       const { data } = response;
 
       if (data) {
@@ -76,12 +76,12 @@ export default function DeliveryForm({ location }) {
           label: 'Select...',
         });
 
-        setDeliverymans(loaded);
+        setDeliverymen(loaded);
       }
     }
 
     loadRecipients();
-    loadDeliverymans();
+    loadDeliverymen();
   }, [selectedDelivery]);
 
   function filterRecipients(inputValue) {
@@ -108,15 +108,15 @@ export default function DeliveryForm({ location }) {
     });
   }
 
-  function filterDeliverymans(inputValue) {
-    return deliverymans.filter((deliveryman) =>
+  function filterDeliverymen(inputValue) {
+    return deliverymen.filter((deliveryman) =>
       deliveryman.label.toLowerCase().includes(inputValue.toLowerCase())
     );
   }
 
-  function loadDeliverymansToSelect(inputValue, callback) {
+  function loadDeliverymenToSelect(inputValue, callback) {
     setTimeout(() => {
-      callback(filterDeliverymans(inputValue));
+      callback(filterDeliverymen(inputValue));
     }, 1000);
   }
 
@@ -228,8 +228,8 @@ export default function DeliveryForm({ location }) {
             <SelectContainer>
               <AsyncSelect
                 cacheOptions
-                loadOptions={loadDeliverymansToSelect}
-                defaultOptions={deliverymans}
+                loadOptions={loadDeliverymenToSelect}
+                defaultOptions={deliverymen}
                 value={{
                   value: newDelivery.deliveryman_id,
                   label: newDelivery.deliveryman_name || 'Select...',

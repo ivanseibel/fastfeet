@@ -14,11 +14,8 @@ export default function Header() {
           <MenuItem to="/deliveries" selected={activeScreen === 'deliveries'}>
             DELIVERIES
           </MenuItem>
-          <MenuItem
-            to="/deliverymans"
-            selected={activeScreen === 'deliverymans'}
-          >
-            DELIVERYMANS
+          <MenuItem to="/deliverymen" selected={activeScreen === 'deliverymen'}>
+            DELIVERYMEN
           </MenuItem>
           <MenuItem to="/recipients" selected={activeScreen === 'recipients'}>
             RECIPIENTS

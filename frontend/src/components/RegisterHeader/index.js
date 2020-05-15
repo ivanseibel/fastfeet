@@ -16,7 +16,7 @@ import {
   setDeliveriesFilter,
   setShowWithProblems,
 } from '../../store/modules/deliveries/actions';
-import { setDeliverymansFilter } from '../../store/modules/deliverymans/actions';
+import { setDeliverymenFilter } from '../../store/modules/deliverymen/actions';
 
 // import history from '../../services/history';
 
@@ -47,8 +47,8 @@ export default function RegisterHeader({ headerControls, title, subtitle }) {
         dispatch(setDeliveriesFilter(newFilter));
         break;
 
-      case 'deliverymans':
-        dispatch(setDeliverymansFilter(newFilter));
+      case 'deliverymen':
+        dispatch(setDeliverymenFilter(newFilter));
         break;
 
       default:

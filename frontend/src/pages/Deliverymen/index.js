@@ -15,20 +15,20 @@ import { changeScreen } from '../../store/modules/auth/actions';
 import {
   setDeliverymanData,
   setShowPopup,
-} from '../../store/modules/deliverymans/actions';
+} from '../../store/modules/deliverymen/actions';
 
 import * as S from './styles';
 import HeaderRegister from '../../components/RegisterHeader';
 import PopupMenu from '../../components/PopupMenu';
 
-export default function Deliverymans() {
-  const [deliverymans, setDeliverymans] = useState([]);
+export default function Deliverymen() {
+  const [deliverymen, setDeliverymen] = useState([]);
   const [actualPage, setActualPage] = useState(1);
   const [totalRecords, setTotalRecords] = useState(0);
 
-  const filter = useSelector((state) => state.deliverymans.filter);
+  const filter = useSelector((state) => state.deliverymen.filter);
   const deliverymanDetails = useSelector(
-    (state) => state.deliverymans.deliverymanDetails
+    (state) => state.deliverymen.deliverymanDetails
   );
 
   const totalPages = useMemo(() => {
@@ -65,9 +65,9 @@ export default function Deliverymans() {
 
   async function handleDeleteDeliveryman() {
     try {
-      await api.delete(`deliverymans/${deliverymanDetails.id}`);
-      setDeliverymans(
-        deliverymans.filter(
+      await api.delete(`deliverymen/${deliverymanDetails.id}`);
+      setDeliverymen(
+        deliverymen.filter(
           (deliveryman) => deliveryman.id !== deliverymanDetails.id
         )
       );
@@ -97,17 +97,15 @@ export default function Deliverymans() {
   ];
 
   useEffect(() => {
-    dispatch(changeScreen('deliverymans'));
+    dispatch(changeScreen('deliverymen'));
   }, [dispatch]);
 
   useEffect(() => {
-    deliverymans.length === 0 &&
-      actualPage > 1 &&
-      setActualPage(actualPage - 1);
-  }, [deliverymans, actualPage]);
+    deliverymen.length === 0 && actualPage > 1 && setActualPage(actualPage - 1);
+  }, [deliverymen, actualPage]);
 
   useEffect(() => {
-    async function filterDeliverymans() {
+    async function filterDeliverymen() {
       const query = {
         params: {
           page: actualPage,
@@ -118,19 +116,19 @@ export default function Deliverymans() {
         query.params.q = filter;
       }
 
-      const response = await api.get('deliverymans', query);
+      const response = await api.get('deliverymen', query);
 
       if (response) {
         const rows = response.data.rows.map((deliveryman) => ({
           ...deliveryman,
           showMenu: false,
         }));
-        setDeliverymans(rows);
+        setDeliverymen(rows);
         setTotalRecords(response.data.count);
       }
     }
 
-    filterDeliverymans();
+    filterDeliverymen();
   }, [filter, actualPage, totalRecords]);
 
   function handlePrevButtonClick() {
@@ -154,7 +152,7 @@ export default function Deliverymans() {
     <S.Container>
       <HeaderRegister
         headerControls={headerControls}
-        title="Managing deliverymans"
+        title="Managing deliverymen"
       />
       <S.Grid>
         <strong>ID</strong>
@@ -163,7 +161,7 @@ export default function Deliverymans() {
         <strong>Email</strong>
         <strong>Actions</strong>
 
-        {deliverymans.map((deliveryman) => (
+        {deliverymen.map((deliveryman) => (
           <React.Fragment key={deliveryman.id}>
             <span>{deliveryman.id}</span>
             <span>

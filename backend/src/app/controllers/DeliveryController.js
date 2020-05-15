@@ -161,13 +161,6 @@ class DeliveryController {
       ],
       where,
       include: [
-        // {
-        // model: DeliveryProblem,
-        // as: 'problem',
-        // attributes: [],
-        // required: with_problems,
-        // limit: 1,
-        // },
         {
           model: Recipient,
           as: 'recipient',
