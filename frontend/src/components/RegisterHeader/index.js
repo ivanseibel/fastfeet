@@ -17,6 +17,7 @@ import {
   setShowWithProblems,
 } from '../../store/modules/deliveries/actions';
 import { setDeliverymenFilter } from '../../store/modules/deliverymen/actions';
+import { setRecipientsFilter } from '../../store/modules/recipients/actions';
 
 // import history from '../../services/history';
 
@@ -49,6 +50,10 @@ export default function RegisterHeader({ headerControls, title, subtitle }) {
 
       case 'deliverymen':
         dispatch(setDeliverymenFilter(newFilter));
+        break;
+
+      case 'recipients':
+        dispatch(setRecipientsFilter(newFilter));
         break;
 
       default:

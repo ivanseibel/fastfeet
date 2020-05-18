@@ -41,10 +41,7 @@ export const Grid = styled.ul`
       border-radius: 50%;
 
       img {
-        /* margin-right: 5px; */
         width: 30px;
-        /* height: 30px; */
-        /* border-radius: 50%; */
       }
     }
 
