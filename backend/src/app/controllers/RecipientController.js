@@ -112,7 +112,7 @@ class RecipientController {
 
     const where = q ? { name: { [Op.iLike]: `%${q}%` } } : null;
 
-    const recipients = await Recipient.findAll({
+    const recipients = await Recipient.findAndCountAll({
       attributes: [
         'id',
         'name',
