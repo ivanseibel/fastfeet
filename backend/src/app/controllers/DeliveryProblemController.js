@@ -68,7 +68,7 @@ class DeliveryProblemController {
       where.id = id;
     }
 
-    const deliveries = await Delivery.findAll({
+    const deliveries = await Delivery.findAndCountAll({
       attributes: ['id', 'product'],
       where,
       include: [
