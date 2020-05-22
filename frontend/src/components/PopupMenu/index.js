@@ -42,12 +42,14 @@ export default function PopupMenu(props) {
     Details: MdVisibility,
     Edit: MdCreate,
     Delete: MdDeleteForever,
+    'Cancel delivery': MdDeleteForever,
   };
 
   const IconColor = {
     Details: '#8e5be8',
     Edit: '#4d85ee',
     Delete: '#de3b3b',
+    'Cancel delivery': '#de3b3b',
   };
 
   return (

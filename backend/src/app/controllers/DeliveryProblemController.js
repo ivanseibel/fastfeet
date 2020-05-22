@@ -53,10 +53,12 @@ class DeliveryProblemController {
   }
 
   async index(req, res) {
-    const limitOfRecords = 20;
-    const { page = 1 } = req.query;
+    const limitOfRecords = 10;
+    const { page = 1, q } = req.query;
 
     const { id } = req.params;
+
+    const descFilter = q ? { description: { [Op.iLike]: `%${q}%` } } : null;
 
     const where = {
       canceled_at: null,
@@ -68,7 +70,7 @@ class DeliveryProblemController {
       where.id = id;
     }
 
-    const deliveries = await Delivery.findAll({
+    const deliveries = await Delivery.findAndCountAll({
       attributes: ['id', 'product'],
       where,
       include: [
@@ -77,6 +79,7 @@ class DeliveryProblemController {
           as: 'problem',
           attributes: ['id', 'description'],
           required: true,
+          where: descFilter,
         },
       ],
       limit: limitOfRecords,
