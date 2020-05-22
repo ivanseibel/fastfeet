@@ -5,7 +5,7 @@ export const MenuContainer = styled.ul`
   z-index: 9;
   display: ${(props) => (props.show ? 'block' : 'none')};
   position: absolute;
-  width: 150px;
+  width: 160px;
   top: calc(100% - 5px);
   margin-left: auto;
   margin-right: auto;
@@ -23,7 +23,7 @@ export const MenuContainer = styled.ul`
 
   li {
     grid-auto-columns: 0.3fr 0.7fr;
-    padding: 10px 15px;
+    padding: 10px 10px;
 
     display: flex;
     align-items: center;
