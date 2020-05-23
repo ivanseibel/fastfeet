@@ -24,3 +24,10 @@ export function signFailure() {
     type: '@auth/SIGN_IN_FAILURE',
   };
 }
+
+export function signOffRequest() {
+  return {
+    type: '@auth/SIGN_OFF_REQUEST',
+    payload: {},
+  };
+}

@@ -61,3 +61,5 @@ export const Profile = styled.div`
     }
   }
 `;
+
+export const LogoffLink = styled(Link)``;
