@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     description: '',
 
     showPopup: false,
+    showModal: false,
   },
 };
 
@@ -31,6 +32,11 @@ export default function issues(state = INITIAL_STATE, action) {
       case '@issues/SET_SHOW_POPUP': {
         draft.issueDetails.showPopup = action.payload.showPopup;
 
+        break;
+      }
+
+      case '@issues/SET_SHOW_MODAL': {
+        draft.issueDetails.showModal = action.payload.showModal;
         break;
       }
 
