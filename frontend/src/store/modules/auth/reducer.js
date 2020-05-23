@@ -32,6 +32,11 @@ export default function auth(state = INITIAL_STATE, action) {
         break;
       }
 
+      case '@auth/SIGN_OFF_REQUEST': {
+        draft.signed = false;
+        break;
+      }
+
       default:
     }
   });

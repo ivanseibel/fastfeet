@@ -1,11 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { Container, Content, Profile, MenuItem } from './styles';
+import { Container, Content, Profile, MenuItem, LogoffLink } from './styles';
 import logo from '../../assets/logo.svg';
+
+import { signOffRequest } from '../../store/modules/auth/actions';
 
 export default function Header() {
   const { activeScreen } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  function handleLogoff() {
+    dispatch(signOffRequest());
+  }
+
   return (
     <Container>
       <Content>
@@ -29,7 +37,9 @@ export default function Header() {
           <Profile>
             <div>
               <strong>Ivan L. Seibel</strong>
-              <span>Logoff</span>
+              <span>
+                <LogoffLink onClick={handleLogoff}>Logoff</LogoffLink>
+              </span>
             </div>
           </Profile>
         </aside>
