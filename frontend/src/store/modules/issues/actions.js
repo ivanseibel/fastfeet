@@ -18,3 +18,10 @@ export function setShowPopup(showPopup) {
     payload: { showPopup },
   };
 }
+
+export function setShowDetails(showModal) {
+  return {
+    type: '@issues/SET_SHOW_MODAL',
+    payload: { showModal },
+  };
+}

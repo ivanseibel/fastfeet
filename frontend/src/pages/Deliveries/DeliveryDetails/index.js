@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { MdBlock } from 'react-icons/md';
 // import Intl from 'intl/locale-data/jsonp/en';
 
@@ -78,3 +79,7 @@ export default function DeliveryDetails(props) {
     </Container>
   );
 }
+
+DeliveryDetails.propTypes = {
+  id: PropTypes.number.isRequired,
+};

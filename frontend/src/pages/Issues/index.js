@@ -7,11 +7,17 @@ import {
 } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import PopupMenu from '../../components/PopupMenu';
+import Modal from '../../components/Modal';
+import IssueDetails from './IssueDetails';
 
 import api from '../../services/api';
 import { getSafe } from '../../utils/utils';
 import { changeScreen } from '../../store/modules/auth/actions';
-import { setIssueData, setShowPopup } from '../../store/modules/issues/actions';
+import {
+  setIssueData,
+  setShowPopup,
+  setShowDetails,
+} from '../../store/modules/issues/actions';
 
 import * as S from './styles';
 import RegisterHeader from '../../components/RegisterHeader';
@@ -126,13 +132,12 @@ export default function Issues() {
     {
       type: 'Details',
       method: () => {
-        alert('Details');
+        dispatch(setShowDetails(true));
       },
     },
     {
       type: 'Cancel delivery',
       method: () => {
-        alert('Cancel');
         window.confirm('Are you sure you wish to cancel this delivery?') &&
           handleCancelIssue();
       },
@@ -140,61 +145,74 @@ export default function Issues() {
   ];
 
   return (
-    <S.Container>
-      <RegisterHeader headerControls={headerControls} title="Managing issues" />
-      <S.Grid>
-        <strong>Delivery</strong>
-        <strong>Description</strong>
-        <strong>Actions</strong>
+    <>
+      {issueDetails.showModal ? (
+        <Modal>
+          <IssueDetails id={issueDetails.id} />
+        </Modal>
+      ) : null}
 
-        {issues.map((issue) => (
-          <React.Fragment key={issue.id}>
-            <span className="id">{issue.delivery_id}</span>
-            <span>{getSafe(() => issue.partial_desc)}</span>
-            <span className="actions">
-              <button
-                type="button"
-                onClick={() => {
-                  handleSetIssueData({
-                    id: issue.id,
-                    delivery_id: issue.delivery_id,
-                    description: getSafe(() => issue.description),
-                  });
-                }}
-              >
-                <MdMoreHoriz size={20} />
-              </button>
+      <S.Container>
+        <RegisterHeader
+          headerControls={headerControls}
+          title="Managing issues"
+        />
+        <S.Grid>
+          <strong>Delivery</strong>
+          <strong>Description</strong>
+          <strong>Actions</strong>
 
-              <PopupMenu
-                show={
-                  issue.id === issueDetails.id ? issueDetails.showPopup : false
-                }
-                menuItems={menuItems}
-                toggle={(value) => {
-                  dispatch(setShowPopup(value));
-                }}
-              />
-            </span>
-          </React.Fragment>
-        ))}
-      </S.Grid>
+          {issues.map((issue) => (
+            <React.Fragment key={issue.id}>
+              <span className="id">{issue.delivery_id}</span>
+              <span>{getSafe(() => issue.partial_desc)}</span>
+              <span className="actions">
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleSetIssueData({
+                      id: issue.id,
+                      delivery_id: issue.delivery_id,
+                      description: getSafe(() => issue.description),
+                    });
+                  }}
+                >
+                  <MdMoreHoriz size={20} />
+                </button>
 
-      <S.NavBar>
-        <S.NavButton active={actualPage > 1} onClick={handlePrevButtonClick}>
-          <MdKeyboardArrowLeft size={20} color="#fff" />
-          <span>{'PREV '}</span>
-        </S.NavButton>
-        <strong>
-          Page: {actualPage} / {totalPages}
-        </strong>
-        <S.NavButton
-          active={actualPage < totalPages}
-          onClick={handleNextButtonClick}
-        >
-          <span>{' NEXT'}</span>
-          <MdKeyboardArrowRight size={20} color="#fff" />
-        </S.NavButton>
-      </S.NavBar>
-    </S.Container>
+                <PopupMenu
+                  show={
+                    issue.id === issueDetails.id
+                      ? issueDetails.showPopup
+                      : false
+                  }
+                  menuItems={menuItems}
+                  toggle={(value) => {
+                    dispatch(setShowPopup(value));
+                  }}
+                />
+              </span>
+            </React.Fragment>
+          ))}
+        </S.Grid>
+
+        <S.NavBar>
+          <S.NavButton active={actualPage > 1} onClick={handlePrevButtonClick}>
+            <MdKeyboardArrowLeft size={20} color="#fff" />
+            <span>{'PREV '}</span>
+          </S.NavButton>
+          <strong>
+            Page: {actualPage} / {totalPages}
+          </strong>
+          <S.NavButton
+            active={actualPage < totalPages}
+            onClick={handleNextButtonClick}
+          >
+            <span>{' NEXT'}</span>
+            <MdKeyboardArrowRight size={20} color="#fff" />
+          </S.NavButton>
+        </S.NavBar>
+      </S.Container>
+    </>
   );
 }
