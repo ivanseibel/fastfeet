@@ -148,7 +148,7 @@ export default function Issues() {
     <>
       {issueDetails.showModal ? (
         <Modal>
-          <IssueDetails id={issueDetails.id} />
+          <IssueDetails />
         </Modal>
       ) : null}
 

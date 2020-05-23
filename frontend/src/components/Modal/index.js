@@ -22,7 +22,6 @@ export default function Modal(props) {
 
         case 'issues':
           dispatch(setShowIssueDetails(false));
-
           break;
         default:
           break;
