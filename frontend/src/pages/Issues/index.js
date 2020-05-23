@@ -5,6 +5,7 @@ import {
   MdKeyboardArrowRight,
   MdMoreHoriz,
 } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import PopupMenu from '../../components/PopupMenu';
 
 import api from '../../services/api';
@@ -106,6 +107,21 @@ export default function Issues() {
     dispatch(setShowPopup(true));
   }
 
+  async function handleCancelIssue() {
+    try {
+      api.delete(`problem/${issueDetails.delivery_id}/cancel-delivery`);
+
+      setIssues(
+        issues.filter((issue) => issue.delivery_id !== issueDetails.delivery_id)
+      );
+
+      setTotalRecords(totalRecords - 1);
+      toast.success('Delivery was canceled with success');
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
   const menuItems = [
     {
       type: 'Details',
@@ -117,8 +133,8 @@ export default function Issues() {
       type: 'Cancel delivery',
       method: () => {
         alert('Cancel');
-        // window.confirm('Are you sure you wish to cancel this delivery?') &&
-        //   handleDeleteRecipient();
+        window.confirm('Are you sure you wish to cancel this delivery?') &&
+          handleCancelIssue();
       },
     },
   ];
@@ -133,7 +149,7 @@ export default function Issues() {
 
         {issues.map((issue) => (
           <React.Fragment key={issue.id}>
-            <span className="id">{issue.id}</span>
+            <span className="id">{issue.delivery_id}</span>
             <span>{getSafe(() => issue.partial_desc)}</span>
             <span className="actions">
               <button
