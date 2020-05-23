@@ -44,10 +44,9 @@ export default function DeliveryForm({ location }) {
   useEffect(() => {
     async function loadRecipients() {
       const response = await api.get('recipients');
-      const { data } = response;
 
-      if (data) {
-        const loaded = data.map((recipient) => ({
+      if (response) {
+        const loaded = response.data.rows.map((recipient) => ({
           value: recipient.id,
           label: recipient.name,
         }));

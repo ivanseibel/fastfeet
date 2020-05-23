@@ -45,12 +45,12 @@ export default function RecipientForm({ location }) {
 
   const formattedPostalCode = useMemo(() => {
     const { postal_code: postalCode } = newRecipient;
-    return postalCode ? postalCode.replace(/(\d{5})/, '$1-') : '';
+    return postalCode ? postalCode.replace(/(\d{5})(\d{1,3})/, '$1-$2') : '';
   }, [newRecipient]);
 
   function handlePostalCodeChange(e) {
     const { value } = e.target;
-    const newValue = value.replace(/\D+/g, '');
+    const newValue = value.replace(/\D+/g, '').substring(0, 8);
     setNewRecipient({ ...newRecipient, postal_code: newValue });
   }
 
