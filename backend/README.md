@@ -33,6 +33,7 @@
   - [4.2. Users](#4.2.-users)
   - [4.3. Recipients](#4.3.-recipients)
   - [4.4. Deliverymen](#4.4.-deliverymen)
+  - [4.5. Deliveries](#4.5.-deliveries)
 
 # 1. Project General Description
 
@@ -40,11 +41,11 @@ This API is one part of three that implement an application for a delivery servi
 
 # 2. User stories
 
-### Persona: Users
+### 2.1. Persona: Users
 
 - As an user, I want to get access to the restricted screens of the system using my email and password.
 
-### Persona: Admin user
+### 2.2. Persona: Admin user
 
 - As administrator, I want to register a new recipient with the following information: name and full address.
 - As administrator, I want to update the recipient registration information.
@@ -65,7 +66,7 @@ This API is one part of three that implement an application for a delivery servi
 - As administrator, I want to see a detailed description of the problem for a specific delivery.
 - As administrator, I want to cancel a specific delivery with one or more problems.
 
-### Persona: Deliveryman user
+### 2.3. Persona: Deliveryman user
 
 - As deliveryman, I want to see deliveries attributed to me that I need to delivery.
 - As deliveryman, I want to inform that a specific delivery was retired to be delivered.
@@ -74,16 +75,16 @@ This API is one part of three that implement an application for a delivery servi
 - As deliveryman, I want to receive an email notification when one of my deliveries was canceled.
 
 
-# Non-functional Requirements
+# 3. Non-functional Requirements
 
 - An admin user must be created as the first user with default informations.
 - Authenticity of the sessions must be validated usig some token security technology.
 - Only Administrators and Deliverymen have a user to access the system.
 - The delivery start date must be registered as soon as the product is removed by the delivery person, and withdrawals can only be made between 08:00 and 18:00.
 
-# Routes
+# 4. Routes
 
-## Authentication
+## 4.1. Authentication
 
 ### POST: /sessions:
 
@@ -112,7 +113,7 @@ Response example (200 OK):
 }
 ```
 
-## Users
+## 4.2. Users
 
 ### POST /users
 
@@ -171,7 +172,7 @@ Get a list of users.
 
 Query options:
 
-- p (default = 1): Page number, with a fixed limit of 20 records per page.
+- page (default = 1): Page number, with a fixed limit of 20 records per page.
 
 Response example (200 OK):
 
@@ -192,7 +193,7 @@ Response example (200 OK):
 ]
 ```
 
-## Recipients
+## 4.3. Recipients
 
 ### POST: /recipients
 
@@ -261,7 +262,7 @@ Get a list of recipients.
 
 Query options:
 
-- p (default = 1): Page number, with a fixed limit of 10 records per page.
+- page (default = 1): Page number, with a fixed limit of 10 records per page.
 - q (default = null): Recipient name text filter.
 
 Response example (200 OK):
@@ -283,9 +284,11 @@ Response example (200 OK):
 }
 ```
 
-## Deliverymen
+## 4.4. Deliverymen
 
 ### POST /deliverymen
+
+Create a new deliveryman.
 
 Body request example:
 
@@ -311,42 +314,130 @@ Response example (200 OK)
 
 ### PUT /deliverymen/:id
 
+Update deliveryman data.
+
 Body request example:
 
 ```json
+{
+  "name": "Deliveryman 01",
+  "email": "deliveryman01@gmail.com"
+}
 ```
 
 Response example (200 OK)
 
 ```json
+{
+  "id": "1",
+  "name": "Deliveryman 01"
+}
 ```
 
 ### GET /deliverymen
 
-Body request example:
+Get a list of deliverymen.
+
+Query options:
+
+- page (default = 1): Page number, with a fixed limit of 10 records per page.
+- q (default = null): Deliveryman name text filter.
 
 Response example (200 OK)
 
 ```json
+{
+  "count": 1,
+  "rows": [
+    {
+      "id": 1,
+      "name": "Deliveryman 01",
+      "email": "deliveryman01@gmail.com",
+      "createdAt": "2020-05-15T19:46:52.101Z",
+      "updatedAt": "2020-05-25T21:28:55.400Z",
+      "avatar_id": 1,
+      "avatar": {
+        "url": "http://localhost:3333/files/avatar.jpeg",
+        "name": "original-name.jpeg",
+        "path": "avatar.jpeg"
+      }
+    }
+  ]
+}
 ```
 
 ### DELETE /deliverymen/:id
 
-Body request example:
+Delete a specific deliveryman.
 
 Response example (200 OK)
 
 ```json
+{
+  "id": 3,
+  "name": "Deliveryman 3",
+  "email": "deliveryman3@gmail.com",
+  "createdAt": "2020-05-25T21:36:14.024Z",
+  "updatedAt": "2020-05-25T21:36:14.024Z",
+  "avatar_id": null
+}
 ```
 
 ### GET /deliverymen/:id/deliveries
 
-Body request example:
+Get a deliveries list of a specific deliveryman.
+
+Query options:
+
+- page (default = 1): Page number, with a fixed limit of 10 records per page.
+- status (default = null):
+  - 'canceled': get only canceled deliveries
+  - 'delivered': get only delivered deliveries
+  - 'pendent': get only deliveries not canceled and not delivered
+  - null: get all deliveries.
 
 Response example (200 OK)
 
 ```json
+[
+  {
+    "id": 1,
+    "product": "Leather Hat",
+    "canceled_at": null,
+    "start_date": "2020-05-21T21:49:00.000Z",
+    "end_date": null,
+    "recipient": {
+      "id": 1,
+      "name": "John Wayne"
+    },
+    "deliveryman": {
+      "id": 1,
+      "name": "Deliveryman 01"
+    },
+    "signature": null
+  },
+]
 ```
 
+# Deliveries
 
+### POST /deliveries
+
+Description...
+
+### PUT /deliveries/:id
+
+Description...
+
+### GET /deliveries
+
+Description...
+
+### GET /deliveries/:id
+
+Description...
+
+### DELETE /deliveries/:id
+
+Description...
 
