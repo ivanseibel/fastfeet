@@ -27,6 +27,9 @@
 - [User stories](#user-stories)
 - [Non-functional Requirements](#non-functional-requirements)
 - [Routes](#routes)
+  - [Authentication](#authentication)
+  - [Users](#users)
+  - [Recipients](#recipients)
 
 # Project General Description
 
@@ -79,8 +82,7 @@ This API is one part of three that implement an application for a delivery servi
 
 ## Authentication
 
-**POST: /sessions:**
-***
+### POST: /sessions:
 
 Create a new session with security token if user data are correct.
 
@@ -88,26 +90,75 @@ Body request example:
 
 ```json
 {
-	"email": "someuser@fastfeet.com",
-	"password": "122448"
+  "email": "someuser@fastfeet.com",
+  "password": "122448"
 }
 ```
 
-Response example:
+Response example (200 OK):
+
 ```json
 {
   "user": {
     "id": 1,
     "name": "Some User",
     "email": "someusern@fastfeet.com",
-    "admin": false
+    "admin": true
   },
   "token": "eyJhbGdiOiJIUI6IkpXVCJ9.eyJpZCI6M3MDA0OTN9.jp2iEYi9jcqUf57G1RsCIkS"
 }
 ```
 
-**POST: /recipients**
-***
+## Users
+
+### POST /users
+
+Create a new user.
+
+Body request example:
+
+```json
+{
+  "name": "User1",
+  "email": "user1@gmail.com",
+  "password": "123456"
+}
+```
+
+Response example (200 OK):
+
+```json
+{
+  "id": 2,
+  "name": "User1",
+  "email": "user1@gmail.com",
+  "admin": false
+}
+```
+
+
+### PUT /users
+
+Update user data.
+
+Body request example:
+
+Response example (200 OK):
+
+### GET /users
+
+Get a list of users.
+
+Query options:
+
+- p (default = 1): Page number, with a fixed limit of 20 records per page.
+
+Response example (200 OK):
+
+
+## Recipients
+
+### POST: /recipients
 
 Create a new recipient.
 
@@ -115,17 +166,18 @@ Body request example:
 
 ```json
 {
-	"name": "John Wayne",
-	"street": "Colt Street",
-	"number": 38,
-	"complement": "Near cemetery",
-	"state": "TX",
-	"city": "Black Bull",
-	"postal_code": "57160000"
+  "name": "John Wayne",
+  "street": "Colt Street",
+  "number": 38,
+  "complement": "Near cemetery",
+  "state": "TX",
+  "city": "Black Bull",
+  "postal_code": "57160000"
 }
 ```
 
-Response example:
+Response example (200 OK):
+
 ```json
 {
   "id": 1,
@@ -140,6 +192,62 @@ Response example:
   "createdAt": "2020-05-15T19:49:35.954Z"
 }
 ```
+
+### PUT: /recipients/:id
+
+Update data of a specific recipient.
+
+Body request example:
+```json
+{
+  "name": "John Wayne",
+  "street": "Colt Street",
+  "number": 38,
+  "complement": "Near cemetery",
+  "state": "TX",
+  "city": "Black Bull",
+  "postal_code": "57160000"
+}
+```
+
+Response example (200 OK):
+
+```json
+{
+  "id": "1",
+  "name": "John Wayne"
+}
+```
+
+### GET: /recipients
+
+Get a list of recipients.
+
+Query options:
+
+- p (default = 1): Page number, with a fixed limit of 10 records per page.
+- q (default = null): Recipient name text filter.
+
+Response example (200 OK):
+```json
+{
+  "count": 1,
+  "rows": [
+    {
+      "id": 3,
+      "name": "Jack Bauer",
+      "street": "Twenty Four Hours St",
+      "number": 24,
+      "complement": "It's time",
+      "state": "24",
+      "city": "Fast City",
+      "postal_code": "99999132"
+    }
+  ]
+}
+```
+
+
 
 
 ### Status: under construction :construction: :construction_worker:
