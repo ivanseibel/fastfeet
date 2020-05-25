@@ -21,6 +21,8 @@
   </a>
 </p>
 
+### Status: under construction :construction: :construction_worker:
+
 # Topics
 
 - [1. Project General Description](#1.-project-general-description)
@@ -347,4 +349,4 @@ Response example (200 OK)
 ```
 
 
-### Status: under construction :construction: :construction_worker:
+
