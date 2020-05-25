@@ -26,6 +26,7 @@
 - [Project General Description](#project-general-description)
 - [User stories](#user-stories)
 - [Non-functional Requirements](#non-functional-requirements)
+- [Routes](#routes)
 
 # Project General Description
 
