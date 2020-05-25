@@ -23,19 +23,20 @@
 
 # Topics
 
-- [Project General Description](#project-general-description)
-- [User stories](#user-stories)
-- [Non-functional Requirements](#non-functional-requirements)
-- [Routes](#routes)
-  - [Authentication](#authentication)
-  - [Users](#users)
-  - [Recipients](#recipients)
+- [1. Project General Description](#1.-project-general-description)
+- [2. User stories](#2.-user-stories)
+- [3. Non-functional Requirements](#3.-non-functional-requirements)
+- [4. Routes](#4.-routes)
+  - [4.1. Authentication](#4.1.-authentication)
+  - [4.2. Users](#4.2.-users)
+  - [4.3. Recipients](#4.3.-recipients)
+  - [4.4. Deliverymen](#4.4.-deliverymen)
 
-# Project General Description
+# 1. Project General Description
 
 This API is one part of three that implement an application for a delivery service company. This project is one of several constructed during GoStack Bootcamp, a course offered by [Rocketseat](http://www.rocketseat.com.br) that dive deep into one of most popular stacks to software development for web and mobile.
 
-# User stories
+# 2. User stories
 
 ### Persona: Users
 
@@ -136,14 +137,31 @@ Response example (200 OK):
 }
 ```
 
-
 ### PUT /users
 
 Update user data.
 
 Body request example:
 
+```json
+{
+  "name": "User1",
+  "avatar_id": 2,
+  "oldPassword": "123456",
+  "password": "000000",
+  "confirmPassword": "000000"
+}
+```
+
 Response example (200 OK):
+
+```json
+{
+  "id": 1,
+  "name": "User1",
+  "admin": true
+}
+```
 
 ### GET /users
 
@@ -155,6 +173,22 @@ Query options:
 
 Response example (200 OK):
 
+```json
+[
+  {
+    "id": 2,
+    "name": "User1",
+    "email": "user1@gmail.com",
+    "admin": false
+  },
+  {
+    "id": 1,
+    "name": "User1",
+    "email": "admin@fastfeet.com",
+    "admin": true
+  }
+]
+```
 
 ## Recipients
 
@@ -247,7 +281,70 @@ Response example (200 OK):
 }
 ```
 
+## Deliverymen
 
+### POST /deliverymen
+
+Body request example:
+
+```json
+{
+  "name": "Deliveryman 2",
+  "email": "deliveryman2@gmail.com"
+  }
+```
+
+Response example (200 OK)
+
+```json
+{
+  "id": 1,
+  "name": "Deliveryman 2",
+  "email": "deliveryman2@gmail.com",
+  "updatedAt": "2020-03-04T17:41:42.380Z",
+  "createdAt": "2020-03-04T17:41:42.380Z",
+  "avatar_id": null
+}
+```
+
+### PUT /deliverymen/:id
+
+Body request example:
+
+```json
+```
+
+Response example (200 OK)
+
+```json
+```
+
+### GET /deliverymen
+
+Body request example:
+
+Response example (200 OK)
+
+```json
+```
+
+### DELETE /deliverymen/:id
+
+Body request example:
+
+Response example (200 OK)
+
+```json
+```
+
+### GET /deliverymen/:id/deliveries
+
+Body request example:
+
+Response example (200 OK)
+
+```json
+```
 
 
 ### Status: under construction :construction: :construction_worker:
