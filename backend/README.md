@@ -79,7 +79,8 @@ This API is one part of three that implement an application for a delivery servi
 
 ## Authentication
 
-**POST: /recipients:**
+**POST: /sessions:**
+***
 
 Create a new session with security token if user data are correct.
 
@@ -101,11 +102,12 @@ Response example:
     "email": "someusern@fastfeet.com",
     "admin": false
   },
-  "token": "eyJhbGdiOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjhxNTkwMDk1NjkzLCJleHAiOjE1OTA3MDA0OTN9.jp2iEYi9jcqUf57G1RsCIkScMUh-wftOpyKm2H5h5lQ"
+  "token": "eyJhbGdiOiJIUI6IkpXVCJ9.eyJpZCI6M3MDA0OTN9.jp2iEYi9jcqUf57G1RsCIkS"
 }
 ```
 
 **POST: /recipients**
+***
 
 Create a new recipient.
 
@@ -138,5 +140,6 @@ Response example:
   "createdAt": "2020-05-15T19:49:35.954Z"
 }
 ```
+
 
 ### Status: under construction :construction: :construction_worker:
