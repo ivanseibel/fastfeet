@@ -90,7 +90,7 @@ This API is one part of three that implement an application for a delivery servi
 
 Create a new session with security token if user data are correct.
 
-Body request example:
+**Body request example:**
 
 ```json
 {
@@ -99,7 +99,7 @@ Body request example:
 }
 ```
 
-Response example (200 OK):
+**Response example (200 OK):**
 
 ```json
 {
@@ -119,7 +119,7 @@ Response example (200 OK):
 
 Create a new user.
 
-Body request example:
+**Body request example:**
 
 ```json
 {
@@ -129,7 +129,7 @@ Body request example:
 }
 ```
 
-Response example (200 OK):
+**Response example (200 OK):**
 
 ```json
 {
@@ -144,7 +144,7 @@ Response example (200 OK):
 
 Update user data.
 
-Body request example:
+**Body request example:**
 
 ```json
 {
@@ -156,7 +156,7 @@ Body request example:
 }
 ```
 
-Response example (200 OK):
+**Response example (200 OK):**
 
 ```json
 {
@@ -170,11 +170,11 @@ Response example (200 OK):
 
 Get a list of users.
 
-Query options:
+**Query options:**
 
 - page (default = 1): Page number, with a fixed limit of 20 records per page.
 
-Response example (200 OK):
+**Response example (200 OK):**
 
 ```json
 [
@@ -199,7 +199,7 @@ Response example (200 OK):
 
 Create a new recipient.
 
-Body request example:
+**Body request example:**
 
 ```json
 {
@@ -213,7 +213,7 @@ Body request example:
 }
 ```
 
-Response example (200 OK):
+**Response example (200 OK):**
 
 ```json
 {
@@ -234,7 +234,7 @@ Response example (200 OK):
 
 Update data of a specific recipient.
 
-Body request example:
+**Body request example:**
 ```json
 {
   "name": "John Wayne",
@@ -247,7 +247,7 @@ Body request example:
 }
 ```
 
-Response example (200 OK):
+**Response example (200 OK):**
 
 ```json
 {
@@ -260,12 +260,12 @@ Response example (200 OK):
 
 Get a list of recipients.
 
-Query options:
+**Query options:**
 
 - page (default = 1): Page number, with a fixed limit of 10 records per page.
 - q (default = null): Recipient name text filter.
 
-Response example (200 OK):
+**Response example (200 OK):**
 ```json
 {
   "count": 1,
@@ -290,7 +290,7 @@ Response example (200 OK):
 
 Create a new deliveryman.
 
-Body request example:
+**Body request example:**
 
 ```json
 {
@@ -316,7 +316,7 @@ Response example (200 OK)
 
 Update deliveryman data.
 
-Body request example:
+**Body request example:**
 
 ```json
 {
@@ -338,7 +338,7 @@ Response example (200 OK)
 
 Get a list of deliverymen.
 
-Query options:
+**Query options:**
 
 - page (default = 1): Page number, with a fixed limit of 10 records per page.
 - q (default = null): Deliveryman name text filter.
@@ -387,7 +387,7 @@ Response example (200 OK)
 
 Get a deliveries list of a specific deliveryman.
 
-Query options:
+**Query options:**
 
 - page (default = 1): Page number, with a fixed limit of 10 records per page.
 - status (default = null):
