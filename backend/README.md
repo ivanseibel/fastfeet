@@ -419,7 +419,7 @@ Response example (200 OK)
 ]
 ```
 
-# 4.5. Deliveries
+## 4.5. Deliveries
 
 ### POST /deliveries
 
