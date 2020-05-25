@@ -74,5 +74,68 @@ This API is one part of three that implement an application for a delivery servi
 - Only Administrators and Deliverymen have a user to access the system.
 - The delivery start date must be registered as soon as the product is removed by the delivery person, and withdrawals can only be made between 08:00 and 18:00.
 
+# Routes
+
+## Authentication
+
+**POST: /recipients:**
+
+Create a new session with security token if user data are correct.
+
+Body request example:
+
+```json
+{
+	"email": "someuser@fastfeet.com",
+	"password": "122448"
+}
+```
+
+Response example:
+```json
+{
+  "user": {
+    "id": 1,
+    "name": "Some User",
+    "email": "someusern@fastfeet.com",
+    "admin": false
+  },
+  "token": "eyJhbGdiOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjhxNTkwMDk1NjkzLCJleHAiOjE1OTA3MDA0OTN9.jp2iEYi9jcqUf57G1RsCIkScMUh-wftOpyKm2H5h5lQ"
+}
+```
+
+**POST: /recipients**
+
+Create a new recipient.
+
+Body request example:
+
+```json
+{
+	"name": "John Wayne",
+	"street": "Colt Street",
+	"number": 38,
+	"complement": "Near cemetery",
+	"state": "TX",
+	"city": "Black Bull",
+	"postal_code": "57160000"
+}
+```
+
+Response example:
+```json
+{
+  "id": 1,
+  "name": "John Wayne",
+  "street": "Colt Street",
+  "number": 38,
+  "complement": "Near cemetery",
+  "state": "TX",
+  "city": "Black Bull",
+  "postal_code": "57160000",
+  "updatedAt": "2020-05-15T19:49:35.954Z",
+  "createdAt": "2020-05-15T19:49:35.954Z"
+}
+```
 
 ### Status: under construction :construction: :construction_worker:
