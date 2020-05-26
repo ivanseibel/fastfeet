@@ -49,15 +49,15 @@ class DeliveryEndController {
       return res.status(401).json({ error: 'Delivery must be started' });
     }
 
-    if (!isBefore(delivery.start_date, delivery.end_date)) {
+    if (!isBefore(delivery.start_date, parsedDate)) {
       return res
         .status(401)
         .json({ error: 'End Date must be after Start Date' });
     }
 
-    await delivery.update(req.body);
+    await delivery.update({ end_date: parsedDate });
 
-    return delivery;
+    return res.json(delivery);
   }
 }
 
