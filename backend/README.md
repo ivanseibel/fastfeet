@@ -299,7 +299,7 @@ Create a new deliveryman.
   }
 ```
 
-Response example (200 OK)
+**Response example (200 OK):**
 
 ```json
 {
@@ -325,7 +325,7 @@ Update deliveryman data.
 }
 ```
 
-Response example (200 OK)
+**Response example (200 OK):**
 
 ```json
 {
@@ -343,7 +343,7 @@ Get a list of deliverymen.
 - page (default = 1): Page number, with a fixed limit of 10 records per page.
 - q (default = null): Deliveryman name text filter.
 
-Response example (200 OK)
+**Response example (200 OK):**
 
 ```json
 {
@@ -370,7 +370,7 @@ Response example (200 OK)
 
 Delete a specific deliveryman.
 
-Response example (200 OK)
+**Response example (200 OK):**
 
 ```json
 {
@@ -396,7 +396,7 @@ Get a deliveries list of a specific deliveryman.
   - 'pendent': get only deliveries not canceled and not delivered
   - null: get all deliveries.
 
-Response example (200 OK)
+**Response example (200 OK):**
 
 ```json
 [
@@ -423,21 +423,157 @@ Response example (200 OK)
 
 ### POST /deliveries
 
-Description...
+Create a new delivery.
+
+**Body request example:**
+
+```json
+{
+  "product": "Coffee Mug",
+  "deliveryman_id": 1,
+  "recipient_id": 1
+}
+```
+
+**Response example (200 OK):**
+
+```json
+{
+  "id": 2,
+  "product": "Coffee Mug",
+  "recipient_id": 1,
+  "deliveryman_id": 1
+}
+```
 
 ### PUT /deliveries/:id
 
-Description...
+Update delivery data.
+
+**Body request example:**
+
+```json
+{
+  "product": "Mouse",
+  "deliveryman_id": 1,
+  "recipient_id": 1
+}
+```
+
+**Response example (200 OK):**
+
+```json
+{
+  "status": "pendent",
+  "id": 2,
+  "product": "Mouse",
+  "canceled_at": null,
+  "start_date": "2020-05-21T21:49:00.000Z",
+  "end_date": null,
+  "createdAt": "2020-05-21T21:56:19.159Z",
+  "updatedAt": "2020-05-26T17:59:29.550Z",
+  "recipient_id": 1,
+  "deliveryman_id": 1,
+  "signature_id": null
+}
+```
 
 ### GET /deliveries
 
-Description...
+Get a deliveries list.
+
+**Query options:**
+
+- page (default = 1): Page number, with a fixed limit of 10 records per page.
+- q (default = null): Product name text filter.
+
+**Response example (200 OK):**
+
+```json
+{
+  "count": 1,
+  "rows": [
+    {
+      "status": "pendent",
+      "id": 1,
+      "product": "Leather Hat",
+      "end_date": null,
+      "canceled_at": null,
+      "start_date": "2020-05-21T21:49:00.000Z",
+      "recipient": {
+        "id": 1,
+        "name": "John Wayne",
+        "city": "Black Bull",
+        "state": "TX"
+      },
+      "deliveryman": {
+        "id": 1,
+        "name": "Deliveryman 01",
+        "avatar": {
+          "url": "http://localhost:3333/files/avatar.jpeg",
+          "path": "avatar.jpeg"
+        }
+      }
+    }
+  ]
+}
+```
 
 ### GET /deliveries/:id
 
-Description...
+Get data from a specific delivery.
+
+**Response example (200 OK):**
+
+```json
+{
+  "status": "pendent",
+  "id": 2,
+  "product": "Mouse",
+  "canceled_at": null,
+  "start_date": "2020-05-21T21:49:00.000Z",
+  "end_date": null,
+  "recipient": {
+    "id": 1,
+    "name": "John Wayne",
+    "street": "Colt Street",
+    "number": 38,
+    "complement": "Near cemetery",
+    "state": "TX",
+    "city": "Black Bull",
+    "postal_code": "57160000"
+  },
+  "deliveryman": {
+    "id": 1,
+    "name": "Deliveryman 01",
+    "email": "deliveryman01@gmail.com",
+    "createdAt": "2020-05-15T19:46:52.101Z",
+    "updatedAt": "2020-05-25T21:28:55.400Z",
+    "avatar_id": 1
+  },
+  "signature": null
+}
+```
 
 ### DELETE /deliveries/:id
 
-Description...
+Delete a specific delivery.
+
+**Response example (200 OK):**
+
+```json
+{
+  "status": "pendent",
+  "id": 4,
+  "product": "Coffee Mug",
+  "canceled_at": null,
+  "start_date": null,
+  "end_date": null,
+  "createdAt": "2020-05-26T18:07:48.644Z",
+  "updatedAt": "2020-05-26T18:07:48.644Z",
+  "recipient_id": 1,
+  "deliveryman_id": 1,
+  "signature_id": null
+}
+```
 
