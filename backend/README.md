@@ -38,6 +38,10 @@
   - [4.6. Delivery Problems](#46-delivery-problems)
   - [4.7. Avatars](#47-avatars)
   - [4.8. Signatures](#48-signatures)
+- [5. Technologies/libraries](#5-technologies/libraries)
+- [6. How to run](#6-how-to-run)
+- [7. License](#7-license)
+
 
 # 1. Project General Description
 
@@ -855,3 +859,63 @@ file: data
   "createdAt": "2020-03-04T17:42:02.895Z"
 }
 ```
+
+# 5. Technologies/libraries
+
+- Prettier: Code formatter.
+- Eslint: Code patterns identifier.
+- Nodemon: Live reload.
+- Sucrase: An alternative to Babel that allows super-fast development builds. In this project sucrase was applied to be able to use `import from` syntax, instead of the `require` syntax, and `export` in instead of `module.exports`.
+- Sentry: Express error tracking.
+- Bee-queue: Redis-backed job queue to queue non-priority jobs like email sent and error tracking.
+- Cors: providing a Connect/Express middleware that can be used to enable CORS with various options.
+- Date-fns: Modern JavaScript date utility library.
+- Dotenv: A zero-dependency module that loads environment variables from a .env file into process.env.
+- Express: Server framework for Node.js to build web applications and API's.
+- Express-async-errors: Async/await error handling support for express.js.
+- Express-handlebars: View engine for Express to create emails with dynamic html.
+- Jsonwebtoken: JWT to code and decode web tokens.
+- Multer: Handle multipart/form-data to upload signature and avatar files.
+- Nodemailer: Allow easy email sending.
+- Nodemailer-express-handlebars: Handlebars integration with nodemailer.
+- Pg: PostgreSQL client for Node.js.
+- Pg-hstore: A node package for serializing and deserializing JSON data to hstore format.
+- Sequelize: Promise-based ORM to persist data into a PostgreSQL database.
+- Youch: Pretty error reporting.
+- Yup: Data validation.
+
+# 6. How to run
+
+Clone this repository:
+
+$ git clone https://github.com/ivanseibel/fastfeet
+
+Get inside the new created folder "fastfeet/backend"
+
+```bash
+$ cd fastfeet/backend
+```
+
+Configure your .env file using template .env.template.
+
+Install all components:
+
+```bash
+$ yarn install
+```
+
+Run the app:
+
+```bash
+$ yarn dev
+```
+
+Run the queue management:
+
+```bash
+$ yarn dev:queue
+```
+
+# 7. License
+
+This project is under MIT license.
