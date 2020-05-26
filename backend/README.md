@@ -27,6 +27,7 @@
 
 - [1. Project General Description](#1-project-general-description)
 - [2. User stories](#2-user-stories)
+  - [2.1. Persona: Users](21-persona-users)
 - [3. Non-functional Requirements](#3-non-functional-requirements)
 - [4. Routes](#4-routes)
   - [4.1. Authentication](#41-authentication)
@@ -35,6 +36,8 @@
   - [4.4. Deliverymen](#44-deliverymen)
   - [4.5. Deliveries](#45-deliveries)
   - [4.6. Delivery Problems](#46-delivery-problems)
+  - [4.7. Avatars](#47-avatars)
+  - [4.8. Signatures](#48-signatures)
 
 # 1. Project General Description
 
@@ -763,5 +766,92 @@ Cancel a specific delivery with problem.
       "description": "Lorem ipsum dolor sit amet, consectetur ... "
     }
   ]
+}
+```
+## 4.7. Avatars
+
+### POST /avatars
+
+Create a new deliveryman avatar.
+
+**Content-Type: multipart/form-data**
+
+file: data
+
+**Response example (200 OK):**
+
+```json
+{
+  "url": "http://localhost:3333/files/file.jpeg",
+  "id": 1,
+  "name": "original-name.jpeg",
+  "path": "file.jpeg",
+  "updatedAt": "2020-03-04T17:42:02.895Z",
+  "createdAt": "2020-03-04T17:42:02.895Z"
+}
+```
+
+### PUT /avatars/:id
+
+Update the avatar file for a specific deliveryman avatar.
+
+**Content-Type: multipart/form-data**
+
+file: data
+
+**Response example (200 OK):**
+
+```json
+{
+  "url": "http://localhost:3333/files/file.jpeg",
+  "id": 1,
+  "name": "original-name.jpeg",
+  "path": "file.jpeg",
+  "updatedAt": "2020-03-04T17:42:02.895Z",
+  "createdAt": "2020-03-04T17:42:02.895Z"
+}
+```
+
+## 4.8. Signatures
+
+### POST /signatures
+
+Create a new signature.
+
+**Content-Type: multipart/form-data**
+
+file: data
+
+**Response example (200 OK):**
+
+```json
+{
+  "url": "http://localhost:3333/files/file.jpeg",
+  "id": 1,
+  "name": "original-name.jpeg",
+  "path": "file.jpeg",
+  "updatedAt": "2020-03-04T17:42:02.895Z",
+  "createdAt": "2020-03-04T17:42:02.895Z"
+}
+```
+
+### PUT /signatures/:id
+
+Update the signature file for a specific signature.
+
+**Content-Type: multipart/form-data**
+
+file: data
+
+**Response example (200 OK):**
+
+```json
+{
+  "url": "http://localhost:3333/files/file.jpeg",
+  "id": 1,
+  "name": "original-name.jpeg",
+  "path": "file.jpeg",
+  "updatedAt": "2020-03-04T17:42:02.895Z",
+  "createdAt": "2020-03-04T17:42:02.895Z"
 }
 ```
