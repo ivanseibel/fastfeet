@@ -21,7 +21,7 @@
   </a>
 </p>
 
-# Topics
+# Index
 
 - [1. Project General Description](#1-project-general-description)
 - [2. User stories](#2-user-stories)
