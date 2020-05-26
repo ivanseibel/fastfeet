@@ -577,3 +577,62 @@ Delete a specific delivery.
 }
 ```
 
+### PUT /deliveries/:id/start
+
+Deliveryman start delivery process for a specific delivery.
+
+**Body request example:**
+
+```json
+{
+	"start_date": "2020-05-26T15:14:00-03:00"
+}
+```
+
+**Response example (200 OK):**
+
+```json
+{
+  "status": "pendent",
+  "id": 1,
+  "product": "Leather Hat",
+  "canceled_at": null,
+  "start_date": "2020-05-26T18:14:00.000Z",
+  "end_date": null,
+  "createdAt": "2020-05-15T19:50:33.956Z",
+  "updatedAt": "2020-05-26T18:15:02.194Z",
+  "recipient_id": 1,
+  "deliveryman_id": 1,
+  "signature_id": null
+}
+```
+
+### PUT /deliveries/:id/end
+
+Deliveryman end delivery process for a specific delivery.
+
+**Body request example:**
+
+```json
+{
+	"end_date": "2020-05-26T15:20:00-03:00"
+}
+```
+
+**Response example (200 OK):**
+
+```json
+{
+  "status": "delivered",
+  "id": 1,
+  "product": "Leather Hat",
+  "canceled_at": null,
+  "start_date": "2020-05-26T18:14:00.000Z",
+  "end_date": "2020-05-26T18:20:00.000Z",
+  "createdAt": "2020-05-15T19:50:33.956Z",
+  "updatedAt": "2020-05-26T18:37:21.592Z",
+  "recipient_id": 1,
+  "deliveryman_id": 1,
+  "signature_id": null
+}
+```
