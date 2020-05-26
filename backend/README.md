@@ -38,7 +38,7 @@
   - [4.6. Delivery Problems](#46-delivery-problems)
   - [4.7. Avatars](#47-avatars)
   - [4.8. Signatures](#48-signatures)
-- [5. Technologies/libraries](#5-technologies/libraries)
+- [5. Technologies/libraries](#5-technologieslibraries)
 - [6. How to run](#6-how-to-run)
 - [7. License](#7-license)
 
