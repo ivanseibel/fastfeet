@@ -585,7 +585,7 @@ Deliveryman start delivery process for a specific delivery.
 
 ```json
 {
-	"start_date": "2020-05-26T15:14:00-03:00"
+  "start_date": "2020-05-26T15:14:00-03:00"
 }
 ```
 
@@ -615,7 +615,7 @@ Deliveryman end delivery process for a specific delivery.
 
 ```json
 {
-	"end_date": "2020-05-26T15:20:00-03:00"
+  "end_date": "2020-05-26T15:20:00-03:00"
 }
 ```
 
@@ -634,5 +634,133 @@ Deliveryman end delivery process for a specific delivery.
   "recipient_id": 1,
   "deliveryman_id": 1,
   "signature_id": null
+}
+```
+
+## Delivery Problems
+
+### POST /delivery/:id/problems
+
+Create a new delivery problem to a specific delivery.
+
+**Body request example:**
+
+```json
+{
+  "description": "This problem is very important as well!"
+}
+```
+
+**Response example (200 OK):**
+
+```json
+{
+  "id": 4,
+  "description": "This problem is very important as well!",
+  "delivery_id": "2",
+  "updatedAt": "2020-05-26T18:50:34.052Z",
+  "createdAt": "2020-05-26T18:50:34.052Z",
+  "DeliveryId": 2
+}
+```
+
+### GET /delivery/problems
+
+Get all delivery problems.
+
+**Query options:**
+
+- page (default = 1): Page number, with a fixed limit of 10 records per page.
+- q (default = null): Problem description text filter.
+
+**Response example (200 OK):**
+
+```json
+{
+  "count": 2,
+  "rows": [
+    {
+      "id": 2,
+      "product": "Mouse",
+      "problem": [
+        {
+          "id": 3,
+          "description": "Lorem ipsum dolor sit amet, consectetur ... "
+        },
+        {
+          "id": 4,
+          "description": "This problem is very important as well!"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### GET /delivery/:id/problems
+
+Get all problems from a specific delivery.
+
+**Query options:**
+
+- page (default = 1): Page number, with a fixed limit of 10 records per page.
+- q (default = null): Problem description text filter.
+
+**Response example (200 OK):**
+
+```json
+{
+  "count": 2,
+  "rows": [
+    {
+      "id": 2,
+      "product": "Mouse",
+      "problem": [
+        {
+          "id": 3,
+          "description": "Lorem ipsum dolor sit amet, consectetur ... "
+        },
+        {
+          "id": 4,
+          "description": "This problem is very important as well!"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### DELETE /problem/:id/cancel-delivery
+
+Cancel a specific delivery with problem.
+
+**Response example (200 OK):**
+
+```json
+{
+  "status": "canceled",
+  "id": 2,
+  "product": "Coffee Mug",
+  "canceled_at": "2020-05-23T18:33:38.145Z",
+  "start_date": "2020-05-21T21:49:00.000Z",
+  "end_date": null,
+  "createdAt": "2020-05-21T21:56:19.159Z",
+  "updatedAt": "2020-05-23T18:33:38.146Z",
+  "recipient_id": 1,
+  "deliveryman_id": 1,
+  "signature_id": null,
+  "recipient": {
+    "name": "John Wayne"
+  },
+  "deliveryman": {
+    "name": "Ivan",
+    "email": "ivan@fastfeet.com"
+  },
+  "problem": [
+    {
+      "id": 3,
+      "description": "Lorem ipsum dolor sit amet, consectetur ... "
+    }
+  ]
 }
 ```
