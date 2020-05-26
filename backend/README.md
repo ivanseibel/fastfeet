@@ -21,13 +21,13 @@
   </a>
 </p>
 
-### Status: :construction_worker: :construction: under construction :construction: :construction_worker:
-
 # Topics
 
 - [1. Project General Description](#1-project-general-description)
 - [2. User stories](#2-user-stories)
-  - [2.1. Persona: Users](21-persona-users)
+  - [2.1. Persona: Users](#21-persona-users)
+  - [2.2. Persona: Admin user](#22-persona-admin-user)
+  - [2.3. Persona: Deliveryman user](#23-persona-deliveryman-user)
 - [3. Non-functional Requirements](#3-non-functional-requirements)
 - [4. Routes](#4-routes)
   - [4.1. Authentication](#41-authentication)
