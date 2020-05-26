@@ -34,6 +34,7 @@
   - [4.3. Recipients](#43-recipients)
   - [4.4. Deliverymen](#44-deliverymen)
   - [4.5. Deliveries](#45-deliveries)
+  - [4.6. Delivery Problems](#46-delivery-problems)
 
 # 1. Project General Description
 
@@ -637,7 +638,7 @@ Deliveryman end delivery process for a specific delivery.
 }
 ```
 
-## Delivery Problems
+## 4.6. Delivery Problems
 
 ### POST /delivery/:id/problems
 
