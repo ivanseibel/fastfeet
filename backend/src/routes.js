@@ -28,6 +28,9 @@ function OnlyAdmin(req, res, next) {
 
 routes.post('/sessions', SessionController.store);
 
+routes.get('/deliverymen/:id', DeliverymanController.show);
+routes.get('/deliverymen/:id/deliveries', DeliveryStatusController.index);
+
 routes.use(authMiddleware);
 
 routes.post('/recipients', OnlyAdmin, RecipientController.store);
@@ -42,7 +45,6 @@ routes.post('/deliverymen', OnlyAdmin, DeliverymanController.store);
 routes.put('/deliverymen/:id', OnlyAdmin, DeliverymanController.update);
 routes.get('/deliverymen', OnlyAdmin, DeliverymanController.index);
 routes.delete('/deliverymen/:id', OnlyAdmin, DeliverymanController.delete);
-routes.get('/deliverymen/:id/deliveries', DeliveryStatusController.index);
 
 routes.post('/deliveries', OnlyAdmin, DeliveryController.store);
 routes.put('/deliveries/:id', OnlyAdmin, DeliveryController.update);

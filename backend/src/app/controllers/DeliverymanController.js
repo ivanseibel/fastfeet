@@ -117,6 +117,26 @@ class DeliverymanController {
 
     return res.json(deliverymen);
   }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const deliverymen = await Deliveryman.findByPk(id, {
+      include: [
+        {
+          model: Avatar,
+          as: 'avatar',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
+    });
+
+    if (!deliverymen) {
+      return res.status(404).json({ error: 'Deliveryman not found' });
+    }
+
+    return res.status(200).json(deliverymen);
+  }
 }
 
 export default new DeliverymanController();
