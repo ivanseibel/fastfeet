@@ -1,21 +1,14 @@
-export function signInRequest(email, password) {
+export function signInRequest(id) {
   return {
     type: '@auth/SIGN_IN_REQUEST',
-    payload: { email, password },
+    payload: { id },
   };
 }
 
-export function signInSuccess(token, user) {
+export function signInSuccess(user) {
   return {
     type: '@auth/SIGN_IN_SUCCESS',
-    payload: { token, user },
-  };
-}
-
-export function changeScreen(activeScreen) {
-  return {
-    type: '@auth/CHANGE_SCREEN',
-    payload: { activeScreen },
+    payload: { user },
   };
 }
 
