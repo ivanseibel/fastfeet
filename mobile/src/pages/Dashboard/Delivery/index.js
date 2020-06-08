@@ -22,7 +22,7 @@ import {
 
 const Delivery = ({ delivery }) => {
   const getUpdatedAt = () => {
-    return format(parseISO(delivery.updated_at), 'yy-M-d a h:m');
+    return format(parseISO(delivery.updated_at), 'yy-M-d h:mm a');
   };
 
   return (

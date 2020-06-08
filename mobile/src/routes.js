@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -15,7 +16,7 @@ const Tab = createBottomTabNavigator();
 function TabMain() {
   return (
     <Tab.Navigator
-      screenOptions={{ unmountOnBlur: true }}
+      // screenOptions={{ unmountOnBlur: true }}
       tabBarOptions={{
         activeTintColor: '#7D40E7',
         labelStyle: { fontSize: 14 },
@@ -44,11 +45,16 @@ function TabMain() {
 }
 
 export default function Routes() {
+  const signed = useSelector(state => state.auth.signed);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="Dashboard" component={TabMain} />
+        {signed ? (
+          <Stack.Screen name="Dashboard" component={TabMain} />
+        ) : (
+          <Stack.Screen name="SignIn" component={SignIn} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

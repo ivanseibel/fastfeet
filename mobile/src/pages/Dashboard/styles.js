@@ -65,3 +65,12 @@ export const Filter = styled.Text`
 export const Deliveries = styled.FlatList`
   margin-top: 15px;
 `;
+
+export const PushToUpdateContainer = styled.View`
+  margin-top: 15px;
+  align-items: center;
+`;
+
+export const PushToUpdateText = styled.Text`
+  color: #999;
+`;
