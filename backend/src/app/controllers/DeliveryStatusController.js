@@ -30,7 +30,7 @@ class DeliveryStatusController {
 
     const deliveries = await Delivery.findAll({
       where: { ...where },
-      order: [['id', 'ASC']],
+      order: [['updated_at', 'DESC']],
       limit: limitOfRecords,
       offset: (page - 1) * limitOfRecords,
       attributes: [

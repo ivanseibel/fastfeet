@@ -9,13 +9,19 @@ export function* signIn({ payload }) {
   try {
     const { id } = payload;
 
+    if (!id) {
+      Alert.alert('Login fails', 'ID is required');
+      yield put(signFailure());
+      return;
+    }
+
     const response = yield call(api.get, `deliverymen/${id}`);
 
     const user = response.data;
 
     yield put(signInSuccess(user));
   } catch (error) {
-    Alert.alert('Login error', error.message);
+    Alert.alert('Login fails', 'Invalid ID');
     yield put(signFailure());
   }
 }
