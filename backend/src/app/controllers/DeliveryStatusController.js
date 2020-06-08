@@ -33,12 +33,19 @@ class DeliveryStatusController {
       order: [['id', 'ASC']],
       limit: limitOfRecords,
       offset: (page - 1) * limitOfRecords,
-      attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
+      attributes: [
+        'id',
+        'product',
+        'canceled_at',
+        'start_date',
+        'end_date',
+        'updated_at',
+      ],
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'city'],
         },
         {
           model: Deliveryman,
