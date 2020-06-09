@@ -42,7 +42,11 @@ function DeliveryScreens() {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Dashboard"
+        component={Dashboard}
+      />
       <Stack.Screen
         options={({ navigation }) =>
           DeliveryScreenOptions(navigation, 'Delivery details')
