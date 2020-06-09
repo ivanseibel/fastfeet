@@ -1,6 +1,11 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
+export const Container = styled.SafeAreaView`
+  background-color: #fff;
+  flex: 1;
+`;
+
 export const PurpleHeader = styled.SafeAreaView`
   background-color: #7d40e7;
   height: 155px;
