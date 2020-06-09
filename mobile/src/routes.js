@@ -1,17 +1,58 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
+import { TouchableOpacity } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, Header } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SignIn from '~/pages/SignIn';
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
+import DeliveryDetails from '~/pages/DeliveryDetails';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function DeliveryScreens() {
+  const DeliveryScreenOptions = (navigation, title) => {
+    return {
+      headerShown: true,
+      title,
+      headerTransparent: true,
+      headerTitleStyle: { color: '#fff', fontSize: 16 },
+      headerTitleAlign: 'center',
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Icon
+            style={{ marginLeft: 10 }}
+            name="chevron-left"
+            color="#fff"
+            size={25}
+          />
+        </TouchableOpacity>
+      ),
+    };
+  };
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen
+        options={({ navigation }) =>
+          DeliveryScreenOptions(navigation, 'Delivery details')
+        }
+        name="DeliveryDetails"
+        component={DeliveryDetails}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function TabMain() {
   return (
@@ -24,12 +65,13 @@ function TabMain() {
     >
       <Tab.Screen
         options={{
+          title: 'Dashboard',
           tabBarIcon: ({ color }) => (
             <Icon name="list" color={color} size={20} />
           ),
         }}
-        name="Dashboard"
-        component={Dashboard}
+        name="DeliveryScreens"
+        component={DeliveryScreens}
       />
       <Tab.Screen
         options={{
@@ -45,13 +87,15 @@ function TabMain() {
 }
 
 export default function Routes() {
-  const signed = useSelector(state => state.auth.signed);
+  const signed = useSelector((state) => state.auth.signed);
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {signed ? (
-          <Stack.Screen name="Dashboard" component={TabMain} />
+          <>
+            <Stack.Screen name="TabMain" component={TabMain} />
+          </>
         ) : (
           <Stack.Screen name="SignIn" component={SignIn} />
         )}
