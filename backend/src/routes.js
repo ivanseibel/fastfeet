@@ -31,6 +31,10 @@ routes.post('/sessions', SessionController.store);
 routes.get('/deliverymen/:id', DeliverymanController.show);
 routes.get('/deliverymen/:id/deliveries', DeliveryStatusController.index);
 
+routes.post('/delivery/:id/problems', DeliveryProblemController.store);
+routes.get('/delivery/problems', DeliveryProblemController.index);
+routes.get('/delivery/:id/problems', DeliveryProblemController.index);
+
 routes.use(authMiddleware);
 
 routes.post('/recipients', OnlyAdmin, RecipientController.store);
@@ -55,10 +59,6 @@ routes.delete('/deliveries/:id', OnlyAdmin, DeliveryController.delete);
 routes.put('/deliveries/:id/start', DeliveryStartController.update);
 routes.put('/deliveries/:id/end', DeliveryEndController.update);
 
-// Delivery Problems routes
-routes.post('/delivery/:id/problems', DeliveryProblemController.store);
-routes.get('/delivery/problems', DeliveryProblemController.index);
-routes.get('/delivery/:id/problems', DeliveryProblemController.index);
 routes.delete(
   '/problem/:id/cancel-delivery',
   OnlyAdmin,
