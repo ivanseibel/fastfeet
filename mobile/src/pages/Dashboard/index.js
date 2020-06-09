@@ -24,13 +24,13 @@ import { signOffRequest } from '~/store/modules/auth/actions';
 
 import api from '~/services/api';
 
-const Dashboard = () => {
+const Dashboard = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const [refreshing, setRefreshing] = useState(false);
   const [filter, setFilter] = useState('pendent');
 
-  const { user } = useSelector(state => state.user);
+  const { user } = useSelector((state) => state.user);
 
   const avatar = useMemo(() => {
     return user.avatar
@@ -123,14 +123,16 @@ const Dashboard = () => {
         refreshing={refreshing}
         showsVerticalScrollIndicator={false}
         data={filter === 'pendent' ? pendent : delivered}
-        keyExtractor={item => String(item.id)}
+        keyExtractor={(item) => String(item.id)}
         ListEmptyComponent={
           <PushToUpdateContainer>
             <Icon name="refresh" size={30} color="#999" />
             <PushToUpdateText>Push to update</PushToUpdateText>
           </PushToUpdateContainer>
         }
-        renderItem={({ item }) => <Delivery delivery={item} />}
+        renderItem={({ item }) => (
+          <Delivery navigation={navigation} delivery={item} />
+        )}
       />
     </Container>
   );

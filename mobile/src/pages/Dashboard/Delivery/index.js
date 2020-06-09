@@ -1,7 +1,7 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
 
-import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -20,7 +20,7 @@ import {
   SeeDetails,
 } from './styles';
 
-const Delivery = ({ delivery }) => {
+const Delivery = ({ delivery, navigation }) => {
   const getUpdatedAt = () => {
     return format(parseISO(delivery.updated_at), 'yy-M-d h:mm a');
   };
@@ -51,12 +51,20 @@ const Delivery = ({ delivery }) => {
           <FooterTitle>Last update</FooterTitle>
           <FooterValue>{getUpdatedAt()}</FooterValue>
         </FooterItemContainer>
+
         <FooterItemContainer>
           <FooterTitle>City</FooterTitle>
           <FooterValue>{delivery.recipient.city}</FooterValue>
         </FooterItemContainer>
+
         <FooterItemContainer>
-          <SeeDetails>See details</SeeDetails>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('DeliveryDetails', { delivery });
+            }}
+          >
+            <SeeDetails>See details</SeeDetails>
+          </TouchableOpacity>
         </FooterItemContainer>
       </DeliveryFooter>
     </Container>
