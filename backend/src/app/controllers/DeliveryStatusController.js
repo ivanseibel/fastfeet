@@ -40,12 +40,21 @@ class DeliveryStatusController {
         'start_date',
         'end_date',
         'updated_at',
+        'status',
       ],
       include: [
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['id', 'name', 'city'],
+          attributes: [
+            'id',
+            'name',
+            'city',
+            'street',
+            'number',
+            'state',
+            'postal_code',
+          ],
         },
         {
           model: Deliveryman,
