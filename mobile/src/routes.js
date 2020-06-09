@@ -11,6 +11,7 @@ import SignIn from '~/pages/SignIn';
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
 import DeliveryDetails from '~/pages/DeliveryDetails';
+import NewIssue from '~/pages/NewIssue';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,6 +54,13 @@ function DeliveryScreens() {
         }
         name="DeliveryDetails"
         component={DeliveryDetails}
+      />
+      <Stack.Screen
+        options={({ navigation }) =>
+          DeliveryScreenOptions(navigation, 'Report an issue')
+        }
+        name="NewIssue"
+        component={NewIssue}
       />
     </Stack.Navigator>
   );
