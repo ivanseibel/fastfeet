@@ -12,6 +12,7 @@ import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
 import DeliveryDetails from '~/pages/DeliveryDetails';
 import NewIssue from '~/pages/NewIssue';
+import SeeIssues from '~/pages/SeeIssues';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,6 +62,13 @@ function DeliveryScreens() {
         }
         name="NewIssue"
         component={NewIssue}
+      />
+      <Stack.Screen
+        options={({ navigation }) =>
+          DeliveryScreenOptions(navigation, 'See issues')
+        }
+        name="SeeIssues"
+        component={SeeIssues}
       />
     </Stack.Navigator>
   );

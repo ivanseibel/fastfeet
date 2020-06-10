@@ -96,7 +96,11 @@ const DeliveryDetails = ({ navigation, route }) => {
               <ActionText>a problem</ActionText>
             </ActionContainer>
 
-            <ActionContainer>
+            <ActionContainer
+              onPress={() =>
+                navigation.navigate('SeeIssues', { id: delivery.id })
+              }
+            >
               <Icon name="information-outline" size={20} color="#E7BA40" />
               <CardSeparator height="5px" />
               <ActionText>See</ActionText>
