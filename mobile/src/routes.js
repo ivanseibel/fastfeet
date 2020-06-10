@@ -13,6 +13,7 @@ import Profile from '~/pages/Profile';
 import DeliveryDetails from '~/pages/DeliveryDetails';
 import NewIssue from '~/pages/NewIssue';
 import SeeIssues from '~/pages/SeeIssues';
+import ConfirmDelivery from '~/pages/ConfirmDelivery';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,6 +70,13 @@ function DeliveryScreens() {
         }
         name="SeeIssues"
         component={SeeIssues}
+      />
+      <Stack.Screen
+        options={({ navigation }) =>
+          DeliveryScreenOptions(navigation, 'Confirm delivery')
+        }
+        name="ConfirmDelivery"
+        component={ConfirmDelivery}
       />
     </Stack.Navigator>
   );

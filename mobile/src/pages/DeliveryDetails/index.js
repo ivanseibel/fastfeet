@@ -107,7 +107,11 @@ const DeliveryDetails = ({ navigation, route }) => {
               <ActionText>issues</ActionText>
             </ActionContainer>
 
-            <ActionContainer>
+            <ActionContainer
+              onPress={() =>
+                navigation.navigate('ConfirmDelivery', { id: delivery.id })
+              }
+            >
               <Icon name="check-circle-outline" size={20} color="#7D40E7" />
               <CardSeparator height="5px" />
               <ActionText>Confirm</ActionText>
