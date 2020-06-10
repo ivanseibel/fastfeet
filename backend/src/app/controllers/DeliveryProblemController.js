@@ -77,7 +77,7 @@ class DeliveryProblemController {
         {
           model: DeliveryProblem,
           as: 'problem',
-          attributes: ['id', 'description'],
+          attributes: ['id', 'description', 'created_at'],
           required: true,
           where: descFilter,
         },
