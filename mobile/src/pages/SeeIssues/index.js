@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar, Alert, TouchableWithoutFeedback } from 'react-native';
+
+import { format, parseISO } from 'date-fns';
+import api from '~/services/api';
 
 import {
   Container,
@@ -9,62 +12,35 @@ import {
   Title,
   CardDescription,
   CardDate,
-  EmptyListText,
+  CardEmptyDescription,
   RowSeparator,
 } from './styles';
 
-const SeeIssues = () => {
-  const [issues, setIssues] = useState([
-    {
-      id: 3,
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in sagittis nisl, id interdum sem. Integer non ante et tellus viverra tristique vel eget neque. Proin in sagittis ligula. ',
-      created_at: '2020-05-21T21:57:27.113Z',
-      formattedDate: '2020-05-21',
-    },
-    {
-      id: 4,
-      description: 'This problem is very important as well!',
-      created_at: '2020-05-26T18:50:34.052Z',
-      formattedDate: '2020-05-26',
-    },
-    {
-      id: 5,
-      description: 'Problema na entrega 2.',
-      created_at: '2020-06-09T21:47:02.108Z',
-      formattedDate: '2020-06-09',
-    },
-    {
-      id: 6,
-      description: 'Problema na entrega 2.',
-      created_at: '2020-06-09T21:47:02.108Z',
-      formattedDate: '2020-06-09',
-    },
-    {
-      id: 7,
-      description: 'Problema na entrega 2.',
-      created_at: '2020-06-09T21:47:02.108Z',
-      formattedDate: '2020-06-09',
-    },
-    {
-      id: 8,
-      description: 'Problema na entrega 2.',
-      created_at: '2020-06-09T21:47:02.108Z',
-      formattedDate: '2020-06-09',
-    },
-    {
-      id: 9,
-      description: 'Problema na entrega 2.',
-      created_at: '2020-06-09T21:47:02.108Z',
-      formattedDate: '2020-06-09',
-    },
-    {
-      id: 10,
-      description: 'Problema na entrega 10.',
-      created_at: '2020-06-09T21:47:02.108Z',
-      formattedDate: '2020-06-09',
-    },
-  ]);
+const SeeIssues = ({ route }) => {
+  const [issues, setIssues] = useState([]);
+  const { id } = route.params;
+
+  useEffect(() => {
+    const loadIssues = async () => {
+      try {
+        const response = await api.get(`delivery/${id}/problems`);
+        const issues = response.data.rows[0].problem;
+
+        setIssues(
+          issues.map((issue) => {
+            return {
+              ...issue,
+              formattedDate: format(parseISO(issue.created_at), 'yyyy-MM-dd'),
+            };
+          })
+        );
+      } catch (error) {
+        Alert.alert('Network error', error.message);
+      }
+    };
+
+    loadIssues();
+  }, []);
 
   return (
     <Container>
@@ -72,7 +48,11 @@ const SeeIssues = () => {
         data={issues}
         keyExtractor={(item) => String(item.id)}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={<Card />}
+        ListEmptyComponent={
+          <Card>
+            <CardEmptyDescription>No issues found</CardEmptyDescription>
+          </Card>
+        }
         renderItem={({ item }) => (
           <TouchableWithoutFeedback onPress={() => {}}>
             <>
@@ -90,7 +70,7 @@ const SeeIssues = () => {
 
         <RowSeparator height="70px" />
 
-        <Title>Delivery 1</Title>
+        <Title>Delivery {id}</Title>
 
         <RowSeparator height="15px" />
 

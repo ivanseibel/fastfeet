@@ -32,11 +32,12 @@ export const IssuesList = styled(FlatList)`
 export const Card = styled.View`
   background-color: #fff;
   border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #efe;
   margin: 0 20px 0;
   padding: 15px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `;
 
 export const CardDescription = styled.Text`
@@ -54,7 +55,10 @@ export const CardDate = styled.Text`
   font-size: 12px;
 `;
 
-export const EmptyListText = styled.Text``;
+export const CardEmptyDescription = styled.Text`
+  color: #999999;
+  font-size: 16px;
+`;
 
 export const RowSeparator = styled.View`
   height: ${(props) => (props.height ? props.height : '0px')};
