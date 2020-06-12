@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import React, { useRef, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-// import { RNCamera } from 'react-native-camera';
+import { Alert, Image, ActivityIndicator } from 'react-native';
+
+import api from '~/services/api';
 
 import {
   Container,
@@ -13,39 +14,62 @@ import {
   SubmitButtonText,
   RowSeparator,
   Camera,
-  // ShotBackground,
+  CameraObject,
 } from './styles';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'black',
-  },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20,
-  },
-});
-
-const ConfirmDelivery = () => {
+const ConfirmDelivery = ({ navigation, route }) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [image, setImage] = useState(null);
   let camera = useRef(null);
+  const { id } = route.params;
 
   const takePicture = async () => {
     if (camera) {
-      const options = { quality: 0.5, base64: true };
+      const options = { quality: 0.1, base64: false, width: 200 };
       const data = await camera.takePictureAsync(options);
       console.tron.log(data.uri);
+      setImage(data.uri);
+    }
+  };
+
+  const handlePostSignature = async () => {
+    setSubmitting(true);
+    if (!image) {
+      setSubmitting(false);
+      Alert.alert(
+        'Warning',
+        'You must capture the signature to end this delivery!'
+      );
+      return;
+    }
+
+    try {
+      const body = new FormData();
+
+      body.append('file', {
+        type: 'image/jpg',
+        uri: image,
+        name: 'signature.jpg',
+      });
+
+      const headers = {
+        'content-type': 'multipart/form-data',
+        accept: 'application/json',
+      };
+
+      const { data } = await api.post('signatures', body, { headers });
+
+      await api.put(`deliveries/${id}/end`, {
+        end_date: new Date(),
+        signature_id: data.id,
+      });
+
+      setSubmitting(false);
+      Alert.alert('Success', 'Delivered is ended!');
+      navigation.navigate('Dashboard');
+    } catch (error) {
+      setSubmitting(false);
+      Alert.alert('Network error', error.message);
     }
   };
 
@@ -67,23 +91,36 @@ const ConfirmDelivery = () => {
           }}
         />
         <TakeShotButton>
-          {/* <TouchableOpacity onPress={takePicture}> */}
-          <ShotBackground onPress={takePicture}>
-            <Icon name="camera" size={30} color="#fff" />
-          </ShotBackground>
-          {/* </TouchableOpacity> */}
-        </TakeShotButton>
+          <CameraObject>
+            {/* empty object only for alignment purpose */}
+          </CameraObject>
 
-        {/* <SubmitButton>
-          <SubmitButtonText>Submit</SubmitButtonText>
-        </SubmitButton> */}
+          <CameraObject>
+            <ShotBackground onPress={takePicture}>
+              <Icon name="camera" size={30} color="#fff" />
+            </ShotBackground>
+          </CameraObject>
+
+          <CameraObject background="rgba(0,0,0,0.2)">
+            <Image
+              source={{ uri: image || 'no content' }}
+              style={{ width: 37, height: 50, flex: 0, alignSelf: 'center' }}
+            />
+          </CameraObject>
+        </TakeShotButton>
       </Card>
 
-      <PurpleHeader>
-        <RowSeparator height="70px" />
+      <PurpleHeader />
 
-        <RowSeparator height="30px" />
-      </PurpleHeader>
+      <RowSeparator height="10px" />
+
+      <SubmitButton onPress={handlePostSignature}>
+        {submitting ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <SubmitButtonText>Submit</SubmitButtonText>
+        )}
+      </SubmitButton>
     </Container>
   );
 };

@@ -85,7 +85,6 @@ function DeliveryScreens() {
 function TabMain() {
   return (
     <Tab.Navigator
-      // screenOptions={{ unmountOnBlur: true }}
       tabBarOptions={{
         activeTintColor: '#7D40E7',
         labelStyle: { fontSize: 14 },
@@ -121,9 +120,7 @@ export default function Routes() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {signed ? (
-          <>
-            <Stack.Screen name="TabMain" component={TabMain} />
-          </>
+          <Stack.Screen name="TabMain" component={TabMain} />
         ) : (
           <Stack.Screen name="SignIn" component={SignIn} />
         )}

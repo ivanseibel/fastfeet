@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, View } from 'react-native';
+import { Alert, StatusBar, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { format, parseISO } from 'date-fns';
 
@@ -108,9 +108,13 @@ const DeliveryDetails = ({ navigation, route }) => {
             </ActionContainer>
 
             <ActionContainer
-              onPress={() =>
-                navigation.navigate('ConfirmDelivery', { id: delivery.id })
-              }
+              onPress={() => {
+                if (delivery.end_date) {
+                  Alert.alert('Warning', 'This delivery is already ended');
+                  return;
+                }
+                navigation.navigate('ConfirmDelivery', { id: delivery.id });
+              }}
             >
               <Icon name="check-circle-outline" size={20} color="#7D40E7" />
               <CardSeparator height="5px" />

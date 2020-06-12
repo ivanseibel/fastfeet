@@ -18,7 +18,7 @@ export const PurpleHeader = styled.View`
 `;
 
 export const Card = styled.View`
-  flex: 0.8;
+  flex: 0.9;
   background-color: transparent;
 
   margin: 80px 20px 0;
@@ -26,20 +26,32 @@ export const Card = styled.View`
 `;
 
 export const Camera = styled(RNCamera)`
-  flex: 0.6;
+  flex: 0.7;
   align-items: center;
 `;
 
 export const TakeShotButton = styled.View`
   flex: 0;
-  margin-left: auto;
-  margin-right: auto;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const CameraObject = styled.View`
+  margin-top: 50px;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 76px;
+  margin: 0 20px;
+  border-radius: 38px;
+  background-color: ${(props) =>
+    props.background ? props.background : 'transparent'};
 `;
 
 export const ShotBackground = styled(RectButton)`
-  width: 70px;
-  height: 70px;
-  border-radius: 35px;
+  width: 76px;
+  height: 76px;
+  border-radius: 38px;
 
   align-items: center;
   justify-content: center;
@@ -47,12 +59,13 @@ export const ShotBackground = styled(RectButton)`
   background-color: rgba(0, 0, 0, 0.2);
 `;
 
-export const SubmitButton = styled.View`
+export const SubmitButton = styled.TouchableOpacity`
   align-self: stretch;
   margin: 0 20px;
   background-color: #7d40e7;
   border-radius: 4px;
   padding: 12px;
+  align-items: center;
 `;
 
 export const SubmitButtonText = styled.Text`

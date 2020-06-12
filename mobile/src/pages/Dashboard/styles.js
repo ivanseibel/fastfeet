@@ -56,21 +56,21 @@ export const DeliveriesFilter = styled.View`
 
 export const Filter = styled.Text`
   margin-left: 10px;
-  color: ${props => (props.selected ? '#7d40e7' : '#999')};
+  color: ${(props) => (props.selected ? '#7d40e7' : '#999')};
   font-weight: bold;
   border-bottom-color: #7d40e7;
-  border-bottom-width: ${props => (props.selected ? '1px' : '0')};
+  border-bottom-width: ${(props) => (props.selected ? '1px' : '0')};
 `;
 
 export const Deliveries = styled.FlatList`
   margin-top: 15px;
 `;
 
-export const PushToUpdateContainer = styled.View`
+export const PullToUpdateContainer = styled.View`
   margin-top: 15px;
   align-items: center;
 `;
 
-export const PushToUpdateText = styled.Text`
+export const PullToUpdateText = styled.Text`
   color: #999;
 `;
