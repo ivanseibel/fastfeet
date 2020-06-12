@@ -35,6 +35,11 @@ routes.post('/delivery/:id/problems', DeliveryProblemController.store);
 routes.get('/delivery/problems', DeliveryProblemController.index);
 routes.get('/delivery/:id/problems', DeliveryProblemController.index);
 
+routes.put('/deliveries/:id/start', DeliveryStartController.update);
+routes.put('/deliveries/:id/end', DeliveryEndController.update);
+
+routes.post('/signatures', upload.single('file'), SignatureController.store);
+
 routes.use(authMiddleware);
 
 routes.post('/recipients', OnlyAdmin, RecipientController.store);
@@ -56,9 +61,6 @@ routes.get('/deliveries', OnlyAdmin, DeliveryController.index);
 routes.get('/deliveries/:id', OnlyAdmin, DeliveryController.show);
 routes.delete('/deliveries/:id', OnlyAdmin, DeliveryController.delete);
 
-routes.put('/deliveries/:id/start', DeliveryStartController.update);
-routes.put('/deliveries/:id/end', DeliveryEndController.update);
-
 routes.delete(
   '/problem/:id/cancel-delivery',
   OnlyAdmin,
@@ -76,19 +78,6 @@ routes.put(
   OnlyAdmin,
   upload.single('file'),
   AvatarController.update
-);
-
-routes.post(
-  '/signatures',
-  OnlyAdmin,
-  upload.single('file'),
-  SignatureController.store
-);
-routes.put(
-  '/signatures/:id',
-  OnlyAdmin,
-  upload.single('file'),
-  SignatureController.update
 );
 
 export default routes;
