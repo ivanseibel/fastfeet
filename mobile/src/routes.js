@@ -13,6 +13,7 @@ import Profile from '~/pages/Profile';
 import DeliveryDetails from '~/pages/DeliveryDetails';
 import NewIssue from '~/pages/NewIssue';
 import SeeIssues from '~/pages/SeeIssues';
+import ConfirmDelivery from '~/pages/ConfirmDelivery';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -70,6 +71,13 @@ function DeliveryScreens() {
         name="SeeIssues"
         component={SeeIssues}
       />
+      <Stack.Screen
+        options={({ navigation }) =>
+          DeliveryScreenOptions(navigation, 'Confirm delivery')
+        }
+        name="ConfirmDelivery"
+        component={ConfirmDelivery}
+      />
     </Stack.Navigator>
   );
 }
@@ -77,7 +85,6 @@ function DeliveryScreens() {
 function TabMain() {
   return (
     <Tab.Navigator
-      // screenOptions={{ unmountOnBlur: true }}
       tabBarOptions={{
         activeTintColor: '#7D40E7',
         labelStyle: { fontSize: 14 },
@@ -113,9 +120,7 @@ export default function Routes() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {signed ? (
-          <>
-            <Stack.Screen name="TabMain" component={TabMain} />
-          </>
+          <Stack.Screen name="TabMain" component={TabMain} />
         ) : (
           <Stack.Screen name="SignIn" component={SignIn} />
         )}

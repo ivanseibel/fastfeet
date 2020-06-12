@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 
 import { StatusBar, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -16,8 +17,8 @@ import {
   DeliveriesTitle,
   DeliveriesFilter,
   Filter,
-  PushToUpdateContainer,
-  PushToUpdateText,
+  PullToUpdateContainer,
+  PullToUpdateText,
 } from './styles';
 
 import { signOffRequest } from '~/store/modules/auth/actions';
@@ -26,6 +27,8 @@ import api from '~/services/api';
 
 const Dashboard = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  const focused = useIsFocused();
 
   const [refreshing, setRefreshing] = useState(false);
   const [filter, setFilter] = useState('pendent');
@@ -43,6 +46,9 @@ const Dashboard = ({ navigation }) => {
   const [delivered, setDelivered] = useState([]);
 
   const loadDeliveries = async () => {
+    if (user.id === '') {
+      return;
+    }
     setRefreshing(true);
     try {
       let response = await api({
@@ -73,8 +79,8 @@ const Dashboard = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (!pendent.length || !delivered) loadDeliveries();
-  }, []);
+    loadDeliveries();
+  }, [focused]);
 
   const showDeliveries = useMemo(() => {
     if (filter === 'pendent' && pendent.length) return true;
@@ -125,10 +131,10 @@ const Dashboard = ({ navigation }) => {
         data={filter === 'pendent' ? pendent : delivered}
         keyExtractor={(item) => String(item.id)}
         ListEmptyComponent={
-          <PushToUpdateContainer>
+          <PullToUpdateContainer>
             <Icon name="refresh" size={30} color="#999" />
-            <PushToUpdateText>Push to update</PushToUpdateText>
-          </PushToUpdateContainer>
+            <PullToUpdateText>Pull to update</PullToUpdateText>
+          </PullToUpdateContainer>
         }
         renderItem={({ item }) => (
           <Delivery navigation={navigation} delivery={item} />

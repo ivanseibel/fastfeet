@@ -12,14 +12,8 @@ import { signInRequest } from '~/store/modules/auth/actions';
 const SignIn = ({ navigation }) => {
   const [id, setId] = useState();
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.auth.loading);
-  const signed = useSelector(state => state.auth.signed);
-
-  useEffect(() => {
-    if (signed) {
-      navigation.navigate('Dashboard');
-    }
-  }, [signed]);
+  const loading = useSelector((state) => state.auth.loading);
+  const signed = useSelector((state) => state.auth.signed);
 
   const handleLogin = () => {
     dispatch(signInRequest(id));
