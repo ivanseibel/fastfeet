@@ -49,18 +49,18 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 Page to deliverymen login into the system.
 
 <p>
-  <img src=".github/assets/screen-login.png" alt="Login" width="20%">
+  <img src=".github/assets/screen-login.png" alt="Login" width="25%">
 </p>
 
-## 3.2. Deliveries
+## 3.2. Dashboard
 
 In this page deliverymen can:
 
-- xxx
-- xxx
+- Visualize his pendent and finished deliveries.
+- Open a delivery to see detailed informations.
 
 <p>
-  <img src=".github/assets/screen-deliveries.png" alt="Deliveries" width="60%">
+  <img src=".github/assets/screen-dashboard.png" alt="Deliveries" width="25%">
 </p>
 
 ### 3.2.1. Delivery xxx
