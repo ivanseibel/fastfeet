@@ -49,7 +49,7 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 Page to deliverymen login into the system.
 
 <p>
-  <img src=".github/assets/screen-login.png" alt="Login" width="50%">
+  <img src=".github/assets/screen-login.png" alt="Login" width="30%">
 </p>
 
 ## 3.2. Deliveries
