@@ -264,9 +264,11 @@ Run the app:
 $ yarn start
 ```
 
-You can see the instructions to get up the API [HERE](https://github.com/ivanseibel/fastfeet/tree/master/backend#6-how-to-run).
+**IMPORTANT**
 
-**IMPORTANT**: axios baseURL must be equal to APP_URL const from back-end .env file, or front-end will not show avatars correctly.
+Axios baseURL must be equal to APP_URL const from back-end .env file, or front-end will not show avatars correctly.
+
+You can see the instructions to get up the API [HERE](https://github.com/ivanseibel/fastfeet/tree/master/backend#6-how-to-run).
 
 # 6. License
 
