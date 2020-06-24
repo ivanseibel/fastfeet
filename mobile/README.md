@@ -214,6 +214,10 @@ Upload app to emulator/device:
 $ yarn android
 ```
 
+**ABOUT Reactotron**
+
+If you want to debug this app using Reactotron, will be necessary to update file `src/config/ReactotronConfir.js` to set the real ip address of your computer where Reactotron is running.
+
 **ABOUT iOS**
 
 This app is probably 100% iOS compatible, but it cannot be tested. I recommend run the app using Android emulator or physical devices.

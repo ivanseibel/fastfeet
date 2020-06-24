@@ -23,11 +23,16 @@ const SeeIssues = ({ route }) => {
   useEffect(() => {
     const loadIssues = async () => {
       try {
-        const response = await api.get(`delivery/${id}/problems`);
-        const issues = response.data.rows[0].problem;
+        const { data } = await api.get(`delivery/${id}/problems`);
+
+        if (data.count === 0) {
+          return;
+        }
+
+        const loadedIssues = data.rows[0].problem;
 
         setIssues(
-          issues.map((issue) => {
+          loadedIssues.map((issue) => {
             return {
               ...issue,
               formattedDate: format(parseISO(issue.created_at), 'yyyy-MM-dd'),
