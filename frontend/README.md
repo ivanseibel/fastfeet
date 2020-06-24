@@ -4,7 +4,7 @@
 
 <h3 align="center">
   <img width="250px" src="./src/assets/logo.png" alt="Fastfeet">
-  <p>Project: Fastfeet - Delivery Service (backend)</p>
+  <p>Project: Fastfeet - Delivery Service (front-end)</p>
 </h3>
 
 <p align="center">
@@ -25,7 +25,7 @@
 
 - [1. Project General Description](#1-project-general-description)
 - [2. User stories](#2-user-stories)
-  - [2.1. Persona: Admin user](21-persona-admin-user)
+  - [2.1. Persona: Admin user](#21-persona-admin-user)
 
 
 # 1. Project General Description
