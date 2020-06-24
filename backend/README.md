@@ -25,9 +25,8 @@
 
 - [1. Project General Description](#1-project-general-description)
 - [2. User stories](#2-user-stories)
-  - [2.1. Persona: Users](#21-persona-users)
-  - [2.2. Persona: Admin user](#22-persona-admin-user)
-  - [2.3. Persona: Deliveryman user](#23-persona-deliveryman-user)
+  - [2.1. Persona: Admin user](#21-persona-admin-user)
+  - [2.2. Persona: Deliveryman user](#22-persona-deliveryman-user)
 - [3. Non-functional Requirements](#3-non-functional-requirements)
 - [4. Routes](#4-routes)
   - [4.1. Authentication](#41-authentication)
@@ -49,12 +48,9 @@ This API is one part of three that implement an application for a delivery servi
 
 # 2. User stories
 
-### 2.1. Persona: Users
+### 2.1. Persona: Admin user
 
-- As an user, I want to get access to the restricted screens of the system using my email and password.
-
-### 2.2. Persona: Admin user
-
+- As administrator, I want to get access to the restricted screens of the system using my email and password.
 - As administrator, I want to register a new recipient with the following information: name and full address.
 - As administrator, I want to update the recipient registration information.
 - As administrator, I want to delete a specific recipient.
@@ -74,8 +70,9 @@ This API is one part of three that implement an application for a delivery servi
 - As administrator, I want to see a detailed description of the problem for a specific delivery.
 - As administrator, I want to cancel a specific delivery with one or more problems.
 
-### 2.3. Persona: Deliveryman user
+### 2.2. Persona: Deliveryman user
 
+- As deliveryman, I want to get access to the restricted screens of the system using my ID.
 - As deliveryman, I want to see deliveries attributed to me that I need to delivery.
 - As deliveryman, I want to inform that a specific delivery was retired to be delivered.
 - As deliveryman, I want to inform that a specific delivery was delivered.
