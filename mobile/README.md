@@ -4,7 +4,7 @@
 
 <h3 align="center">
   <img width="250px" src="./src/assets/logo.png" alt="Fastfeet">
-  <p>Project: Fastfeet - Delivery Service (front-end)</p>
+  <p>Project: Fastfeet - Delivery Service (mobile)</p>
 </h3>
 
 <p align="center">
@@ -25,20 +25,8 @@
 
 - [1. Project General Description](#1-project-general-description)
 - [2. User stories](#2-user-stories)
-  - [2.1. Persona: Admin user](#21-persona-admin-user)
+  - [2.1. Persona: Deliveryman user](#21-persona-deliveryman-user)
 - [3. Screen Captures](#3-screen-captures)
-  - [3.2. Deliveries](#32-deliveries)
-    - [3.2.1. Delivery insert](#321-delivery-insert)
-    - [3.2.2. Delivery edit](#322-delivery-edit)
-    - [3.2.3. Delivery details](#323-delivery-details)
-  - [3.3. Deliverymen](#33-deliverymen)
-    - [3.3.1. Deliveryman insert](#331-deliveryman-insert)
-    - [3.3.2. Deliveryman edit](#332-deliveryman-edit)
-  - [3.4. Recipients](#34-recipients)
-    - [3.4.1. Recipient insert](#341-recipient-insert)
-    - [3.4.2. Recipient edit](#342-recipient-edit)
-  - [3.5. Issues](#35-issues)
-    - [3.5.1. Issue details](#351-issue-details)
 - [4. Technologies/libraries](#4-technologieslibraries)
 - [5. How to run](#5-how-to-run)
 - [6. License](#6-license)
@@ -46,7 +34,7 @@
 
 # 1. Project General Description
 
-This ReactJS web app is one part of three that implement an application for a delivery service company. This project is one of several constructed during GoStack Bootcamp, a course offered by [Rocketseat](http://www.rocketseat.com.br) that dive deep into one of most popular stacks to software development for web and mobile.
+This React Native mobile app is one part of three that implement an application for a delivery service company. This project is one of several constructed during GoStack Bootcamp, a course offered by [Rocketseat](http://www.rocketseat.com.br) that dive deep into one of most popular stacks to software development for web and mobile.
 
 # 2. User stories
 
