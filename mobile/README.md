@@ -74,7 +74,51 @@ Page where deliverymen can xxx.
 
 # 4. Technologies/libraries
 
-
+- @react-native-community/async-storage: Asynchronous, persistent, key-value storage - system for React Native.
+- @react-native-community/masked-view: React Native MaskedView component for iOS.
+- @react-navigation/bottom-tabs: Bottom tab navigator following iOS design guidelines.
+- @react-navigation/native: React Native support for React Navigation.
+- @react-navigation/stack: Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
+- axios: Promise based HTTP client for the browser and node.js.
+- date-fns: Modern JavaScript date utility library.
+- immer: Create your next immutable state by mutating the current one.
+- prop-types: Runtime type checking for React props and similar objects.
+- react: React is a JavaScript library for building user interfaces.
+- react-native: Create native apps for Android and iOS using React.
+- react-native-camera: A Camera component for React Native. Also reads barcodes.
+- react-native-elements: React Native Elements & UI Toolkit.
+- react-native-gesture-handler: Experimental implementation of a new declarative API for gesture handling in react-native.
+- react-native-reanimated: Alternative and enhanced implementation of React Native's Animated API.
+- react-native-safe-area-context: A more flexible `<SafeAreaView>`
+- react-native-screens: First incomplete navigation solution for your react-native app.
+- react-native-vector-icons: Customizable Icons for React Native with support for NavBar/TabBar/ToolbarAndroid, image source and full styling.
+- react-redux: Official React bindings for Redux.
+- reactotron-react-native: A development tool to explore, inspect, and diagnose your React Native apps.
+- reactotron-redux: A Reactotron plugin for Redux.
+- reactotron-redux-saga: A Reactotron plugin for Redux Saga.
+- redux: Predictable state container for JavaScript apps.
+- redux-persist: Persist and rehydrate redux stores.
+- redux-saga: Saga middleware for Redux to handle Side Effects.
+- styled-components: Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress.
+- @babel/core: Babel compiler core.
+- @babel/runtime: Babel's modular runtime helpers.
+- @react-native-community/eslint-config: ESLint config for React Native.
+- babel-eslint: Custom parser for ESLint.
+- babel-jest: Jest plugin to use babel for transformation.
+- babel-plugin-root-import: Babel Plugin to enable relative root-import.
+- eslint: An AST-based pattern checker for JavaScript.
+- eslint-config-airbnb: Airbnb's ESLint config, following our styleguide.
+- eslint-config-prettier: Turns off all rules that are unnecessary or might conflict with Prettier.
+- eslint-import-resolver-babel-plugin-root-import: Fork of eslint-import-resolver-babel-root-import that works.
+- eslint-plugin-import: Import with sanity.
+- eslint-plugin-jsx-a11y: Static AST checker for accessibility rules on JSX elements.
+- eslint-plugin-prettier: Runs prettier as an eslint rule.
+- eslint-plugin-react: React specific linting rules for ESLint.
+- eslint-plugin-react-hooks: ESLint rules for React Hooks.
+- jest: Delightful JavaScript Testing.
+- metro-react-native-babel-preset: Babel preset for React Native applications.
+- prettier: Prettier is an opinionated code formatter.
+- react-test-renderer: React package for snapshot testing.
 
 # 5. How to run
 
@@ -90,7 +134,7 @@ Get inside the new created folder "fastfeet/mobile"
 $ cd fastfeet/mobile
 ```
 
-Configure axios baseURL at ./src/services/api.js.
+Configure axios baseURL at ./src/services/api.js. To avoid network issues, I recommend use real local network address in API and mobile app.
 
 ```javascript
 import axios from 'axios';
