@@ -136,6 +136,13 @@ In this page administrators can:
   <img src=".github/assets/screen-recipients.png" alt="Recipients" width="600px">
 </p>
 
+### 3.4.1. Recipient insert
+
+Page where administrators can register new recipients.
+
+<p>
+  <img src=".github/assets/screen-recipient-insert.png" alt="Recipient insert" width="600px">
+</p>
 
 # 4. Technologies/libraries
 
