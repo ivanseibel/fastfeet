@@ -34,7 +34,7 @@ This part of the project is a web interface to manage deliveries, deliverymen an
 
 # 2. User stories
 
-# 2.1. Persona: Admin user
+## 2.1. Persona: Admin user
 
 You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree/master/backend#21-persona-admin-user).
 
