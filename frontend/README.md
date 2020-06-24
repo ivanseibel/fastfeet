@@ -152,6 +152,20 @@ Page where administrators can edit recipient data.
   <img src=".github/assets/screen-recipient-edit.png" alt="Recipient edit" width="600px">
 </p>
 
+## 3.5. Issues
+
+In this page administrators can:
+
+- See basic info and navigate by the deliveries issues list.
+- Filter issue list by description.
+- See issue details.
+- Cancel a delivery.
+
+<p>
+  <img src=".github/assets/screen-issues.png" alt="Issues" width="600px">
+</p>
+
+
 # 4. Technologies/libraries
 
 - @rocketseat/unform: Easy peasy highly scalable ReactJS & React Native forms.
