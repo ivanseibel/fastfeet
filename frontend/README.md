@@ -85,7 +85,9 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 
 Clone this repository:
 
+```bash
 $ git clone https://github.com/ivanseibel/fastfeet
+```
 
 Get inside the new created folder "fastfeet/frontend"
 
@@ -120,5 +122,7 @@ $ yarn start
 You can see the instructions to get up the API [HERE](https://github.com/ivanseibel/fastfeet/tree/master/backend#6-how-to-run).
 
 # 5. License
+
+This project is under MIT license.
 
 ### Status: under construction :construction: :construction_worker:
