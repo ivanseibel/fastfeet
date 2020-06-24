@@ -87,12 +87,20 @@ In this screen deliveryman can report a delivery issue.
   <img src=".github/assets/screen-report-issue.png" alt="Report an issue" width="25%">
 </p>
 
-#### 3.2.1.2. Report an issue
+#### 3.2.1.2. See issues
 
 In this screen deliveryman can see a delivery issues list.
 
 <p>
   <img src=".github/assets/screen-see-issues.png" alt="See delivery issues list" width="25%">
+</p>
+
+#### 3.2.1.2. Confirm delivery
+
+In this screen deliveryman can confirm and end a delivery.
+
+<p>
+  <img src=".github/assets/screen-confirm-delivery.png" alt="Confirm delivery" width="25%">
 </p>
 
 # 4. Technologies/libraries
