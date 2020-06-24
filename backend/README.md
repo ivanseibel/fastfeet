@@ -4,7 +4,7 @@
 
 <h3 align="center">
   <img width="250px" src="../frontend/src/assets/logo.png" alt="Fastfeet">
-  <p>Project: Fastfeet - Delivery Service (backend)</p>
+  <p>Project: Fastfeet - Delivery Service (back-end)</p>
 </h3>
 
 <p align="center">
