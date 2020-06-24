@@ -97,7 +97,7 @@ In this screen deliveryman can see a delivery issues list.
 
 #### 3.2.1.2. Confirm delivery
 
-In this screen deliveryman can confirm and end a delivery.
+In this screen deliveryman can capture the recipient signature with camera and confirm/end the delivery.
 
 <p>
   <img src=".github/assets/screen-confirm-delivery.png" alt="Confirm delivery" width="25%">
