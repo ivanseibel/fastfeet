@@ -43,7 +43,7 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 
 # 3. Technologies/libraries
 
-- [@rocketseat/unform](https://github.com/Rocketseat/unform): Unform is a performance focused library that helps you creating beautiful forms in ReactJS & React Native with the power of uncontrolled components performance and React Hooks.
+- @rocketseat/unform: Easy peasy highly scalable ReactJS & React Native forms.
 - @testing-library/jest-dom: Custom jest matchers to test the state of the DOM.
 - @testing-library/react: Simple and complete React DOM testing utilities that encourage good testing practices.
 - @testing-library/user-event: Fire events the same way the user does.
@@ -55,31 +55,31 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 - prop-types: Runtime type checking for React props and similar objects.
 - react: React is a JavaScript library for building user interfaces.
 - react-dom: React package for working with the DOM.
-- react-helmet:
-- react-icons:
-- react-redux:
-- react-router-dom:
-- react-scripts:
-- react-select:
-- react-toastify:
-- reactotron-react-js:
-- reactotron-redux:
-- reactotron-redux-saga:
-- redux:
-- redux-persist:
-- redux-saga:
-- styled-components:
-- yup:
-- babel-eslint:
-- eslint:
-- eslint-config-airbnb:
-- eslint-config-prettier:
-- eslint-plugin-import:
-- eslint-plugin-jsx-a11y:
-- eslint-plugin-prettier:
-- eslint-plugin-react:
-- eslint-plugin-react-hooks:
-- prettier:
+- react-helmet: A document head manager for React.
+- react-icons: SVG React icons of popular icon packs using ES6 imports.
+- react-redux: Official React bindings for Redux.
+- react-router-dom: DOM bindings for React Router.
+- react-scripts: Configuration and scripts for Create React App.
+- react-select: A Select control built with and for ReactJS.
+- react-toastify: React notification made easy.
+- reactotron-react-js: A development tool to explore, inspect, and diagnose your React JS/DOM apps.
+- reactotron-redux: A Reactotron plugin for Redux.
+- reactotron-redux-saga: A Reactotron plugin for Redux Saga.
+- redux: Predictable state container for JavaScript apps.
+- redux-persist: Persist and rehydrate redux stores.
+- redux-saga: Saga middleware for Redux to handle Side Effects.
+- styled-components: Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress.
+- yup: Dead simple Object schema validation.
+- babel-eslint: Custom parser for ESLint.
+- eslint: An AST-based pattern checker for JavaScript.
+- eslint-config-airbnb: Airbnb's ESLint config, following our styleguide.
+- eslint-config-prettier: Turns off all rules that are unnecessary or might conflict with Prettier.
+- eslint-plugin-import: Import with sanity.
+- eslint-plugin-jsx-a11y: Static AST checker for accessibility rules on JSX elements.
+- eslint-plugin-prettier: Runs prettier as an eslint rule.
+- eslint-plugin-react: React specific linting rules for ESLint.
+- eslint-plugin-react-hooks: ESLint rules for React Hooks.
+- prettier: Prettier is an opinionated code formatter.
 
 # 4. How to run
 
