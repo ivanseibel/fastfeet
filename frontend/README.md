@@ -271,5 +271,3 @@ You can see the instructions to get up the API [HERE](https://github.com/ivansei
 # 6. License
 
 This project is under MIT license.
-
-### Status: under construction :construction: :construction_worker:
