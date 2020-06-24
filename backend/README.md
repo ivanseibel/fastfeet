@@ -862,6 +862,14 @@ file: data
 
 # 5. Technologies/libraries
 
+## 5.1. Technologies
+
+### 5.1.1. Databases
+
+PostgreSQL: API data persistency.
+Redis: Queue data management persistency.
+
+## 5.2. Libraries
 - Prettier: Code formatter.
 - Eslint: Code patterns identifier.
 - Nodemon: Live reload.
@@ -901,7 +909,7 @@ Configure your .env file using template .env.template.
 Install all components:
 
 ```bash
-$ yarn install
+$ yarn
 ```
 
 Run the app:
