@@ -66,12 +66,17 @@ In this page deliverymen can:
   <img src=".github/assets/screen-dashboard-01.png" alt="Dashboard Delivered" width="25%">
 </p>
 
-### 3.2.1. Delivery xxx
+### 3.2.1. Delivery details
 
-Page where deliverymen can xxx.
+Page where deliverymen can:
+- See detailed information about address.
+- See detailed information about delivery status.
+- Report delivery issues.
+- See issues from a delivery.
+- Confirm a delivery.
 
 <p>
-  <img src=".github/assets/screen-delivery-insert.png" alt="Delivery insert" width="60%">
+  <img src=".github/assets/screen-delivery-details.png" alt="Delivery details" width="25%">
 </p>
 
 
