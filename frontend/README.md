@@ -84,6 +84,15 @@ Page where administrators can edit delivery data.
   <img src=".github/assets/screen-delivery-edit.png" alt="Delivery edit" width="600px">
 </p>
 
+## 3.5. Delivery details
+
+Page where administrators can see more informations about a delivery.
+
+<p>
+  <img src=".github/assets/screen-delivery-details.png" alt="Delivery details" width="600px">
+</p>
+
+
 # 4. Technologies/libraries
 
 - @rocketseat/unform: Easy peasy highly scalable ReactJS & React Native forms.
