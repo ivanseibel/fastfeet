@@ -122,6 +122,21 @@ Page where administrators can edit deliveryman data.
   <img src=".github/assets/screen-deliveryman-edit.png" alt="Deliveryman edit" width="600px">
 </p>
 
+## 3.4. Recipients
+
+In this page administrators can:
+
+- See basic info and navigate by the recipients list.
+- Filter recipient list by name.
+- Create a new recipient.
+- Edit recipient data.
+- Delete a recipient.
+
+<p>
+  <img src=".github/assets/screen-recipients.png" alt="Recipients" width="600px">
+</p>
+
+
 # 4. Technologies/libraries
 
 - @rocketseat/unform: Easy peasy highly scalable ReactJS & React Native forms.
