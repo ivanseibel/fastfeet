@@ -893,7 +893,9 @@ file: data
 
 Clone this repository:
 
+```bash
 $ git clone https://github.com/ivanseibel/fastfeet
+```
 
 Get inside the new created folder "fastfeet/backend"
 
