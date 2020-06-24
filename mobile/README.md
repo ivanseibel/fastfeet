@@ -27,6 +27,13 @@
 - [2. User stories](#2-user-stories)
   - [2.1. Persona: Deliveryman user](#21-persona-deliveryman-user)
 - [3. Screen Captures](#3-screen-captures)
+  - [3.1. Login](#31-login)
+  - [3.2. Dashboard](#32-dashboard)
+    - [3.2.1. Delivery details](#321-delivery-details)
+      - [3.2.1.1. Report an issue](#3211-report-an-issue)
+      - [3.2.1.2. See issues](#3212-see-issues)
+      - [3.2.1.3. Confirm delivery](#3213-confirm-delivery)
+  - [3.3. Profile](#33-profile)
 - [4. Technologies/libraries](#4-technologieslibraries)
 - [5. How to run](#5-how-to-run)
 - [6. License](#6-license)
@@ -96,7 +103,7 @@ In this screen deliveryman can see a delivery issues list.
   <img src=".github/assets/screen-see-issues.png" alt="See delivery issues list" width="25%">
 </p>
 
-#### 3.2.1.2. Confirm delivery
+#### 3.2.1.3. Confirm delivery
 
 In this screen deliveryman can capture the recipient signature with camera and confirm/end the delivery.
 
