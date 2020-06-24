@@ -40,7 +40,7 @@ This React Native mobile app is one part of three that implement an application 
 
 ## 2.1. Persona: Deliveryman user
 
-You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree/master/backend#21-persona-deliveryman-user).
+You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree/master/backend#22-persona-deliveryman-user).
 
 # 3. Screen Captures
 
