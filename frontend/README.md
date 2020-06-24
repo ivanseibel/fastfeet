@@ -49,7 +49,7 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 Page to administrator users login into the system.
 
 <p>
-  <img src=".github/assets/screen-login.png" alt="Login" width="600px" style="border:1px solid #333" >
+  <img src=".github/assets/screen-login.png" alt="Login" width="600px" style="border: 1px solid #333;">
 </p>
 
 ## 3.2. Deliveries
@@ -65,7 +65,7 @@ In this page administrators can:
 - Delete a delivery.
 
 <p>
-  <img src=".github/assets/screen-deliveries.png" alt="Deliveries" width="600px" style="border:1px solid #333" >
+  <img src=".github/assets/screen-deliveries.png" alt="Deliveries" width="600px" style="border: 1px solid #333;">
 </p>
 
 ## 3.3. Delivery insert
@@ -73,7 +73,7 @@ In this page administrators can:
 Page where administrators can create new deliveries.
 
 <p>
-  <img src=".github/assets/screen-delivery-insert.png" alt="Delivery insert" width="600px" style="border:1px solid #333" >
+  <img src=".github/assets/screen-delivery-insert.png" alt="Delivery insert" width="600px" style="border: 1px solid #333;">
 </p>
 
 # 4. Technologies/libraries
