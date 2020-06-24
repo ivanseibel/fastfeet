@@ -68,7 +68,7 @@ In this page administrators can:
   <img src=".github/assets/screen-deliveries.png" alt="Deliveries" width="600px">
 </p>
 
-## 3.3. Delivery insert
+## 3.2.1. Delivery insert
 
 Page where administrators can create new deliveries.
 
@@ -76,7 +76,7 @@ Page where administrators can create new deliveries.
   <img src=".github/assets/screen-delivery-insert.png" alt="Delivery insert" width="600px">
 </p>
 
-## 3.4. Delivery edit
+## 3.2.2. Delivery edit
 
 Page where administrators can edit delivery data.
 
@@ -84,12 +84,26 @@ Page where administrators can edit delivery data.
   <img src=".github/assets/screen-delivery-edit.png" alt="Delivery edit" width="600px">
 </p>
 
-## 3.5. Delivery details
+## 3.2.3. Delivery details
 
-Page where administrators can see more informations about a delivery.
+Modal window where administrators can see more informations about a delivery.
 
 <p>
   <img src=".github/assets/screen-delivery-details.png" alt="Delivery details" width="600px">
+</p>
+
+## 3.3. Deliverymen
+
+In this page administrators can:
+
+- See basic info and navigate by the deliverymen list.
+- Filter deliverymen list by name.
+- Create a new delivery.
+- Edit delivery data.
+- Delete a delivery.
+
+<p>
+  <img src=".github/assets/screen-deliverymen.png" alt="Deliverymen" width="600px">
 </p>
 
 
