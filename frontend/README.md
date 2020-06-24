@@ -114,6 +114,14 @@ Page where administrators can register new deliverymen.
   <img src=".github/assets/screen-deliveryman-insert.png" alt="Deliveryman insert" width="600px">
 </p>
 
+### 3.3.2. Deliveryman edit
+
+Page where administrators can edit deliveryman data.
+
+<p>
+  <img src=".github/assets/screen-deliveryman-edit.png" alt="Deliveryman edit" width="600px">
+</p>
+
 # 4. Technologies/libraries
 
 - @rocketseat/unform: Easy peasy highly scalable ReactJS & React Native forms.
