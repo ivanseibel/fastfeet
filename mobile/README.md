@@ -56,11 +56,14 @@ Page to deliverymen login into the system.
 
 In this page deliverymen can:
 
-- Visualize his pendent and finished deliveries.
-- Open a delivery to see detailed informations.
+- Visualize basic information about delivery, including status.
+- Filter by pendent and finished delivery status.
+- Open a delivery to see detailed informations and finish a delivery.
 
 <p>
-  <img src=".github/assets/screen-dashboard.png" alt="Deliveries" width="25%">
+  <img src=".github/assets/screen-dashboard.png" alt="Dashboard Pendent" width="25%">
+  &nbsp;&nbsp;&nbsp;
+  <img src=".github/assets/screen-dashboard-01.png" alt="Dashboard Delivered" width="25%">
 </p>
 
 ### 3.2.1. Delivery xxx
