@@ -26,9 +26,10 @@
 - [1. Project General Description](#1-project-general-description)
 - [2. User stories](#2-user-stories)
   - [2.1. Persona: Admin user](#21-persona-admin-user)
-- [3. Technologies/libraries](#3-technologieslibraries)
-- [4. How to run](#4-how-to-run)
-- [5. License](#5-license)
+- [3. Screen Captures](#3-screen-captures)
+- [4. Technologies/libraries](#4-technologieslibraries)
+- [5. How to run](#5-how-to-run)
+- [6. License](#6-license)
 
 
 # 1. Project General Description
@@ -41,7 +42,41 @@ This part of the project is a web interface to manage deliveries, deliverymen an
 
 You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree/master/backend#21-persona-admin-user).
 
-# 3. Technologies/libraries
+# 3. Screen Captures
+
+## 3.1. Login
+
+Page to administrator users login into the system.
+
+<p>
+  <img src=".github/assets/screen-login.png" alt="Login" width="600px" >
+</p>
+
+## 3.2. Deliveries
+
+In this page administrators can:
+
+- See basic info and navigate by the deliveries list.
+- Filter deliveries list by product name.
+- Filter deliveries list with issues.
+- See delivery details.
+- Create a new delivery.
+- Edit delivery data.
+- Delete a delivery.
+
+<p>
+  <img src=".github/assets/screen-deliveries.png" alt="Deliveries" width="600px" >
+</p>
+
+## 3.3. Delivery insert
+
+Page where administrators can create new deliveries.
+
+<p>
+  <img src=".github/assets/screen-delivery-insert.png" alt="Delivery insert" width="600px" >
+</p>
+
+# 4. Technologies/libraries
 
 - @rocketseat/unform: Easy peasy highly scalable ReactJS & React Native forms.
 - @testing-library/jest-dom: Custom jest matchers to test the state of the DOM.
@@ -81,7 +116,7 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 - eslint-plugin-react-hooks: ESLint rules for React Hooks.
 - prettier: Prettier is an opinionated code formatter.
 
-# 4. How to run
+# 5. How to run
 
 Clone this repository:
 
@@ -121,7 +156,9 @@ $ yarn start
 
 You can see the instructions to get up the API [HERE](https://github.com/ivanseibel/fastfeet/tree/master/backend#6-how-to-run).
 
-# 5. License
+**IMPORTANT**: axios baseURL must be equal to APP_URL const from back-end .env file, or front-end will not show avatars correctly.
+
+# 6. License
 
 This project is under MIT license.
 
