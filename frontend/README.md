@@ -83,6 +83,42 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 
 # 4. How to run
 
+Clone this repository:
+
+$ git clone https://github.com/ivanseibel/fastfeet
+
+Get inside the new created folder "fastfeet/frontend"
+
+```bash
+$ cd fastfeet/frontend
+```
+
+Configure axios baseURL at ./src/services/api.js.
+
+```javascript
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:3333',
+});
+
+export default api;
+```
+
+Install all components:
+
+```bash
+$ yarn
+```
+
+Run the app:
+
+```bash
+$ yarn start
+```
+
+You can see the instructions to get up the API [HERE](https://github.com/ivanseibel/fastfeet/tree/master/backend#6-how-to-run).
+
 # 5. License
 
 ### Status: under construction :construction: :construction_worker:
