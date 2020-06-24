@@ -144,6 +144,14 @@ Page where administrators can register new recipients.
   <img src=".github/assets/screen-recipient-insert.png" alt="Recipient insert" width="600px">
 </p>
 
+### 3.4.2. Recipient edit
+
+Page where administrators can edit recipient data.
+
+<p>
+  <img src=".github/assets/screen-recipient-edit.png" alt="Recipient edit" width="600px">
+</p>
+
 # 4. Technologies/libraries
 
 - @rocketseat/unform: Easy peasy highly scalable ReactJS & React Native forms.
