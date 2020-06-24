@@ -909,6 +909,18 @@ Install all components:
 $ yarn
 ```
 
+Run the migrations to create the database objects:
+
+```bash
+$ yarn sequelize db:migrate
+```
+
+Run the seeders to populate tables with basic data:
+
+```bash
+$ yarn sequelize db:seed:all
+```
+
 Run the app:
 
 ```bash
