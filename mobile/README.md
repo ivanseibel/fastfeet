@@ -74,6 +74,7 @@ Screen where deliverymen can:
 - Report delivery issues.
 - See issues from a delivery.
 - Confirm a delivery.
+- Log out the app.
 
 <p>
   <img src=".github/assets/screen-delivery-details.png" alt="Delivery details" width="25%">
@@ -101,6 +102,17 @@ In this screen deliveryman can capture the recipient signature with camera and c
 
 <p>
   <img src=".github/assets/screen-confirm-delivery.png" alt="Confirm delivery" width="25%">
+</p>
+
+## 3.3. Profile
+
+In this screen deliverymen can:
+
+- See his personal informations.
+- Log out.
+
+<p>
+  <img src=".github/assets/screen-profile.png" alt="Profile" width="25%">
 </p>
 
 # 4. Technologies/libraries
