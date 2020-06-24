@@ -46,7 +46,7 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 
 ## 3.1. Login
 
-Page to deliverymen login into the system.
+Screen to deliverymen login into the system.
 
 <p>
   <img src=".github/assets/screen-login.png" alt="Login" width="25%">
@@ -54,7 +54,7 @@ Page to deliverymen login into the system.
 
 ## 3.2. Dashboard
 
-In this page deliverymen can:
+In this screen deliverymen can:
 
 - Visualize basic information about delivery, including status.
 - Filter by pendent and finished delivery status.
@@ -68,7 +68,7 @@ In this page deliverymen can:
 
 ### 3.2.1. Delivery details
 
-Page where deliverymen can:
+Screen where deliverymen can:
 - See detailed information about address.
 - See detailed information about delivery status.
 - Report delivery issues.
@@ -79,6 +79,13 @@ Page where deliverymen can:
   <img src=".github/assets/screen-delivery-details.png" alt="Delivery details" width="25%">
 </p>
 
+#### 3.2.1.1. Report an issue
+
+In this screen deliveryman can report a delivery issue.
+
+<p>
+  <img src=".github/assets/screen-report-issue.png" alt="Report an issue" width="25%">
+</p>
 
 # 4. Technologies/libraries
 
