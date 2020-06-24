@@ -49,7 +49,7 @@ You can see this user stories [HERE](https://github.com/ivanseibel/fastfeet/tree
 Page to administrator users login into the system.
 
 <p>
-  <img src=".github/assets/screen-login.png" alt="Login" width="600px">
+  <img src=".github/assets/screen-login.png" alt="Login" width="60%">
 </p>
 
 ## 3.2. Deliveries
@@ -65,7 +65,7 @@ In this page administrators can:
 - Delete a delivery.
 
 <p>
-  <img src=".github/assets/screen-deliveries.png" alt="Deliveries" width="600px">
+  <img src=".github/assets/screen-deliveries.png" alt="Deliveries" width="60%">
 </p>
 
 ### 3.2.1. Delivery insert
@@ -73,7 +73,7 @@ In this page administrators can:
 Page where administrators can create new deliveries.
 
 <p>
-  <img src=".github/assets/screen-delivery-insert.png" alt="Delivery insert" width="600px">
+  <img src=".github/assets/screen-delivery-insert.png" alt="Delivery insert" width="60%">
 </p>
 
 ### 3.2.2. Delivery edit
@@ -81,7 +81,7 @@ Page where administrators can create new deliveries.
 Page where administrators can edit delivery data.
 
 <p>
-  <img src=".github/assets/screen-delivery-edit.png" alt="Delivery edit" width="600px">
+  <img src=".github/assets/screen-delivery-edit.png" alt="Delivery edit" width="60%">
 </p>
 
 ### 3.2.3. Delivery details
@@ -89,7 +89,7 @@ Page where administrators can edit delivery data.
 Modal window where administrators can see more informations about a delivery.
 
 <p>
-  <img src=".github/assets/screen-delivery-details.png" alt="Delivery details" width="600px">
+  <img src=".github/assets/screen-delivery-details.png" alt="Delivery details" width="60%">
 </p>
 
 ## 3.3. Deliverymen
@@ -103,7 +103,7 @@ In this page administrators can:
 - Delete a deliveryman.
 
 <p>
-  <img src=".github/assets/screen-deliverymen.png" alt="Deliverymen" width="600px">
+  <img src=".github/assets/screen-deliverymen.png" alt="Deliverymen" width="60%">
 </p>
 
 ### 3.3.1. Deliveryman insert
@@ -111,7 +111,7 @@ In this page administrators can:
 Page where administrators can register new deliverymen.
 
 <p>
-  <img src=".github/assets/screen-deliveryman-insert.png" alt="Deliveryman insert" width="600px">
+  <img src=".github/assets/screen-deliveryman-insert.png" alt="Deliveryman insert" width="60%">
 </p>
 
 ### 3.3.2. Deliveryman edit
@@ -119,7 +119,7 @@ Page where administrators can register new deliverymen.
 Page where administrators can edit deliveryman data.
 
 <p>
-  <img src=".github/assets/screen-deliveryman-edit.png" alt="Deliveryman edit" width="600px">
+  <img src=".github/assets/screen-deliveryman-edit.png" alt="Deliveryman edit" width="60%">
 </p>
 
 ## 3.4. Recipients
@@ -133,7 +133,7 @@ In this page administrators can:
 - Delete a recipient.
 
 <p>
-  <img src=".github/assets/screen-recipients.png" alt="Recipients" width="600px">
+  <img src=".github/assets/screen-recipients.png" alt="Recipients" width="60%">
 </p>
 
 ### 3.4.1. Recipient insert
@@ -141,7 +141,7 @@ In this page administrators can:
 Page where administrators can register new recipients.
 
 <p>
-  <img src=".github/assets/screen-recipient-insert.png" alt="Recipient insert" width="600px">
+  <img src=".github/assets/screen-recipient-insert.png" alt="Recipient insert" width="60%">
 </p>
 
 ### 3.4.2. Recipient edit
@@ -149,7 +149,7 @@ Page where administrators can register new recipients.
 Page where administrators can edit recipient data.
 
 <p>
-  <img src=".github/assets/screen-recipient-edit.png" alt="Recipient edit" width="600px">
+  <img src=".github/assets/screen-recipient-edit.png" alt="Recipient edit" width="60%">
 </p>
 
 ## 3.5. Issues
@@ -162,7 +162,7 @@ In this page administrators can:
 - Cancel a delivery.
 
 <p>
-  <img src=".github/assets/screen-issues.png" alt="Issues" width="600px">
+  <img src=".github/assets/screen-issues.png" alt="Issues" width="60%">
 </p>
 
 ### 3.5.1. Issue details
