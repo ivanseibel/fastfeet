@@ -866,8 +866,8 @@ file: data
 
 ### 5.1.1. Databases
 
-PostgreSQL: API data persistency.
-Redis: Queue data management persistency.
+- PostgreSQL: API data persistency.
+- Redis: Queue data management persistency.
 
 ## 5.2. Libraries
 - Prettier: Code formatter.
