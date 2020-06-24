@@ -165,6 +165,14 @@ In this page administrators can:
   <img src=".github/assets/screen-issues.png" alt="Issues" width="600px">
 </p>
 
+### 3.5.1. Issue details
+
+Modal window where administrators can see more informations about an issue.
+
+<p>
+  <img src=".github/assets/screen-issue-details.png" alt="Issue details" width="600px">
+</p>
+
 
 # 4. Technologies/libraries
 
