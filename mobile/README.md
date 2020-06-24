@@ -74,7 +74,7 @@ Screen where deliverymen can:
 - Report delivery issues.
 - See issues from a delivery.
 - Confirm a delivery.
-- Log out the app.
+- Log out.
 
 <p>
   <img src=".github/assets/screen-delivery-details.png" alt="Delivery details" width="25%">
