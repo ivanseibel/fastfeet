@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, StatusBar, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { format, parseISO } from 'date-fns';
+
+import api from '~/services/api';
 
 import {
   Container,
@@ -19,9 +21,48 @@ import {
 
 const DeliveryDetails = ({ navigation, route }) => {
   const { delivery } = route.params;
+  const [startDate, setStartDate] = useState(delivery.start_date);
   const { recipient } = delivery;
   const postalCode = recipient.postal_code.replace(/(\d{5})(\d{1,3})/, '$1-$2');
   const fullAddress = `${recipient.street}, ${recipient.number}, ${recipient.city} - ${recipient.state}, ${postalCode}.`;
+
+  const startDelivery = () => {
+    const newStartDate = new Date();
+    api
+      .put(`/deliveries/${delivery.id}/start`, {
+        start_date: newStartDate,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          setStartDate(res.data.start_date);
+          delivery.start_date = res.data.start_date;
+        }
+      })
+      .catch((err) => {
+        Alert.alert(
+          'Network error',
+          'Was not possible to start delivery, try again later.'
+        );
+      });
+  };
+
+  useEffect(() => {
+    if (!delivery.start_date) {
+      Alert.alert('Question', 'Do you want to start this delivery?', [
+        {
+          text: 'Yes',
+          onPress: () => {
+            startDelivery();
+          },
+        },
+        {
+          text: 'No',
+          onPress: () => {},
+        },
+      ]);
+    }
+  }, []);
+
   return (
     <Container>
       <PurpleHeader>
@@ -68,9 +109,7 @@ const DeliveryDetails = ({ navigation, route }) => {
             <View style={{ flex: 1 }}>
               <CardSubtitle>START DATE</CardSubtitle>
               <CardDataText>
-                {delivery.start_date
-                  ? format(parseISO(delivery.start_date), 'yyyy-MM-dd')
-                  : null}
+                {startDate ? format(parseISO(startDate), 'yyyy-MM-dd') : null}
               </CardDataText>
             </View>
 
