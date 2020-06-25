@@ -39,28 +39,31 @@ const DeliveryDetails = ({ navigation, route }) => {
           delivery.start_date = res.data.start_date;
         }
       })
-      .catch(() => {
-        Alert.alert(
-          'Network error',
-          'Was not possible to start delivery, try again later.'
-        );
+      .catch((error) => {
+        Alert.alert('Error', error.response.data.error);
       });
   };
 
+  const startDateAlertOptions = [
+    {
+      text: 'Yes',
+      onPress: () => {
+        startDelivery();
+      },
+    },
+    {
+      text: 'No',
+      onPress: () => {},
+    },
+  ];
+
   useEffect(() => {
     if (!delivery.start_date) {
-      Alert.alert('Question', 'Do you want to start this delivery?', [
-        {
-          text: 'Yes',
-          onPress: () => {
-            startDelivery();
-          },
-        },
-        {
-          text: 'No',
-          onPress: () => {},
-        },
-      ]);
+      Alert.alert(
+        'Question',
+        'Do you want to start this delivery?',
+        startDateAlertOptions
+      );
     }
   }, []);
 
@@ -149,11 +152,22 @@ const DeliveryDetails = ({ navigation, route }) => {
 
             <ActionContainer
               onPress={() => {
+                let ok = true;
                 if (delivery.end_date) {
                   Alert.alert('Warning', 'This delivery is already ended');
-                  return;
+                  ok = false;
                 }
-                navigation.navigate('ConfirmDelivery', { id: delivery.id });
+                if (!delivery.start_date) {
+                  Alert.alert(
+                    'Warning',
+                    'Do you want to start this delivery now?',
+                    startDateAlertOptions
+                  );
+                  ok = false;
+                }
+                if (ok) {
+                  navigation.navigate('ConfirmDelivery', { id: delivery.id });
+                }
               }}
             >
               <Icon name="check-circle-outline" size={20} color="#7D40E7" />
