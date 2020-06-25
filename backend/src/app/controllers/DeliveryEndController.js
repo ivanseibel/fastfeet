@@ -23,7 +23,7 @@ class DeliveryEndController {
     }
 
     const { id } = req.params;
-    const { end_date } = req.body;
+    const { end_date, signature_id } = req.body;
 
     const parsedDate = parseISO(end_date);
 
@@ -31,7 +31,7 @@ class DeliveryEndController {
       return res.status(401).json({ error: 'Your date is in the past' });
     }
 
-    const delivery = await Delivery.findByPk(id);
+    const delivery = await Delivery.findOne({ where: { id } });
 
     if (!delivery) {
       return res.status(404).json({ error: 'Delivery not found' });
@@ -55,7 +55,7 @@ class DeliveryEndController {
         .json({ error: 'End Date must be after Start Date' });
     }
 
-    await delivery.update({ end_date: parsedDate });
+    await delivery.update({ end_date: parsedDate, signature_id });
 
     return res.json(delivery);
   }
