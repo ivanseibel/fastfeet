@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 
 import { StatusBar, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -82,12 +83,6 @@ const Dashboard = ({ navigation }) => {
     loadDeliveries();
   }, [focused]);
 
-  const showDeliveries = useMemo(() => {
-    if (filter === 'pendent' && pendent.length) return true;
-    if (filter === 'delivered' && delivered.length) return true;
-    return true;
-  }, [filter]);
-
   return (
     <Container>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -142,6 +137,10 @@ const Dashboard = ({ navigation }) => {
       />
     </Container>
   );
+};
+
+Dashboard.propTypes = {
+  navigation: PropTypes.shape().isRequired,
 };
 
 export default Dashboard;

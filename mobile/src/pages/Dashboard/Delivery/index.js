@@ -1,5 +1,6 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
+import PropTypes from 'prop-types';
 
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -69,6 +70,11 @@ const Delivery = ({ delivery, navigation }) => {
       </DeliveryFooter>
     </Container>
   );
+};
+
+Delivery.propTypes = {
+  navigation: PropTypes.shape().isRequired,
+  delivery: PropTypes.shape().isRequired,
 };
 
 export default Delivery;

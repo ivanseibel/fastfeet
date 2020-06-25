@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar, Alert, TouchableWithoutFeedback } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { format, parseISO } from 'date-fns';
 import api from '~/services/api';
@@ -83,6 +84,10 @@ const SeeIssues = ({ route }) => {
       </PurpleHeader>
     </Container>
   );
+};
+
+SeeIssues.propTypes = {
+  route: PropTypes.shape().isRequired,
 };
 
 export default SeeIssues;

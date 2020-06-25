@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, Header } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -82,6 +83,10 @@ function DeliveryScreens() {
   );
 }
 
+function TabBarIcon({ color }) {
+  return <Icon name="account-circle" color={color} size={20} />;
+}
+
 function TabMain() {
   return (
     <Tab.Navigator
@@ -93,18 +98,14 @@ function TabMain() {
       <Tab.Screen
         options={{
           title: 'Dashboard',
-          tabBarIcon: ({ color }) => (
-            <Icon name="list" color={color} size={20} />
-          ),
+          tabBarIcon: TabBarIcon,
         }}
         name="DeliveryScreens"
         component={DeliveryScreens}
       />
       <Tab.Screen
         options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="account-circle" color={color} size={20} />
-          ),
+          tabBarIcon: TabBarIcon,
         }}
         name="Profile"
         component={Profile}
@@ -128,3 +129,11 @@ export default function Routes() {
     </NavigationContainer>
   );
 }
+
+TabBarIcon.propTypes = {
+  color: PropTypes.string,
+};
+
+TabBarIcon.defaultProps = {
+  color: '',
+};

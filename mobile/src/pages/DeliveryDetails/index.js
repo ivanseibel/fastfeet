@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, StatusBar, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { format, parseISO } from 'date-fns';
+import PropTypes from 'prop-types';
 
 import api from '~/services/api';
 
@@ -38,7 +39,7 @@ const DeliveryDetails = ({ navigation, route }) => {
           delivery.start_date = res.data.start_date;
         }
       })
-      .catch((err) => {
+      .catch(() => {
         Alert.alert(
           'Network error',
           'Was not possible to start delivery, try again later.'
@@ -165,6 +166,11 @@ const DeliveryDetails = ({ navigation, route }) => {
       </PurpleHeader>
     </Container>
   );
+};
+
+DeliveryDetails.propTypes = {
+  navigation: PropTypes.shape().isRequired,
+  route: PropTypes.shape().isRequired,
 };
 
 export default DeliveryDetails;

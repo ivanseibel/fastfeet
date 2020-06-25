@@ -17,7 +17,7 @@ import {
 const Profile = () => {
   const dispatch = useDispatch();
 
-  const { user } = useSelector(state => state.user);
+  const { user } = useSelector((state) => state.user);
 
   const avatar = useMemo(() => {
     return user.avatar

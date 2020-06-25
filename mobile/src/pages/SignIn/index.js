@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { StatusBar, Image, ActivityIndicator } from 'react-native';
@@ -9,11 +8,10 @@ import logo from '~/assets/logo.png';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
-const SignIn = ({ navigation }) => {
+const SignIn = () => {
   const [id, setId] = useState();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.auth.loading);
-  const signed = useSelector((state) => state.auth.signed);
 
   const handleLogin = () => {
     dispatch(signInRequest(id));
@@ -35,10 +33,6 @@ const SignIn = ({ navigation }) => {
       </SubmitButton>
     </Container>
   );
-};
-
-SignIn.propTypes = {
-  navigation: PropTypes.shape().isRequired,
 };
 
 export default SignIn;

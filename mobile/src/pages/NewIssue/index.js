@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar, Alert, ActivityIndicator } from 'react-native';
+import PropTypes from 'prop-types';
 
 import api from '~/services/api';
 
@@ -58,6 +59,11 @@ const NewIssue = ({ navigation, route }) => {
       </PurpleHeader>
     </Container>
   );
+};
+
+NewIssue.propTypes = {
+  navigation: PropTypes.shape().isRequired,
+  route: PropTypes.shape().isRequired,
 };
 
 export default NewIssue;

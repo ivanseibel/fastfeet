@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Alert, Image, ActivityIndicator } from 'react-native';
+import PropTypes from 'prop-types';
 
 import api from '~/services/api';
 
@@ -17,7 +18,9 @@ import {
   CameraObject,
 } from './styles';
 
-const ConfirmDelivery = ({ navigation, route }) => {
+const ConfirmDelivery = (props) => {
+  const { navigation, route } = props;
+
   const [submitting, setSubmitting] = useState(false);
   const [image, setImage] = useState(null);
   let camera = useRef(null);
@@ -44,6 +47,7 @@ const ConfirmDelivery = ({ navigation, route }) => {
     }
 
     try {
+      /* global FormData */
       const body = new FormData();
 
       body.append('file', {
@@ -123,6 +127,11 @@ const ConfirmDelivery = ({ navigation, route }) => {
       </SubmitButton>
     </Container>
   );
+};
+
+ConfirmDelivery.propTypes = {
+  navigation: PropTypes.shape().isRequired,
+  route: PropTypes.shape().isRequired,
 };
 
 export default ConfirmDelivery;

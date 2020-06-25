@@ -36,7 +36,7 @@ export const DeliveryStatusLine = styled.View`
 export const DeliveryStatusBall = styled.View`
   height: 10px;
   width: 10px;
-  background-color: ${props => (props.selected ? '#7d40e7' : '#fff')};
+  background-color: ${(props) => (props.selected ? '#7d40e7' : '#fff')};
   border-radius: 5px;
   border: 1px solid #7d40e7;
 `;
