@@ -1,7 +1,3 @@
-<h1 align="center">
-    <img alt="GoStack" src="https://github.com/ivanseibel/assets/blob/master/img/gostack10/bootcamp-header.png?raw=true" width="200px" />
-</h1>
-
 <h3 align="center">
   <img width="250px" src="./src/assets/logo.png" alt="Fastfeet">
   <p>Project: Fastfeet - Delivery Service (mobile)</p>
@@ -41,7 +37,7 @@
 
 # 1. Project General Description
 
-This React Native mobile app is one part of three that implement an application for a delivery service company. This project is one of several constructed during GoStack Bootcamp, a course offered by [Rocketseat](http://www.rocketseat.com.br) that dive deep into one of most popular stacks to software development for web and mobile.
+This React Native mobile app is one part of three that implement an application for a fake delivery service company.
 
 # 2. User stories
 
